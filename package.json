@@ -1,10 +1,8 @@
 {
-  "name": "naive-ui-admin",
-  "version": "1.9.0",
+  "name": "jt-naiveui-basic",
+  "version": "1.0.0",
   "author": {
-    "name": "Ahjung",
-    "email": "735878602@qq.com",
-    "url": "https://github.com/jekip/naive-ui-admin"
+    "name": "sssh"
   },
   "private": true,
   "scripts": {
@@ -110,22 +108,12 @@
   "keywords": [
     "vue",
     "naive-ui",
-    "naive-ui-admin",
     "vue3",
     "ts",
     "tsx",
-    "admin",
     "typescript"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jekip/naive-ui-admin.git"
-  },
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jekip/naive-ui-admin/issues"
-  },
-  "homepage": "https://github.com/jekip/naive-ui-admin",
   "engines": {
     "node": ">=16"
   }
