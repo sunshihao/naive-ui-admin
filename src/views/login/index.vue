@@ -5,7 +5,7 @@
       <div class="view-account-top">
         <div class="view-account-top-logo">
           <!-- <img :src="websiteConfig.loginImage" alt="" /> -->
-          {{ websiteConfig.project }}
+          {{ websiteConfig.projectName }}
         </div>
         <!-- <div class="view-account-top-desc">{{ websiteConfig.loginDesc }}</div> -->
       </div>

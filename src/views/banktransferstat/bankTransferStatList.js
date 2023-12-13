@@ -1,6 +1,8 @@
 /*
  * 银行间转账统计页面
  */
+
+
 export const banktransferstat = function() {
 	return {
 		init : function() {
@@ -298,7 +300,9 @@ export const banktransferstat = function() {
 }();
 
 
-	var api = parent.layer.getUserData();
+	var api = {
+    userId: null
+  }
 	var actionType;
 
 	banktransferstat.companytree = function() {

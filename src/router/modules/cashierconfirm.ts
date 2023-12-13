@@ -16,9 +16,9 @@ import { renderIcon } from '@/utils/index';
  * */
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/cashierconfirm',
+    path: '/fee',
     name: 'cashierconfirm',
-    redirect: '/cashierconfirm/cashierList',
+    redirect: '/fee/cashierList',
     component: Layout,
     meta: {
       title: '出纳确认',

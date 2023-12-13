@@ -54,6 +54,7 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
         // 接口地址代理
         '/api': {
           target: 'http://172.16.1.61:8070', // 接口的域名
+          // target: 'http://124.221.211.92:3000/mock/425', // 接口的域名
           changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
           rewrite: path => path.replace(/^\/api/, '')
         }
