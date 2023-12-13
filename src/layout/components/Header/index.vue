@@ -276,10 +276,10 @@
 
       // 图标列表
       const iconList = [
-        {
-          icon: 'SearchOutlined',
-          tips: '搜索',
-        },
+        // {
+        //   icon: 'SearchOutlined',
+        //   tips: '搜索',
+        // },
         {
           icon: 'LockOutlined',
           tips: '锁屏',
