@@ -49,14 +49,15 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       host: true,
       port: VITE_PORT,
+      // proxy:  createProxy(VITE_PROXY),
       proxy: {
-        ... createProxy(VITE_PROXY),
-        "/api": {
-          target: "http://172.16.1.61:8070",
-          changeOrigin: true,
-          rewrite: (path) => path.replace(/^\/api/, ""),
+        // 接口地址代理
+        '/api': {
+          target: 'http://172.16.1.61:8070', // 接口的域名
+          changeOrigin: true, // 如果接口跨域，需要进行这个参数配置
+          rewrite: path => path.replace(/^\/api/, '')
         }
-      },
+      }
     },
     optimizeDeps: {
       include: [],

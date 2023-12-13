@@ -36,4 +36,4 @@
 
 @import url("/fee/framework/ui4/css/xj-theme.css");
 
-/* <link rel="stylesheet" href="/fee/ecside/sweetalert/sweetalert.css"> */
+@import url("/fee/ecside/sweetalert/sweetalert.css");

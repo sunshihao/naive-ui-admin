@@ -16,8 +16,14 @@ const httpsRE = /^https:\/\//;
  * @param list
  */
 export function createProxy(list: ProxyList = []) {
+
+  console.log('list', list, typeof list)
+
   const ret: ProxyTargetList = {};
   for (const [prefix, target] of list) {
+
+    console.log('--', prefix, target);
+
     const isHttps = httpsRE.test(target);
 
     // https://github.com/http-party/node-http-proxy#options
@@ -30,5 +36,6 @@ export function createProxy(list: ProxyList = []) {
       ...(isHttps ? { secure: false } : {}),
     };
   }
+  console.log('ret', ret);
   return ret;
 }
