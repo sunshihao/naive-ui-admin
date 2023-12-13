@@ -1,0 +1,421 @@
+@charset "utf-8";
+/* CSS 模块层 */
+html, body, div, p, ul, li, dl, dt, dd, h1, h2, h3, h4, h5, h6, form, input, select, button, textarea, iframe, table, th, td {
+	margin: 0;
+	padding: 0;
+	font-family:'Microsoft Yahei', Tahoma, Helvetica, Arial, SimSun, sans-serif;
+}
+body{
+	background-color: #f1f2f7;
+}
+html{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+*::-moz-selection{
+	background: none repeat scroll 0 0 #FF6400;
+    color: #fff;
+}
+img {
+	border: 0 none;
+	vertical-align: top;
+}
+ul, li {
+	list-style-type: none;
+}
+body, input, select, button, textarea {
+	font-family: Tahoma, Geneva, sans-serif;
+}
+button {
+	cursor: pointer;
+}
+i, em, cite {
+	font-style: normal;
+}
+select option{
+	padding: 5px 3px;
+}
+body {
+	line-height: 1.2;
+}
+a, a:link {
+	color: #222;
+	text-decoration:none;
+	outline:none;
+}
+a:visited {
+}
+a:active, a:hover {
+	text-decoration: none;
+	star:expression(this.onFocus=this.blur());
+}
+a:focus {
+	outline: none;
+}
+.fixed:after {
+	content: ".";
+	display: block;
+	clear: both;
+	height: 0;
+	visibility: hidden;
+}
+.fixed {
+	display: block;
+	min-height: 1%;
+}
+*html .fixed {
+	height: 1%;
+}
+.clear {
+	diplay: block!important;
+	float: none!important;
+	clear: both;
+	overflow: hidden;
+	width: auto!important;
+	height: 0!important;
+	margin: 0 auto!important;
+	padding: 0!important;
+	font-size: 0;
+	line-height: 0;
+}
+.more {
+	float: right;
+}
+.more a {
+	font-weight: normal;
+	font-size: 12px;
+}
+.fl{
+	display: inline;
+	float: left;
+}
+.fr {
+	display: inline;
+	float: right !important;
+}
+.main{
+	width: 100%;
+	height: 100%;
+}
+/*LOGO*/
+#logo{
+	height: 50px;
+	line-height: 50px;
+	float: left;
+}
+#logo a{
+	font-size: 18px;
+	padding:0 0 0 20px;
+}
+#logo a:hover{
+	text-decoration: none;
+}
+#topFrame,#contentFrame{
+	width: 100%;
+	height:100%;
+	position: absolute;
+}
+/** chengxue 20160302 去掉overflow**/
+.leftFrame,#rightFrame{
+	height:100%;/**	
+	overflow: auto;**/
+}
+/*头部*/
+#topFrame{
+	top: 0;
+	left: 0;
+	height: 50px;
+	position: fixed;
+	z-index: 1002;
+}
+/*左侧菜单*/
+#leftFrame{
+	/*update by zrzdemon 左侧菜单告诉*/
+	height:100%;
+	display:block;
+	overflow: auto;
+	left:0;
+	/*update by zrzdemon
+	top:55px;*/
+	padding-top: 55px;
+	bottom: 0px;
+	
+	position: fixed;
+	z-index:12;
+	box-shadow: 3px 2px 3px #e9ebf2;
+}
+/*add by zrzdemon */
+.leftFrameNav {
+	height: 100%;
+}
+
+#leftFrame .left-nav-text{
+}
+@media screen and ( min-width: 280px ) and ( max-width: 480px ){
+	#leftFrame{
+		width: 30px;
+	}
+	.leftNav ul li a{
+		padding-left: 10px;
+	}
+	#main-content{
+		margin-left: 30px;
+	}
+	.navbar-default .navbar-nav > li > a{
+		padding: 15px 10px;
+	}
+	.left-nav-text{
+		display: none;
+	}
+}
+@media screen and ( min-width: 481px ) and ( max-width: 720px ){
+	#leftFrame{
+		width: 100px;
+	}
+	.leftNav ul li a{
+		padding-left:15px;
+	}
+	#main-content{
+		margin-left: 100px;
+	}
+	.navbar-default .navbar-nav > li > a{
+		padding: 15px 10px;
+	}
+	.left-nav-text{
+		display: inline-block;
+	}
+}
+@media screen and ( min-width: 721px ){
+	#leftFrame{
+		width: 140px;
+	}
+	.leftNav ul li a{
+		padding-left:15px;
+	}
+	#main-content{
+	/*update by zrzdemon 增加5个像素 */
+		margin-left: 140px;
+	}
+	.left-nav-text{
+		display: inline-block;
+	}
+}
+/*右侧菜单*/
+#rightFrame{
+	/* update by zrzdemon 左右布局基于顶部统一间距 
+	margin-top: 40px;*/
+	margin-top: 55px;
+}
+.wrapper{
+	display: inline-block;
+	width: 100%;
+}
+/*中间内容*/
+#contentFrame{
+	top: 60px;
+}
+/*TOP导航*/
+.topNav{
+	z-index: 10;
+}
+.topNav ul li{
+	line-height: 60px;
+	font-size: 14px;
+	cursor: pointer;
+}
+.topNav ul li .glyphicon{
+	margin-right: 5px;
+}
+.topNav ul li:hover{
+	text-decoration: none;
+}
+.navbar-brand{
+	height: 50px;
+}
+#topFrame .nav{
+	margin: 7px 0 0 0;
+}
+#topFrame .nav li{
+	margin: 0 10px 0 0;
+}
+/*top下拉菜单*/
+.user-name{
+	position: absolute;
+	top: 5px;
+	right:30px;
+}
+.user-name a{
+	text-decoration: none;
+}
+.user-name .username{
+	position: relative;
+	top: 5px;
+	font-size: 13px;
+	color: #222;
+}
+.user-name .user-down:hover .user-name .caret{
+	color: #6C6F7E;
+}
+.user-name .user-down{
+	border: 1px solid #e8ebf0;
+	padding:4px 6px;
+	border-radius: 4px;
+	float: left;
+}
+.user-name .caret{
+	position: relative;
+	top: 5px;
+	color: #ADB6C3;
+}
+.user-name .dropdown-menu .glyphicon{
+	margin: 0 10px 0 0;
+}
+.user-name .log-arrow-up {
+	background: url(../img/frame/arrow-up.png);
+    height: 11px;
+    position: absolute;
+    right: 20px;
+    top: -10px;
+    width: 20px;
+}
+/*左侧导航*/
+.leftNav{
+	/*update by zrzdemon 去掉所有边距*/
+	/*width:165px;
+	margin: 10px 0 0 0;*/
+	/**CX 2016-03-14
+	padding-bottom:65px;**/
+
+}
+.leftNav ul li a{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	cursor: pointer;
+	font-size: 14px;
+	overflow: hidden;
+	display: inline-block;
+	color: #757575;
+}
+.leftNav ul li a:hover{
+	color: #505050;
+}
+.leftNav ul li .glyphicon{
+	font-size: 12px;
+	margin-right: 5px;
+}
+/*内容部分导航*/
+.contNav{
+	width: 100%;
+	height: 40px;
+	/* position: absolute; */
+	padding-left: 15px;
+}
+.contNav ul{
+	width: 100%;
+	height: 38px;
+	line-height: 38px;
+	overflow: auto;
+	float: left;
+}
+.contNav ul li{
+	float: left;
+	font-size: 14px;
+	padding: 0 20px;
+	cursor: pointer;
+}
+
+/*内容部分上部导航*/
+#contentNav{
+	width: 100%;
+	height: 50px;
+	z-index: 15;
+	display: table;
+	position: static;
+	overflow: auto;
+	left: 200px;
+}
+/*内容部分盒子*/
+#contentBox{
+	width: 100%;
+	height: 100%;
+	z-index: 14;
+	padding: 15px 0 0 0;
+}
+
+label.error {
+	/* remove the next line when you have trouble in IE6 with labels in list */
+	color: red;
+	font-style: italic
+}
+input.error { border: 1px dotted red; }
+span.error { border: 1px dotted red;position:absolute; }
+.p-top-20{padding-top: 20px;}
+.p-lr-30{padding: 0 30px;}
+.p-0{padding: 0;}
+.p-20{padding: 20px;}
+.m-b-30{margin-bottom: 30px;}
+.m-b-15{margin-bottom: 15px;}
+/*翻页*/
+.page-num{margin: 0;}
+.page-text{
+	margin: 7px 0 0 0;
+	font-size: 12px;
+	font-weight: 500;
+}
+/*
+	下拉多选
+*/
+.multiselect-container{position:absolute;list-style-type:none;margin:0;padding:0}
+.multiselect-container .input-group{margin:5px}
+.multiselect-container>li{padding:0}
+.multiselect-container>li>a{padding: 3px 20px 3px 30px;}
+.multiselect-container>li>a.multiselect-all label{font-weight:bold}
+.multiselect-container>li>label.multiselect-group{margin:0;padding:3px 20px 3px 20px;height:100%;font-weight:bold}
+.multiselect-container>li>a>label{margin:0;height:100%;cursor:pointer;font-weight:normal}
+.multiselect-container>li>a>label.radio,
+.multiselect-container>li>a>label.checkbox{margin:0}
+.multiselect-container>li>a>label>input[type="checkbox"]{margin-bottom:5px}
+.btn-group>.btn-group:nth-child(2)>.multiselect.btn{border-top-left-radius:4px;border-bottom-left-radius:4px}
+
+/*
+	浮出按钮	
+*/
+.ilead-float-btn{
+	background: #000000;
+	opacity: 0.75;
+	padding: 15px 0 0 0;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+}
+.ilead-float-btn .form-group{
+	margin-right: 40px;
+}
+
+.center {
+  width: auto;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+}
+.text-center {
+  text-align: center;
+}
+
+
+/*2016.3.2 cx*/
+.btn-file{
+margin-right:10px;
+}
+.btn.red:not(.btn-outline){
+margin-right:10px;
+}
+
+
+
+
+

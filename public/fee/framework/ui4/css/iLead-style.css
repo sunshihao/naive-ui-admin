@@ -1,0 +1,490 @@
+
+/*
+	更改bootstrap样式
+*/
+.form-control {
+	border-radius: 3px;
+	background-clip: padding-box;
+	border-color: #ccc;
+	box-shadow: none;
+	font-size: 13px;
+}
+label {
+    display: inline-block;
+    font-weight: 500;
+    max-width: 100%;
+    color: #646e7c;
+}
+.panel-default > .panel-heading{
+	background-image:none;
+	background: #ffffff;
+	border:0 none;
+	color: #0097fa;
+	padding:15px 15px 5px 15px;
+}
+.panel{
+	box-shadow: 1px 1px 2px 0 #cccccc;
+	border-radius: 3px;
+}
+.panel-default{
+	border-color: #ffffff;
+}
+.btn-default{
+	background-image:none;
+	background-color: #0097fa;
+    text-shadow: 0 0 0 #fff;
+    border-radius: 3px;
+    border:0 none;
+    color: #ffffff;
+}
+.btn-default:hover{
+	color: #ffffff;
+	background: #2c7bcc;
+}
+.btn{
+	padding: 5px 20px;
+}
+
+/*
+	修改 bootstrap
+*/
+.navbar{
+	margin: 0;
+}
+.navbar > .container .navbar-brand, 
+.navbar > .container-fluid .navbar-brand{
+	margin: 0 0 0 15px;
+}
+.navbar-default .navbar-toggle:focus, 
+.navbar-default .navbar-toggle:hover{
+	background: #555862;
+}
+.navbar-default .navbar-toggle{
+	border-color: #555862;
+}
+.navbar-default .navbar-toggle .icon-bar{
+	background: #A2A5AF;
+}
+.navbar-toggle{
+	float: left;
+	margin:8px 0 0 30px;
+	padding: 9px 8px;
+}
+
+.navbar-collapse{
+	box-shadow:0 0 0;
+}
+.navbar-nav{
+	margin: 0;
+}
+.tooltip.right{
+	display: block;
+	z-index: 2000;
+}
+/*
+.navbar .nav li a:hover{
+	background: #ffffff;
+	border:1px solid #00a8ff;
+	border-radius: 3px;
+	color: #00a8ff !important;
+}
+.navbar .current a{
+	background: #00a8ff;
+	border:1px solid #00a8ff;
+	border-radius: 3px;
+	color: #ffffff;
+}*/
+
+.nav>li{
+	position: inherit;
+}
+.navbar-default .navbar-nav > li > a{
+	border:1px solid #ffffff;
+	border-radius: 3px;
+	color: #95a6b1;
+}
+
+
+
+.navbar-default .navbar-nav > li >a:hover{
+	color: #00a8ff;
+	border:1px solid #00a8ff;
+	border-radius: 3px;
+	color:#00a8ff;
+}
+
+/*
+.navbar-default .navbar-nav > li .nocurrent{
+	border-radius: 3px;
+	color:#95a6b1;
+}
+
+
+.navbar-default .navbar-nav > li >a:focus,
+.navbar-default .navbar-nav > .current >a{
+	background: #00a8ff;
+	border:1px solid #00a8ff;
+	color: #ffffff;
+	border-radius: 3px;
+}
+*/
+
+.navbar-default .navbar-nav > li > a:focus,
+.navbar-default .navbar-nav > li > .current{
+	background-color: #00a8ff;
+	border:1px solid #00a8ff;
+	color:#ffffff !important;
+	border-radius: 3px;
+}
+
+.navbar-default .navbar-nav > li > a:focus{}
+
+
+/*
+	响应式TOP导航边距
+*/
+@media screen and ( min-width: 721px ) and ( max-width: 1024px ){
+	.navbar-default .navbar-nav > li > a{
+		padding: 5px 10px;
+	}
+}
+@media screen and ( min-width:1025px ){
+	.navbar-default .navbar-nav > li > a{
+		padding: 6px 10px;
+	}
+}
+.navbar-brand, .navbar-nav > li > a{
+	text-shadow: 0 0 0 rgba(255,255,255,0.25) ;
+}
+.navbar-default .navbar-collapse, 
+.navbar-default .navbar-form{
+	border: 0 none;
+}
+.navbar-default{
+	border-radius: 0;
+}
+/*
+	修改 jqgrid 下的 jquery-ui
+*/
+.ui-jqgrid .ui-jqgrid-titlebar{
+	height:auto;
+	padding: 10px;
+	font-size: 16px;
+	font-weight: 300;
+}
+.ui-widget-header{
+	background: #ffffff;
+	color: #0097FA;
+	border: 1px solid #DDDDDD;
+}
+.ui-jqgrid tr.jqgrow td{
+	height: auto;
+	padding: 10px 8px;
+	font-size: 12px;
+}
+.ui-jqgrid .ui-jqgrid-titlebar-close{
+	margin:-8px 10px 0 0;
+}
+.ui-widget-content{
+	background: #ffffff;
+}
+.ui-jqgrid .ui-jqgrid-htable th{
+	height: 30px;
+	color: #797979;
+	font-size: 12px;
+}
+.ui-state-default, 
+.ui-widget-content .ui-state-default, 
+.ui-widget-header .ui-state-default{
+
+}
+.ui-corner-bottom{
+	border:1px solid #ffffff !important;
+}
+.ui-jqgrid .ui-jqgrid-toppager .ui-pager-control, 
+.ui-jqgrid .ui-jqgrid-pager .ui-pager-control{
+	height: 40px;
+	background: #ffffff;
+}
+.ui-widget-header .ui-state-hover,
+.ui-widget-header .ui-state-focus {
+	background: #ffffff;
+	border: 1px solid #009AF5;
+}
+.ui-state-hover,
+.ui-state-focus{
+	background: none;
+	border: 1px solid #009AF5;
+}
+.ui-jqgrid .ui-jqgrid-pager .ui-pg-div{
+	padding: 0;
+}
+.ui-jqgrid .ui-pg-table td{
+	padding: 0 5px;
+}
+.ui-icon-triangle-1-n{
+	background-position: 1px -16px;
+}
+.ui-jqgrid .ui-pg-button:hover{
+	padding: 0 5px;
+}
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus{
+	border: 0 none;
+}
+.ui-state-default, 
+.ui-widget-content .ui-state-default, 
+.ui-widget-header .ui-state-default{
+	background: #F2F2F2;
+}
+.ui-state-highlight, 
+.ui-widget-content .ui-state-highlight, 
+.ui-widget-header .ui-state-highlight{
+	/* background: #DEEDF5; */
+	background:#0084d2;
+	border:1px solid #ccc;
+	color:#fff;
+}
+.ui-widget-content .ui-state-hover,
+.ui-widget-content .ui-state-focus{
+		background: #e5e5e5;
+		color: #222;
+		border: 1px solid #dddddd;
+}
+.ui-jqgrid .ui-pg-input, 
+.ui-jqgrid .ui-jqgrid-toppager .ui-pg-input{
+	min-width: 40px;
+	height: 20px;
+	border: 1px solid #dddddd;
+	text-align: center;
+}
+/*
+	查询条件的样式集
+*/
+.ilead-search{
+	background: #ffffff;
+	border-radius: 3px;
+	margin: 0 0 10px 0;
+	padding: 15px 10px;
+}
+.ilead-search label{
+	font-size: 12px;
+	/* width: 100px; */
+	padding: 0 15px;
+	color: #222;
+	/*font-weight: 600;*/
+}
+.ilead-search .form-group{
+	margin: 0 0 15px 0;
+}
+.ilead-search .form-control{
+	border: 1px solid #ccc;
+}
+.ilead-search .btn{
+	margin: 0 0 0 15px;
+}
+/*
+	表单的样式集
+*/
+.ilead-form{
+}
+.ilead-form .control-label{
+	color: #646e7c;
+	padding:10px 0 10px 0;
+	font-size: 0.95em;
+    font-weight: 400;
+}
+.ilead-form .form-group{
+	margin: 10px 0 20px 0;
+}
+.ilead-form .checkbox{
+	padding: 12px 0 0 15px;
+	color: #646e7c;
+}
+
+.ilead-table{
+	position: relative;
+}
+.ilead-table .ilead-plus{
+	position: absolute;
+	right: 100px;
+	top: 8px;
+	z-index: 12;
+	padding: 2px 8px;
+	background-color: #fff;
+	border:1px solid #ddd;
+}
+.ilead-table .ilead-plus:hover{
+	background-color: #ddd;
+}
+/*
+	左侧二级下拉
+*/
+.leftNav .panel-default{
+	border:0 none;
+	margin-bottom:0px;
+}
+.leftNav .panel,
+.leftNav .list-group,
+.leftNav .panel-default > .panel-heading{
+	background: none;
+	box-shadow:0 0 0;
+}
+.leftNav .panel > .list-group:last-child .list-group-item:last-child, 
+.leftNav .panel > .panel-collapse > .list-group:last-child .list-group-item:last-child,
+.leftNav .panel > .list-group:first-child .list-group-item:first-child, 
+.leftNav .panel > .panel-collapse > .list-group:first-child .list-group-item:first-child{
+	border-radius: 0;
+}
+.leftNav .panel-group .panel,
+.leftNav .panel-heading{
+	border-radius: 0;
+}
+.leftNav .panel-group .panel + .panel{
+	margin: 0;
+}
+.leftNav .list-group-item{
+	padding:0;
+	background: none;
+	border:0 none;
+}
+.leftNav .panel-default > .panel-heading{
+	padding: 0;
+}
+.leftNav .panel-default > .panel-heading h4 a{
+	background: #ffffff;
+	width: 100%;
+	padding:15px 15px;
+	display: inline-block;
+	color: #95a6b1;
+}
+.leftNav .panel-default > .panel-heading h4 a:hover{
+	text-decoration: none;
+	color: #1486ec;
+}
+.leftNav .panel-default > .panel-heading h4 a .glyphicon-menu-down{
+	float: right;
+	margin: 1px 0 0 0;
+	font-size: 12px;
+}
+.leftNav .panel-title{
+	font-size: 14px;
+}
+.leftNav .panel-group .panel-heading + .panel-collapse > .list-group, 
+.panel-group .panel-heading + .panel-collapse > .panel-body{
+	border:0 none;
+}
+.leftNav .panel-group{
+	margin-bottom: 0px;
+}
+.leftNav .panel-group ul{
+	background: #f7f9fb;
+}
+.leftNav .panel-group ul li{
+	cursor: pointer;
+	display: inline-block;
+	width: 100%;
+	display: block;
+	overflow: hidden;
+	word-break:keep-all;
+	white-space:nowrap;
+}
+
+
+.leftNav .panen-group .active{
+	background: #1daafc !important;
+}
+
+
+
+/***
+Fontawesome Icons
+***/
+[class^="fa-"]:not(.fa-stack),
+[class^="glyphicon-"],
+[class^="icon-"],
+[class*=" fa-"]:not(.fa-stack),
+[class*=" glyphicon-"],
+[class*=" icon-"] {
+  display: inline-block;
+  *margin-right: .3em;
+  line-height: 14px;
+  -webkit-font-smoothing: antialiased; }
+
+/* Make font awesome icons fixed width */
+li [class^="fa-"],
+li [class^="glyphicon-"],
+li [class^="icon-"],
+li [class*=" fa-"],
+li [class*=" glyphicon-"],
+li [class*=" icon-"] {
+  display: inline-block;
+  width: 1.25em;
+  text-align: center; }
+
+li [class^="glyphicon-"],
+li [class*=" glyphicon-"] {
+  top: 2px; }
+
+li [class^="icon-"],
+li [class*=" icon-"] {
+  top: 1px;
+  position: relative; }
+
+li [class^="fa-"].icon-large,
+li [class^="glyphicon-"].icon-large,
+li [class^="icon-"].icon-large,
+li [class*=" fa-"].icon-large,
+li [class*=" glyphicon-"].icon-large,
+li [class*=" icon-"].icon-large {
+  /* increased font size for icon-large */
+  width: 1.5625em; }
+
+/* Icon states */
+.icon-state-default {
+  color: #bac3d0; }
+
+.icon-state-success {
+  color: #3fc9d5; }
+
+.icon-state-info {
+  color: #659be0; }
+
+.icon-state-warning {
+  color: #F1C40F; }
+
+.icon-state-danger {
+  color: #ed6b75; }
+
+/***
+Font Awesome 4.x Demo
+***/
+.fa-item {
+  font-size: 14px;
+  padding: 10px 10px 10px 20px; }
+  .fa-item i {
+    font-size: 16px;
+    display: inline-block;
+    width: 20px;
+    color: #333; }
+  .fa-item:hover {
+    cursor: pointer;
+    background: #eee; }
+
+/*2016.3.2 cx*/
+.nav-tabs{
+   padding-left:15px;
+}
+/*.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > .current {
+    color: #ffffff !important;
+}
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > .current i{
+	color: #ffffff !important;
+}
+.navbar-default .navbar-nav > li > a:hover i{
+	color:#00a8ff;
+}*/

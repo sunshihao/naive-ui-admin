@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8" />
+		<title>插件开发</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<meta content="" name="description" />
+		<meta content="" name="author" />
+		<link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+		<link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+		<link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<link href="css/tab.bootstrap.css" rel="stylesheet" id="style_components" type="text/css" />
+		<link href="css/tab.ilead.css" rel="stylesheet" type="text/css" />
+		<link rel="shortcut icon" href="favicon.ico" />
+		
+	</head>
+
+	<body>
+		<div id="kk">
+			<button onclick="ceshi()">ceshi</button>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-6">
+
+						<div id="tabInit" class="tabbable tabbable-tabdrop tabbable-custom">
+                             
+						</div>
+		
+				</div>
+			</div>			
+		</div>
+		<script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+		
+		
+		<script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="js/tab.ilead2.js" type="text/javascript"></script>
+		<script src="js/bootstrap-tabdrop/js/bootstrap-tabdrop.js" type="text/javascript"></script>
+		<script src="js/app.js" type="text/javascript"></script>
+	<script type="text/javascript">
+			$(function(){
+				//$.ileadTab.test();
+				$("#tabInit").ileadTab({
+					theme:"1",
+					showTabCount:0,
+					direction:0,
+					ifCloseBtn:true,
+					onTabChange:function(tabId, tabIndex, beforeTabIndex){
+						//alert(tabId + "==" + tabIndex + "===" + beforeTabIndex);
+					}
+				});
+			});
+			
+			function ceshi(){
+				$("#tabInit").ileadTab("addTabByText", '{"title":"zrztest", "url":"http://www.baidu.com/"}');
+				/** tab: [{
+        title: 'TAB1', 
+        content: '内容1'
+    }, {
+        title: 'TAB2', 
+        content: '内容2'
+    }, {
+        title: 'TAB3', 
+        content: '内容3'
+    }]**/
+				//$("#tabInit").getTabActiveText();
+				//App.init();
+			}
+		</script>
+	</body>
+
+</html>

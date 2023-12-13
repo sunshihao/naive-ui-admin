@@ -1,0 +1,191 @@
+@media print {
+	.notprint {
+		display: none;
+	}
+}
+
+@media screen {
+	.notprint {
+		display: inline;
+		cursor: hand;
+	}
+}
+
+table {
+	border: 0px;
+	color: #000000;
+	text-indent: 5px;
+}
+
+td {
+	font: normal 12px 宋体;
+}
+
+.Info TD {
+	border-bottom: #cccccc 1px solid;
+	padding: 1px 1px 1px 1px;
+}
+
+.Need {
+	color: #FF0000;
+	padding: 0px 0px 0px 3px;
+}
+/*表单区块样式*/
+.SpanTitle {
+	font: normal 12px 宋体;
+	color: #111111;
+	font-weight: bold;
+}
+
+.DivBlock {
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.DivHead {
+	width: 100%;
+	border-bottom: #7F9DB9 1px solid;
+}
+
+.DivTail {
+	width: 100%;
+	background-color: #FFFFFF;
+	padding: 10px 10px 10px 10px;
+	border-left: #5A87CC 1px solid;
+	border-right: #5A87CC 1px solid;
+	border-bottom: #5A87CC 1px solid;
+}
+
+.DivWrap {
+	width: 100%;
+	background-color: #F3F6FF;
+	padding: 10px 10px 10px 10px;
+	border-left: #7F9DB9 1px solid;
+	border-right: #7F9DB9 1px solid;
+	border-top: #7F9DB9 1px solid;
+	border-bottom: #7F9DB9 1px solid;
+}
+
+.DivTail_Next {
+	width: 100%;
+	background-color: #F3F6FF;
+	padding: 10px 10px 10px 10px;
+	border-left: #7F9DB9 1px solid;
+	border-right: #7F9DB9 1px solid;
+	border-bottom: #7F9DB9 1px solid;
+}
+
+.DivButton {
+	width: 100%;
+	background-color: #F3F6FF;
+	padding: 10px 10px 10px 10px;
+	border-left: #7F9DB9 1px solid;
+	border-right: #7F9DB9 1px solid;
+	border-top: #7F9DB9 1px solid;
+	border-bottom: #7F9DB9 1px solid;
+}
+
+.DivButtonTest {
+	width: 100%;
+	padding: 10px 10px 10px 10px;
+	border-left: #7F9DB9 1px solid;
+	border-right: #7F9DB9 1px solid;
+	border-top: #7F9DB9 1px solid;
+	border-bottom: #7F9DB9 1px solid;
+}
+
+.DivPrompt {
+	width: 100%;
+	background-color: #F3F6FF;
+	padding: 10px 10px 10px 10px;
+	border-left: #7F9DB9 1px solid;
+	border-right: #7F9DB9 1px solid;
+	border-bottom: #7F9DB9 1px solid;
+	color: #FF0000;
+}
+
+.DivPrompt11 {
+	width: 100%;
+	background-color: #dde7f3;
+	border-left: #7F9DB9 1px solid;
+	border-right: #7F9DB9 1px solid;
+	border-bottom: #7F9DB9 1px solid;
+}
+
+/* 控件样式 */
+.MyText {
+	font: normal 12px 宋体;
+	height: 20px;
+	background-color: #FFFFFF;
+	margin: 1px 0px 1px 5px;
+	padding: 2px 2px 0px 2px;
+	border: 1px solid #7F9DB9;
+}
+
+.MyArea {
+	font: normal 12px 宋体;
+	background-color: #FFFFFF;
+	margin: 1px 0px 1px 5px;
+	padding: 2px 2px 0px 2px;
+	border: 1px solid #7F9DB9;
+}
+
+.MyTextReadOnly {
+	font: normal 12px 宋体;
+	height: 20px;
+	background-color: #dde7f3;
+	margin: 1px 0px 1px 5px;
+	padding: 2px 2px 0px 2px;
+	border: 1px solid #7F9DB9;
+}
+
+.MyAreaReadOnly {
+	font: normal 12px 宋体;
+	background-color: #ECF0FC;
+	margin: 1px 0px 1px 5px;
+	padding: 2px 2px 0px 2px;
+	border: 1px solid #7F9DB9;
+}
+
+.table_border {
+	border-bottom: 1px #DDD solid;
+	border-left: 1px #DDD solid;
+}
+
+.MyText_NoBorder {
+	font: normal 12px 宋体;
+	height: 20px;
+	margin: 1px 0px 1px 5px;
+	padding: 2px 2px 0px 2px;
+	border: 0px solid #000000;
+}
+
+.MyText_Border {
+	font: normal 12px 宋体;
+	height: 20px;
+	margin: 1px 0px 1px 5px;
+	padding: 2px 2px 0px 2px;
+	border: 1px solid #000000;
+}
+
+.DivPromptPrint {
+	width: 620px;
+	background-color: #FFFFFF;
+	border-top: #000000 2px solid;
+	border-left: #000000 2px solid;
+	border-right: #000000 2px solid;
+	border-bottom: #000000 2px solid;
+}
+.DivWrap_line {
+	width: 100%;
+	/*   height: 420px; */
+	background-color: #ffffff;
+	border-bottom: #000000 1px dashed;
+}
+
+.DivWrap_line_Down {
+	width: 100%;
+	height: 540px;
+	background-color: #ffffff;
+	border-bottom: #000000 1px dashed;
+}

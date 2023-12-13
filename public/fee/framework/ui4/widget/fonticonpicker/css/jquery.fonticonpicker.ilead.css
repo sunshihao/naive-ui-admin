@@ -1,0 +1,10 @@
+.icons-selector .fip-box {
+	display: inline-block;
+	margin: 2px;
+	width: 20px;
+	line-height: 20px;
+	text-align: center;
+	cursor: pointer;
+	vertical-align: top;
+	height: 20px;
+}

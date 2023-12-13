@@ -1,0 +1,45 @@
+@charset "UTF-8";
+/******************************
+ 3RD PARTY PLUGIN CUSTOMIZATION 
+******************************/
+
+/*!
+ * Tab drop for Bootstrap
+ */
+.tabbable-tabdrop .nav-tabs,
+.tabbable-tabdrop .nav-pills {
+  position: relative; }
+  .tabbable-tabdrop .nav-tabs .caret,
+  .tabbable-tabdrop .nav-pills .caret {
+    display: none; }
+  .tabbable-tabdrop .nav-tabs .tabdrop .dropdown-toggle i,
+  .tabbable-tabdrop .nav-pills .tabdrop .dropdown-toggle i {
+    font-size: 14px; }
+
+.tabbable-tabdrop .dropdown-menu:after {
+  right: 10px;
+  left: auto; }
+
+.tabbable-tabdrop .dropdown-menu:before {
+  right: 9px;
+  left: auto; }
+.no-margin {
+  margin: 0; }
+.ilead-tab-content{
+	padding: 12px 20px 15px;
+}
+.tab-content.bordered{
+	border-left: 1px solid #e7ecf1 !important;
+	border-right: 1px solid #e7ecf1 !important;
+	border-bottom: 1px solid #e7ecf1 !important; 
+}
+.tab-content {
+	height:100%;
+}
+.closeBtn {
+   margin-left: 6px;
+}
+.tabbable-custom > .nav-tabs > li {
+    /* margin-right: 2px; */
+   margin-right: 0px;
+}

@@ -1,0 +1,41 @@
+@charset "utf-8";
+/*------------------------------ 
+		 黑色Theme主题
+ ------------------------------ */
+
+/*Logo*/
+#logo a{color: #F0F0F0;}
+#logo a:hover{color: #ffffff;}
+/*头部*/
+#topFrame,
+.navbar-default{background: #373942;border:0 none;}
+/*左侧菜单*/
+#leftFrame{background: #2B2D37;}
+#leftFrame,
+#leftFrame a{color: #ffffff;}
+/*中间内容*/
+#contentFrame{background: #FCFCFC;}
+/*TOP导航*/
+.topNav{}
+.topNav ul li a{color: #989BA5;}
+.topNav ul li:hover{}
+.topNav ul .current{color: #ffffff;	background: #2B2D37;}
+/*左侧导航*/
+.leftNav ul li:hover{background: #373942;}
+.leftNav ul .current{background: #0097FA;}
+.leftNav ul .current:hover{background: #0097FA;}
+/*内容部分导航*/
+.contNav{background: url(../img/frame/contNavBg.png) repeat-x;}
+.contNav ul{border-left: 1px solid #C4C8D6;}
+.contNav ul li{color: #838797;border-right: 1px solid #C4C8D6;}
+.contNav ul li:hover{background: #DEE0E8;}
+.contNav ul .current{color: #373942;background: #C4C8D6;}
+/*top下拉菜单*/
+
+/*title标签*/
+.title{color: #0097FA;}
+/*搜索工具条*/
+/**/
+/**/
+
+/**/

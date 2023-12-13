@@ -49,7 +49,14 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
     server: {
       host: true,
       port: VITE_PORT,
-      proxy: createProxy(VITE_PROXY),
+      proxy: {
+        ... createProxy(VITE_PROXY),
+        "/api": {
+          target: "http://172.16.1.61:8070",
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api/, ""),
+        }
+      },
     },
     optimizeDeps: {
       include: [],

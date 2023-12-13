@@ -50,6 +50,14 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import('@/views/result/info.vue'),
       },
+      {
+        path: 'ebc',
+        name: 'ebc-page',
+        meta: {
+          title: 'EBC页面',
+        },
+        component: () => import('@/views/ebc/cashierconfirm/cashierList.vue'),
+      },
     ],
   },
 ];

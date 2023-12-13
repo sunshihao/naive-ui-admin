@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>jQuery fontIconPicker - An elegant font icon picker written in jQuery</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="jquery.fonticonpicker.min.css" />
+    <link rel="stylesheet" type="text/css" href="jquery.fonticonpicker.grey.min.css" />
+	<link rel="stylesheet" type="text/css" href="fontello-7275ca86/css/fontello.css" />
+    <link rel="stylesheet" type="text/css" href="icomoon/icomoon.css" />
+</head>
+<body>
+<select id="myselect" name="myselect" class="myselect">
+    <option value="">No icon</option>
+    <option>icon-user</option>
+    <option>icon-search</option>
+    <option>icon-right-dir</option>
+    <option>icon-star</option>
+    <option>icon-cancel</option>
+    <option>icon-help-circled</option>
+    <option>icon-info-circled</option>
+    <option>icon-eye</option>
+    <option>icon-tag</option>
+    <option>icon-bookmark</option>
+    <option>icon-heart</option>
+    <option>icon-thumbs-down-alt</option>
+    <option>icon-upload-cloud</option>
+    <option>icon-phone-squared</option>
+    <option>icon-cog</option>
+    <option>icon-wrench</option>
+    <option>icon-volume-down</option>
+    <option>icon-down-dir</option>
+    <option>icon-up-dir</option>
+    <option>icon-left-dir</option>
+    <option>icon-thumbs-up-alt</option>
+</select>
+<!-- jQuery -->
+<script type="text/javascript" src="jquery-1.7.1.min.js"></script>
+<!-- fontIconPicker JS -->
+<script type="text/javascript" src="jquery.fonticonpicker.min.js"></script>
+<!-- JavaScript -->
+<script type="text/javascript">
+    // Make sure to fire only when the DOM is ready
+    jQuery(document).ready(function($) {
+        $('#myselect').fontIconPicker(); // Load with default options
+    });
+</script>
+
+</body>
+</html>

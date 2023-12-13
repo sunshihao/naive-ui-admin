@@ -1,0 +1,92 @@
+.p-0{padding: 0;}
+body{
+	background: url("../img/loginBg.png");
+	background-attachment: fixed;
+    background-color: #3280e0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.container{
+	width:290px !important;
+}
+.container p{
+	color: #ffffff;
+	font-size: 26px;
+	margin-top: 60px;
+	text-shadow: 1px 1px 6px #084290;
+}
+.contWrap{
+	background: url("../img/loginLogo.png") no-repeat #ffffff;
+	background-position:center 20px;
+	/*width: 250px;*/
+	/*height: 278px;*/
+	border-radius: 5px; 
+	margin:50px auto;
+	padding: 100px 25px 20px;
+}
+.form_style{	
+	/*max-width: 200px;*/
+}
+/*第一类输入框*/
+.inputAdd{
+	 width: 100%;
+	 margin-bottom: 15px;
+	 border: 1px solid #ccc;
+	 border-radius: 4px;
+	 height: 34px;
+}
+.inputAdd span{
+	float: left;
+    line-height:30px;
+    margin-left: 8px;
+}
+.inputAdd input{
+	border: 0 none;
+    line-height: 32px;
+    padding-left: 10px;
+    text-align: left;
+    /*width: 170px;*/
+    height: 32px;
+}
+
+/*第二类输入框*/
+.inputAdd2{
+	 margin-bottom: 15px;
+	 border: 1px solid #ccc;
+	 border-radius: 4px;
+	 height: 34px;
+}
+.inputAdd2 span{
+	float: left;
+    line-height:30px;
+    margin-left: 8px;
+}
+.inputAdd2 #securitycode{
+	height: 32px;
+	border:0 none;
+	padding-left: 10px;
+    text-align: left;
+	width:98px;
+	float: left;
+}
+.inputAdd2 #security_img{
+	float: left;
+	margin: 6px 0 0 10px;
+}
+.loginBtn{
+	background: #3280e0;
+	color: #FFFFFF;
+	border: 1px solid #3280e0;
+}
+.loginBtn:focus,.loginBtn:hover,.loginBtn.active.focus, .loginBtn.active:focus, .loginBtn.focus, .loginBtn.focus:active, .loginBtn:active:focus, .loginBtn:focus{
+	outline: none;		
+	border: 0px;
+	background:#326edd;
+	color: #FFFFFF;
+	border: 1px solid #326edd;
+}
+
+.glyphicon{
+	color: #8da5c0;
+}
+

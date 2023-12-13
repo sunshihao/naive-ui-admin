@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Hello World | Jcrop Demo</title>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+
+<script src="js/jquery.min.js"></script>
+<script src="js/common-util.js"></script>
+<script src="js/jquery.Jcrop.js"></script>
+<script src="js/preview.js"></script>
+<script type="text/javascript">
+  jQuery(function($){
+
+    // How easy is this??
+    var jcropApi;
+    $("#clipFile").uploadPreview({ Img: "target",  Callback:function(blobURL){
+	    	if (typeof(jcropApi) != "undefined" && jcropApi != null) {
+	    		//alert(blobURL);
+				    jcropApi.setImage(blobURL);
+				}else {
+					   $('#target').Jcrop({
+							  allowSelect: true,
+							  bgOpacity: 0.5,
+					      bgColor: 'white',
+					      addClass: 'jcrop-light',
+							  //baseClass: 'jcrop',
+							  //bgOpacity: .6,
+							  aspectRatio: 3/2, 
+							  boxWidth: 500,//用于设置画布的大小可以将布局按倍数缩放
+							  boxHeight: 500
+						 }, function() {
+						  	jcropApi = this;
+						  	//alert(222);
+						  	//jcropApi.setImage(blobURL);
+						 });
+				}
+				
+		}});
+
+  });
+
+</script>
+<link rel="stylesheet" href="demos/demo_files/main.css" type="text/css" />
+<link rel="stylesheet" href="demos/demo_files/demos.css" type="text/css" />
+<link rel="stylesheet" href="css/jquery.Jcrop.css" type="text/css" />
+
+</head>
+<body>
+
+<div class="container">
+<div class="row">
+<div class="span12">
+<div class="jc-demo-box">
+
+<div class="page-header">
+<ul class="breadcrumb first">
+  <li><a href="../index.html">Jcrop</a> <span class="divider">/</span></li>
+  <li><a href="../index.html">Demos</a> <span class="divider">/</span></li>
+  <li class="active">Hello World</li>
+</ul>
+<h1>Hello World</h1>
+</div>
+   <div>
+   	  <input type="file" class="clipFile btn" style="margin-left: 0px;" id="clipFile" name="clipFile" />
+   </div>
+  <img src="pool.jpg" id="target" alt="[Jcrop Example]" />
+
+  <div class="description">
+  <p>
+    <b>This example demonstrates the default behavior of Jcrop.</b><br />
+    Since no event handlers have been attached it only performs
+    the cropping behavior.
+  </p>
+  </div>
+
+<div class="tapmodo-footer">
+  <a href="http://tapmodo.com" class="tapmodo-logo segment">tapmodo.com</a>
+  <div class="segment"><b>&copy; 2008-2014 Tapmodo Interactive LLC</b><br />
+    Jcrop is free software released under <a href="../MIT-LICENSE.txt">MIT License</a>
+  </div>
+</div>
+
+<div class="clearfix"></div>
+
+</div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
+

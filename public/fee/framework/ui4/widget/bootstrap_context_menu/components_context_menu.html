@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Metronic | Context Menu</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta content="width=device-width, initial-scale=1" name="viewport" />
+        <meta content="" name="description" />
+        <meta content="" name="author" />
+        
+        <link href="../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+        <link href="css/bootstrap-contextmenu.css" rel="stylesheet" type="text/css"/>
+        <!--[if lt IE 9]>
+           <style type="text/css">               	
+              .dropdown-menu > li > a {
+               	font-weight: 700 !important;
+               	font-size:100%;
+               } 
+               .dropdown-menu > li > a > [class^="icon-"],
+               .dropdown-menu > li > a > [class*=" icon-"] {
+      	            font-weight: 700 !important;
+      	       }
+           </style>
+        <![endif]-->
+        <link rel="shortcut icon" href="favicon.ico" /> </head>
+
+    <body>
+        <div class="clearfix"> </div>
+        <div class="container">
+        	<div class="row">
+        		<div id="col-xs-6">
+        			<span id="context2" data-toggle="context" data-target="#context-menu">右键菜单展现</span>
+                    <!-- Your custom menu with dropdown-menu as default styling -->
+                    <div id="context-menu">
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="javascript:;"><i class="icon-user"></i>New User</a>
+                            </li>
+                            <li><a href="javascript:;"><i class="icon-present"></i>New Event<span class="badge badge-success">4</span></a>
+                            </li>
+                            <li><a href="javascript:;"><i class="icon-basket"></i>New order</a>
+                            </li>
+                            <li class="divider"> </li>
+                            <li><a href="javascript:;"><i class="icon-flag"></i>Pending Orders<span class="badge badge-danger">4</span></a>
+                            </li>
+                            <li><a href="javascript:;"><i class="icon-users"></i>Pending Users<span class="badge badge-warning">12</span></a>
+                            </li>
+                        </ul>
+                    </div>
+        		</div>
+        	</div>
+        </div>
+
+        
+        <!--[if lt IE 9]>
+			<script src="../assets/global/plugins/respond.min.js"></script>
+			<script src="../assets/global/plugins/excanvas.min.js"></script> 
+		<![endif]-->
+
+        <script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+        <script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+
+        <script src="js/bootstrap-contextmenu/bootstrap-contextmenu.js" type="text/javascript"></script>
+
+        <script src="js/bootstrap-contextmenu/components-context-menu.js" type="text/javascript"></script>
+    </body>
+
+</html>

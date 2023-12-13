@@ -1,0 +1,53 @@
+@charset "utf-8";
+/*------------------------------ 
+		 黑色Theme主题
+ ------------------------------ */
+
+/*Logo*/
+#logo a{color: #196bb5;}
+#logo a:hover{color: #196bb5;}
+/*头部*/
+.navbar-default{background: #ffffff;border:0 none;min-height: 50px;}
+/*左侧菜单*/
+#leftFrame{/* update by zrzdemon background: #ffffff;**/}
+/* update by zrzdemon*/
+.leftFrameNav {
+	background: #ffffff;
+}
+
+/*#leftFrame,
+#leftFrame a{color: #8993a0;}*/
+
+/*中间内容*/
+#contentFrame{background: #FCFCFC;}
+/*TOP导航*/
+.topNav{}
+/*左侧导航*/
+.leftNav ul a:hover{background: #f3f7fa; color: #D3D8E1;}
+/*update by zrzdemon 兼容IE8
+.leftNav ul li:hover{background: #f3f7fa; color: #D3D8E1;}*/
+.leftNav ul .current{background: #1DAAFC; color: #ffffff;}
+.leftNav ul .current span{color: #ffffff;}
+.leftNav ul .current a:hover{background: #0097FA;}
+/*内容部分导航*/
+.contNav{background: url(../img/frame/contNavBg.png) repeat-x;}
+.contNav ul{border-left: 1px solid #C4C8D6;}
+.contNav ul li{color: #838797;border-right: 1px solid #C4C8D6;}
+.contNav ul li:hover{background: #DEE0E8;}
+.contNav ul .current{color: #373942;background: #C4C8D6;}
+/*top下拉菜单*/
+
+/*title标签*/
+.title{color: #0097FA;}
+/*搜索工具条*/
+/**/
+.navbar > .container .navbar-brand, 
+.navbar > .container-fluid .navbar-brand{
+	color: #196bb5;
+}
+/**/
+
+/*2016.3.2cx*/
+.leftNav ul .current span, .leftNav ul .current i {
+    color: #ffffff;
+}

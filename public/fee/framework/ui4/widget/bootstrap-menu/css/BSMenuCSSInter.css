@@ -1,0 +1,82 @@
+#leftFrame{
+    top:0px !important;
+    /**
+    margin-top: 55px;**/
+    background-color: #f2f2f2;
+    width:200px;
+}
+
+#leftBody {
+	background-color: #f2f2f2;
+}
+.leftFrameNav {
+    background-color: #f2f2f2;
+}
+/**设置左侧菜单和左边框的距离**/
+.page-container {
+	/*padding: 0px 10px 0px 2px;*/
+	padding: 0px 5px 0px 5px;
+}
+@media (min-width: 992px) {
+  .page-sidebar {
+    width:195px; 
+   }
+}   
+/**一级菜单背景颜色**/
+.page-sidebar-menu > li > a {
+    background-color: #f8f8f8;
+}
+/**设置左侧菜单所有的一级边框和边框颜色**/
+.page-sidebar-menu > li {
+	border-style: solid !important;
+	border-width: 1px 0 0 !important;
+	border-color: #e5e5e5 !important;
+}
+.page-sidebar .page-sidebar-menu {
+    margin-bottom: 0px;
+}
+.page-sidebar .page-sidebar-menu, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu {
+	margin: 0 0 0 0;
+}
+.page-header-fixed .page-container {
+	margin-top: 0px !important;
+}
+/**修改左侧选中菜单蓝条的宽度**/
+.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu > li.active > a, .page-sidebar .page-sidebar-menu > li.active > a {
+    border-left: 5px solid #5C9ACF !important;
+}
+/**设置hover一级菜单的时候颜色**/
+ .page-sidebar .page-sidebar-menu > li:hover > a,
+    .page-sidebar .page-sidebar-menu > li.open > a {
+      background: #ffffff; }
+.page-sidebar .page-sidebar-menu > li.open > a {
+      background: #f2f6f9 !important;}
+          .page-sidebar .page-sidebar-menu .sub-menu li > a .arrow:before,
+          .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li > a .arrow:before {
+            margin-top: 0px; }
+            
+@media screen and ( min-width: 721px ){
+	#leftFrame{
+		width: auto;
+	}
+	.leftNav ul li a{
+		padding-left:15px;
+	}
+	#main-content{
+		margin-left: 205px;
+	}
+	.left-nav-text{
+		display: inline-block;
+	}
+}
+
+#main-content {
+    margin-left: 205px;
+}
+/**
+.title{color: #485A6A;}**/
+
+/**
+.page-sidebar-menu-closed {
+	width:54px !important;
+}**/
