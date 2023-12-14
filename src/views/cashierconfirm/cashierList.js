@@ -3,6 +3,8 @@
  */
 const WEB_CTX_PATH = "/api/fee"
 
+let allNodes = null;
+
 export const cashierconfirm = function () {
   return {
     init: function () {

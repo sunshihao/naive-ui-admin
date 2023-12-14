@@ -26,6 +26,8 @@
   import { useDesignSettingStore } from '@/store/modules/designSetting';
   import { lighten } from '@/utils/index';
 
+  const WEB_CTX_PATH = "/api/fee";
+
   const route = useRoute();
   const useScreenLock = useScreenLockStore();
   const designStore = useDesignSettingStore();

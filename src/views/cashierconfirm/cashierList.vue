@@ -83,15 +83,15 @@
       <div class="col-xs-12 ilead-table">
         <div class="table-tool">
           <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="详细"
-            onclick="cashierconfirm.cashierList.queryDetail('cashier')" id='detailBtn'>
+            @click="cashierconfirm.queryDetail('cashier')" id='detailBtn'>
             <span class="icon iconfont icon-fankui"></span>编辑
           </button>
           <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="详细"
-            onclick="cashierconfirm.cashierList.queryDetail('detail')" id='detailBtn'>
+            @click="cashierconfirm.queryDetail('detail')" id='detailBtn'>
             <span class="icon iconfont icon-liulan"></span>详细
           </button>
           <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="确认"
-            onclick="cashierconfirm.cashierList.doConfirm()" id='comfirmBtn'>
+            @click="cashierconfirm.doConfirm()" id='comfirmBtn'>
             <span class="icon iconfont icon-bangongyongpin"></span>确认
           </button>
           <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="打印" id='printBtn'>
@@ -115,7 +115,6 @@ onMounted(() => {
   const WEB_CTX_PATH = "/api/fee"
 
   jQuery(document).ready(function () {
-
 
     //初始化控件
     jQuery("#projectUid").select2({
