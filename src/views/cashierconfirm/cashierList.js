@@ -1,8 +1,6 @@
 /*
  * 定义命名空间
  */
-let allNodes = null;
-
 export const cashierconfirm = (function () {
   return {
     init: function () {
@@ -637,7 +635,7 @@ cashierconfirm.companytree = (function () {
     },
     bindEvent: function () {},
     createTreeAll: function (returnData) {
-      allNodes = returnData || [];
+      let allNodes = returnData || [];
       var setting = {
         async: {
           enable: false,

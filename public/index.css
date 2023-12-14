@@ -38,3 +38,7 @@
 
 /* 弹出框 */
 @import url("/fee/ecside/sweetalert/sweetalert.css");
+
+/* zTree */
+@import url("/fee/resource/zTree/css/metroStyle/rightmenu.css");
+@import url("/fee/resource/zTree/css/metroStyle/metroStyle.css");
