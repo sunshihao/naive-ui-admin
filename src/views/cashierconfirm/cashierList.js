@@ -1,8 +1,6 @@
 /*
  * 定义命名空间
  */
-const WEB_CTX_PATH = '/api/fee';
-
 let allNodes = null;
 
 export const cashierconfirm = (function () {
