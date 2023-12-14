@@ -24,7 +24,14 @@ module.exports = defineConfig({
     'plugin:prettier/recommended',
   ],
   rules: {
-    'vue/no-multiple-template-root': "off",
+    'vue/no-multiple-template-root': 'off',
+    // 'vue/first-attribute-linebreak': [
+    //   'error',
+    //   {
+    //     singleline: 'beside',
+    //     multiline: 'beside', // 不允许在第一个属性之前使用换行符
+    //   },
+    // ],
     'vue/script-setup-uses-vars': 'error',
     'vue/multi-word-component-names': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
