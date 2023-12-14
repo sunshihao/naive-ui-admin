@@ -24,6 +24,7 @@ module.exports = defineConfig({
     'plugin:prettier/recommended',
   ],
   rules: {
+    'prettier/prettier': 'error', // 应用eslint-plugin-prettier的规则
     'vue/no-multiple-template-root': 'off',
     // 'vue/first-attribute-linebreak': [
     //   'error',

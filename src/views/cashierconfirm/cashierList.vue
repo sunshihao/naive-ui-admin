@@ -223,6 +223,9 @@
     const WEB_CTX_PATH = '/api/fee';
 
     jQuery(document).ready(function () {
+      cashierconfirm.init();
+      // 初始公司
+      cashierconfirm.companytree.init();
       //初始化控件
       jQuery('#projectUid').select2({
         minimumResultsForSearch: -1,
@@ -254,12 +257,8 @@
         function (type) {},
         'deptbillForm',
         true,
-        ' '
+        ''
       );
-
-      cashierconfirm.init();
-      // 初始公司
-      cashierconfirm.companytree.init();
     });
   });
 </script>
