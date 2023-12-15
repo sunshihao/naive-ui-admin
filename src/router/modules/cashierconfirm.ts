@@ -23,7 +23,6 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: '出纳确认',
       icon: renderIcon(CheckCircleOutlined),
-      sort: 4,
     },
     children: [
       {
@@ -32,8 +31,8 @@ const routes: Array<RouteRecordRaw> = [
         meta: {
           title: '出纳确认',
         },
-        component: () => import('@/views/cashierconfirm/cashierList.vue'),
-      }
+        component: () => import('@/views/ebs/cashierconfirm/cashierList.vue'),
+      },
     ],
   },
 ];

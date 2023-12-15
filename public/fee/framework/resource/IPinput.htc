@@ -1,0 +1,173 @@
+
+<PUBLIC:COMPONENT>
+<public:attach event="oncontentready" onevent="initInput()">
+<script>	
+var frameStyles = "margin:0px;Z-INDEX: 97; POSITION: absolute;left:0px;top:0px;width:130px;height:18px;font-size:10px;";
+
+var style_m_input = "margin:0px;width: 24px;height: 18px;border: 0px solid black;font-family: 'Tahoma';text-align: center;ime-mode:disabled;";
+
+var cDiv = document.createElement("Div");
+var fDiv = document.createElement("Div");
+var IP = new Array();
+function initInput()
+{
+	//styles of Frame
+	fDiv.style.cssText = frameStyles;
+	fDiv.innerHTML = '<iframe src="about:blank" scrolling="no" frameborder="0" style="border:2px solid #dcdcdc;"></iframe>';
+	ieMat = fDiv.firstChild;
+	ieMat.style.width = fDiv.style.width;
+	ieMat.style.height = fDiv.style.height;
+	
+	cDiv.style.height = parseInt(ieMat.style.height);
+	cDiv.style.width = ieMat.style.width;
+	cDiv.style.marginLeft = 2;
+	cDiv.style.marginTop = - parseInt(ieMat.style.height) - 3;
+	fDiv.appendChild(cDiv);			
+	CreatInput();
+	
+	window.document.body.insertAdjacentElement("afterbegin",fDiv);
+	fDiv.style.display="none";
+	element.attachEvent("onmousedown",show);
+	element.readOnly="true";
+}
+function CreatInput()
+{
+	var inputIP1 = document.createElement("input");
+	var inputIP2 = document.createElement("input");
+	var inputIP3 = document.createElement("input");
+	var inputIP4 = document.createElement("input");
+	
+	inputIP1.value = 0;
+	inputIP1.radix = 255;
+	inputIP2.value = 0;
+	inputIP2.radix = 255;
+	inputIP3.value = 0;
+	inputIP3.radix = 255;
+	inputIP4.value = 0;
+	inputIP4.radix = 255;
+	
+	IP[0] = inputIP1;
+	IP[1] = inputIP2;
+	IP[2] = inputIP3;
+	IP[3] = inputIP4;
+	
+	for(var i=0;i<this.IP.length;i++)
+	{
+		IP[i].type = "text";
+		IP[i].style.cssText = style_m_input;
+		IP[i].maxLength = 3;
+		IP[i].attachEvent("onblur",checkInput);
+		IP[i].attachEvent("onkeyup",keyHandle);
+		IP[i].onkeydown = function()
+		{	
+			if ((event.keyCode == 190)||(event.keyCode == 110)||(event.keyCode == 32))
+			{
+				event.keyCode = 9;			
+			}			
+		}
+		IP[i].onkeypress = function()
+		{
+			if (!/[0-9]/.test(String.fromCharCode(event.keyCode)))
+			{			
+				event.keyCode = 0;
+			}
+		}
+		IP[i].onpaste = function(){ return false;}
+		IP[i].ondragenter = function(){ return false;}			
+	}
+
+	var mhDiv1 = document.createElement("span");
+	var mhDiv2 = document.createElement("span");
+	var mhDiv3 = document.createElement("span");
+	
+	mhDiv1.innerHTML = ".";
+	mhDiv2.innerHTML = ".";
+	mhDiv3.innerHTML = ".";
+	cDiv.appendChild(IP[0]);
+	cDiv.appendChild(mhDiv1);		
+	cDiv.appendChild(IP[1]);
+	cDiv.appendChild(mhDiv2);
+	cDiv.appendChild(IP[2]);
+	cDiv.appendChild(mhDiv3);
+	cDiv.appendChild(IP[3]);
+}
+function keyHandle()
+{
+	var obj = event.srcElement;
+	var value = parseInt(obj.value,10);
+	var radix = parseInt(obj.radix,10);
+	if (obj.value>radix||obj.value<0)
+	{
+		obj.value = obj.value.substr(0,1);
+	} 
+}
+function checkInput()
+{
+	var obj = event.srcElement;
+	if(!/[0-9]+/.test(obj.value)) obj.value = "0";		
+}
+function show()
+{
+	var IPvalue = element.value;
+	var str = IPvalue.split(".");
+	if (str.length == 4)
+	{			
+		IP[0].value = str[0];
+		IP[1].value = str[1];
+		IP[2].value = str[2];			
+		IP[3].value = str[3];
+	}
+	fDiv.style.display="";
+	fDiv.style.left=getoffsetLeft(element);
+	fDiv.style.top=getoffsetTop(element)+element.offsetHeight;
+	element.document.attachEvent('onmousedown',onDocumentMouseDown);
+}
+function onDocumentMouseDown()
+{
+	if(element.contains(event.srcElement))
+	{
+		return;
+	}
+	if(fDiv.contains(event.srcElement))
+	{
+		return;
+	}	
+	hideDate();
+}
+
+function hideDate()
+{
+	fDiv.style.display="none";
+	fDiv.style.left=500;
+	fDiv.style.top=500;
+	element.document.detachEvent("onmousedown",onDocumentMouseDown);
+	for(var i=0;i<=3;i++)
+	{
+		if(!/[0-9]+/.test(IP[i].value)) IP[i].value = "0";
+	}
+	element.value=parseInt(IP[0].value,10) +"."+ parseInt(IP[1].value,10) +"."+ parseInt(IP[2].value,10) +"."+ parseInt(IP[3].value,10) ;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function getoffsetLeft(vObject)
+{
+ var iElementLeft=vObject.offsetLeft;
+ while(vObject=vObject.offsetParent)
+ {
+  iElementLeft+=vObject.offsetLeft;
+  iElementLeft = iElementLeft - vObject.scrollLeft;
+ }
+ return iElementLeft;
+}
+
+function getoffsetTop(vObject)
+{
+ var iElementTop=vObject.offsetTop;
+ while(vObject=vObject.offsetParent)
+ {
+     iElementTop+=vObject.offsetTop;  
+     iElementTop = iElementTop - vObject.scrollTop;  
+ }
+ return iElementTop;
+}
+</script></PUBLIC:COMPONENT>

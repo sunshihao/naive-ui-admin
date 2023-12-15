@@ -1,6 +1,8 @@
 /*
  * 定义命名空间
  */
+var allNodes = []; // 公司部门属性结构
+
 export const cashierconfirm = (function () {
   return {
     init: function () {
@@ -245,6 +247,7 @@ export const cashierconfirm = (function () {
       //单据类型判断
       var type = $('#dataList').jqGrid('getRowData', paramIdArr).TYPE;
       var titleStr = '';
+      // TODO 调用的页面的修改
       if (type == 'BX') {
         titleStr = '个人普通报销单详细';
         url =
@@ -487,7 +490,7 @@ export const cashierconfirm = (function () {
       $('#cashierConfirm').val(null).select2();
       $('#type').val(null).select2();
       cashierconfirm.orgtree.init();
-      cashierconfirm.superDetailTree.init();
+      // cashierconfirm.superDetailTree.init();
       ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
@@ -635,7 +638,7 @@ cashierconfirm.companytree = (function () {
     },
     bindEvent: function () {},
     createTreeAll: function (returnData) {
-      let allNodes = returnData || [];
+      allNodes = returnData || [];
       var setting = {
         async: {
           enable: false,
@@ -683,7 +686,7 @@ cashierconfirm.companytree = (function () {
       jQuery('#projectUid').empty().select2();
 
       cashierconfirm.companytree.changeProject();
-      cashierconfirm.superDetailTree.init();
+      cashierconfirm.orgtree.init();
     },
     changeProject: function () {
       //调用下拉列表  bankName'upOrgId'为select组件id、'bankName'(改变角色)

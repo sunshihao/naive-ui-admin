@@ -16,22 +16,22 @@ import { renderIcon } from '@/utils/index';
  * */
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/banktransferstat',
-    name: 'banktransferstat',
-    redirect: '/banktransferstat/bankTransferStatList',
+    path: '/rmbtrip',
+    name: 'rmbtrip',
+    redirect: '/rmbtrip/rmbtripList',
     component: Layout,
     meta: {
-      title: '综合查询',
+      title: '报销业务',
       icon: renderIcon(CheckCircleOutlined),
     },
     children: [
       {
-        path: 'bankTransferStatList',
-        name: 'bankTransferStatList',
+        path: 'rmbtripList',
+        name: 'rmbtripList',
         meta: {
-          title: '银行间转账查询',
+          title: '个人差旅报销',
         },
-        component: () => import('@/views/ebs/banktransferstat/bankTransferStatList.vue'),
+        component: () => import('@/views/ebs/rmbtrip/rmbtripList.vue'),
       },
     ],
   },

@@ -1,0 +1,40 @@
+body {
+	filter : progid:DXImageTransform.Microsoft.Gradient( enabled=true  , startColorStr=#ffffff , endColorStr=#2975d9) ;
+	margin: 0px;
+}
+td {
+	font: 12px/24px "宋体";
+	color: #333;
+}
+.title {
+	background-image: url(../image/login_text1.png);
+	background-repeat: no-repeat;
+}
+.title_nopic {
+	padding-left: 50px;
+	font-family: 黑体; 
+	font: bolder;
+	font-size: 38px; 
+	color: #000000; 
+	FILTER: dropshadow(color=#B4BBCF,offx=6,offy=6,positive=1)
+}
+.login_bg_l {
+	background-image: url(../image/login_bg_l.png);
+	background-repeat: no-repeat;
+}
+.login_bg_c {
+	background-image: url(../image/login_bg_c.png);
+	background-repeat: repeat-x;
+}
+.login_bg_r {
+	background-image: url(../image/login_bg_r.png);
+	background-repeat: no-repeat;
+	padding-top: 70px;
+	padding-left:8px;
+	padding-bottom: 20px;
+}
+.error_text {
+	font: 12px "宋体";
+	color: #F00;
+	text-decoration: none;
+}
