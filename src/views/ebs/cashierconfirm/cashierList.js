@@ -1,15 +1,14 @@
 /*
  * 定义命名空间
  */
-var allNodes = []; // 公司部门属性结构
-
-export const cashierconfirm = (function () {
+jQuery.namespace('cashierconfirm.cashierList');
+cashierconfirm.cashierList = (function () {
   return {
     init: function () {
-      cashierconfirm.gridInit();
-      jQuery('#queryBtn').on('click', cashierconfirm.doQuery);
-      jQuery('#resetBtn').on('click', cashierconfirm.resetQuery);
-      jQuery('#printBtn').on('click', cashierconfirm.doPrint);
+      cashierconfirm.cashierList.gridInit();
+      jQuery('#queryBtn').on('click', cashierconfirm.cashierList.doQuery);
+      jQuery('#resetBtn').on('click', cashierconfirm.cashierList.resetQuery);
+      jQuery('#printBtn').on('click', cashierconfirm.cashierList.doPrint);
     },
     /*
      * 生成表格组件
@@ -96,6 +95,7 @@ export const cashierconfirm = (function () {
             align: 'center',
           },
         ],
+
         rowNum: 10, // 每页最大显示行数
         autowidth: true, // grid的宽度会根据父元素的宽度自动重新计算
         multiselect: true, // 多选（表格会多出一列选择框）
@@ -247,7 +247,6 @@ export const cashierconfirm = (function () {
       //单据类型判断
       var type = $('#dataList').jqGrid('getRowData', paramIdArr).TYPE;
       var titleStr = '';
-      // TODO 调用的页面的修改
       if (type == 'BX') {
         titleStr = '个人普通报销单详细';
         url =
@@ -256,6 +255,13 @@ export const cashierconfirm = (function () {
           actionType +
           '&billUid=' +
           paramIdArr[0];
+        //					jQuery().openDlg({
+        ////						parent: window.top,//此行调遮罩
+        //						height: 800,//此行调高度
+        //						width: 1100,
+        //						url:url,
+        //						title: titleStr
+        //					});
       } else if (type == 'CL') {
         titleStr = '人民币差旅报销单详细';
         url =
@@ -264,6 +270,13 @@ export const cashierconfirm = (function () {
           actionType +
           '&paramId=' +
           paramIdArr[0];
+        //					jQuery().openDlg({
+        //						// parent: window.top,//此行调遮罩
+        //						height : 700,// 此行调高度
+        //						width : 1100,
+        //						url : url,
+        //						title : titleStr
+        //					});
       } else if (type == 'ZJ') {
         titleStr = '银行间转款单详细';
         url =
@@ -272,6 +285,13 @@ export const cashierconfirm = (function () {
           actionType +
           '&billUid=' +
           paramIdArr[0];
+        //					jQuery().openDlg({
+        ////						parent: window.top,//此行调遮罩
+        //						height: 680,//此行调高度
+        //						width: 1000,
+        //						url:url,
+        //						title: titleStr
+        //					});
       } else if (type == 'FX') {
         titleStr = '付款报销单详细';
         url =
@@ -280,6 +300,13 @@ export const cashierconfirm = (function () {
           actionType +
           '&paramId=' +
           paramIdArr[0];
+        //					jQuery().openDlg({
+        ////						parent: window.top,//此行调遮罩
+        //						height: 700,//此行调高度
+        //						width: 1100,
+        //						url:url,
+        //						title: titleStr
+        //					});
       } else if (type == 'CX') {
         titleStr = '车辆费用报销单详细';
         url =
@@ -288,6 +315,13 @@ export const cashierconfirm = (function () {
           actionType +
           '&billUid=' +
           paramIdArr[0];
+        //					jQuery().openDlg({
+        ////						parent: window.top,//此行调遮罩
+        //						height: 700,//此行调高度
+        //						width: 1100,
+        //						url:url,
+        //						title: titleStr
+        //					});
       } else if (type == 'LC') {
         titleStr = '理财产品单详细';
         url =
@@ -313,7 +347,7 @@ export const cashierconfirm = (function () {
         content: url,
         fix: true,
         area: ['100%', '100%'],
-        /*注释部分功能：弹窗后立即最大化*/
+        //		           /*注释部分功能：弹窗后立即最大化*/
         success: function (layerObj) {
           var currLayer = jQuery(layerObj);
           currLayer
@@ -489,8 +523,8 @@ export const cashierconfirm = (function () {
       $('#projectUid').val('');
       $('#cashierConfirm').val(null).select2();
       $('#type').val(null).select2();
-      cashierconfirm.orgtree.init();
-      // cashierconfirm.superDetailTree.init();
+      cashierconfirm.cashierList.orgtree.init();
+      cashierconfirm.cashierList.superDetailTree.init();
       ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
@@ -618,7 +652,7 @@ export const cashierconfirm = (function () {
 })();
 
 // 20170822 公司树形
-cashierconfirm.companytree = (function () {
+cashierconfirm.cashierList.companytree = (function () {
   var zTree;
   return {
     init: function () {
@@ -633,7 +667,7 @@ cashierconfirm.companytree = (function () {
         beforeSend: function (xhr) {
           xhr.setRequestHeader('__REQUEST_TYPE', 'AJAX_REQUEST');
         },
-        success: cashierconfirm.companytree.createTreeAll,
+        success: cashierconfirm.cashierList.companytree.createTreeAll,
       });
     },
     bindEvent: function () {},
@@ -663,7 +697,7 @@ cashierconfirm.companytree = (function () {
           dblClickExpand: false,
         },
         callback: {
-          onClick: cashierconfirm.companytree.onClickCompany,
+          onClick: cashierconfirm.cashierList.companytree.onClickCompany,
         },
       };
       jQuery.fn.zTree.init(jQuery('#companyTree'), setting, allNodes);
@@ -677,16 +711,16 @@ cashierconfirm.companytree = (function () {
       jQuery('#upOrgName').val(node.name);
       var billtype = jQuery('#type').val();
       // 隐藏menu
-      cashierconfirm.companytree.hideMenu();
+      cashierconfirm.cashierList.companytree.hideMenu();
       // 初始化 部门
       jQuery('#orgId').val('');
       jQuery('#orgName').val('');
-      cashierconfirm.orgtree.init(node.id);
+      cashierconfirm.cashierList.orgtree.init(node.id);
       // 初始化 项目
       jQuery('#projectUid').empty().select2();
 
-      cashierconfirm.companytree.changeProject();
-      cashierconfirm.orgtree.init();
+      cashierconfirm.cashierList.companytree.changeProject();
+      // .init();
     },
     changeProject: function () {
       //调用下拉列表  bankName'upOrgId'为select组件id、'bankName'(改变角色)
@@ -703,11 +737,11 @@ cashierconfirm.companytree = (function () {
           top: orgOffset.top + orgName.outerHeight() + 'px',
         })
         .slideDown('fast');
-      jQuery('body').bind('mousedown', cashierconfirm.companytree.onBodyDown);
+      jQuery('body').bind('mousedown', cashierconfirm.cashierList.companytree.onBodyDown);
     },
     hideMenu: function () {
       jQuery('#companyContent').fadeOut('fast');
-      jQuery('body').unbind('mousedown', cashierconfirm.companytree.onBodyDown);
+      jQuery('body').unbind('mousedown', cashierconfirm.cashierList.companytree.onBodyDown);
     },
     onBodyDown: function (event) {
       if (
@@ -717,7 +751,7 @@ cashierconfirm.companytree = (function () {
           jQuery(event.target).parents('#companyContent').length > 0
         )
       ) {
-        cashierconfirm.companytree.hideMenu();
+        cashierconfirm.cashierList.companytree.hideMenu();
       }
     },
     doError: function () {
@@ -728,7 +762,7 @@ cashierconfirm.companytree = (function () {
 })();
 
 //20170822 部门+项目
-cashierconfirm.orgtree = (function () {
+cashierconfirm.cashierList.orgtree = (function () {
   var zTree;
   return {
     init: function (upOrgId) {
@@ -743,7 +777,7 @@ cashierconfirm.orgtree = (function () {
         beforeSend: function (xhr) {
           xhr.setRequestHeader('__REQUEST_TYPE', 'AJAX_REQUEST');
         },
-        success: cashierconfirm.orgtree.createTreeAll,
+        success: cashierconfirm.cashierList.orgtree.createTreeAll,
       });
     },
     bindEvent: function () {},
@@ -773,7 +807,7 @@ cashierconfirm.orgtree = (function () {
           dblClickExpand: false,
         },
         callback: {
-          onClick: cashierconfirm.orgtree.onClickOrg,
+          onClick: cashierconfirm.cashierList.orgtree.onClickOrg,
         },
       };
       jQuery.fn.zTree.init(jQuery('#orgTree'), setting, allNodes);
@@ -787,9 +821,9 @@ cashierconfirm.orgtree = (function () {
       }
       jQuery('#orgName').val(node.name);
       // 隐藏menu
-      cashierconfirm.orgtree.hideMenu();
+      cashierconfirm.cashierList.orgtree.hideMenu();
       // 初始化 项目  -- 最后做
-      cashierconfirm.orgtree.changeProject();
+      cashierconfirm.cashierList.orgtree.changeProject();
     },
     changeProject: function () {
       //调用下拉列表  bankName'upOrgId'为select组件id、'bankName'(改变角色)
@@ -830,11 +864,11 @@ cashierconfirm.orgtree = (function () {
           top: orgOffset.top + orgName.outerHeight() + 'px',
         })
         .slideDown('fast');
-      jQuery('body').bind('mousedown', cashierconfirm.orgtree.onBodyDown);
+      jQuery('body').bind('mousedown', cashierconfirm.cashierList.orgtree.onBodyDown);
     },
     hideMenu: function () {
       jQuery('#orgContent').fadeOut('fast');
-      jQuery('body').unbind('mousedown', cashierconfirm.orgtree.onBodyDown);
+      jQuery('body').unbind('mousedown', cashierconfirm.cashierList.orgtree.onBodyDown);
     },
     onBodyDown: function (event) {
       if (
@@ -844,7 +878,7 @@ cashierconfirm.orgtree = (function () {
           jQuery(event.target).parents('#orgContent').length > 0
         )
       ) {
-        cashierconfirm.orgtree.hideMenu();
+        cashierconfirm.cashierList.orgtree.hideMenu();
       }
     },
     doError: function () {
@@ -854,37 +888,3 @@ cashierconfirm.orgtree = (function () {
     doClose: function () {},
   };
 })();
-
-/*
- * 初始化
- */
-// jQuery(document).ready(function() {
-// 	cashierconfirm.init();
-// 	// 初始公司
-// 	cashierconfirm.companytree.init();
-// 	//初始化控件
-// 	// jQuery("#projectUid").select2({
-// 	// 	minimumResultsForSearch: -1,
-// 	// 	data: []
-// 	// });
-// 	//单据状态下拉
-// 	ajaxFormRequest(
-//  			WEB_CTX_PATH
-//  					+ "/codeAction.do?method=getSelectOptions&element2CodeType="
-//  					+ encodeURI(encodeURI("{'cashierConfirm':'confirmationState'}")),
-//  			function(returnData) {
-//  				if (initSelect2(returnData)) {
-//  				}
-//  			}, function(cashierConfirm) {
-//  			}, "deptbillForm", true, " ");
-// 	//单据类型下拉
-// 	ajaxFormRequest(
-//  			WEB_CTX_PATH
-//  					+ "/codeAction.do?method=getSelectOptions&element2CodeType="
-//  					+ encodeURI(encodeURI("{'type':'billType'}")),
-//  			function(returnData) {
-//  				if (initSelect2(returnData)) {
-//  				}
-//  			}, function(type) {
-//  			}, "deptbillForm", true, " ");
-// });

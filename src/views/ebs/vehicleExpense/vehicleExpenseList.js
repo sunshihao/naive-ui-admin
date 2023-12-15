@@ -1,16 +1,14 @@
 /*
  * 定义命名空间
  */
-var allNodes = []; // 公司部门属性结构
-
-const ordinarymain = (function () {
+jQuery.namespace('vehicleExpense.vehicleExpenseList');
+vehicleExpense.vehicleExpenseList = (function () {
   return {
     init: function () {
-      ordinarymain.gridInit();
-      jQuery('#delBtn').on('click', ordinarymain.deleteMainParam);
-      jQuery('#queryBtn').on('click', ordinarymain.doQuery);
-      jQuery('#resetBtn').on('click', ordinarymain.resetQuery);
-      //			ordinarymain.initSelect();
+      vehicleExpense.vehicleExpenseList.gridInit();
+      jQuery('#delBtn').on('click', vehicleExpense.vehicleExpenseList.deleteMainParam);
+      jQuery('#queryBtn').on('click', vehicleExpense.vehicleExpenseList.doQuery);
+      jQuery('#resetBtn').on('click', vehicleExpense.vehicleExpenseList.resetQuery);
     },
     /*
      * 生成表格组件
@@ -19,15 +17,16 @@ const ordinarymain = (function () {
       jQuery('#dataList').jqGrid({
         // 绝大部分情况下JS中单引号与双引号并无区别
         // 以下部分的值采用单引号和双引号无区别
-        url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+        url: WEB_CTX_PATH + '/vehicleExpenseAction.do?method=doInit',
         regional: 'cn',
         datatype: 'json',
         colNames: [
           'id',
           '单据号',
+          '车牌号码',
           '单据日期',
           '价税合计',
-          '收款人',
+          '收款人/单位',
           '申请人',
           '业务内容',
           'state',
@@ -46,6 +45,11 @@ const ordinarymain = (function () {
           {
             name: 'billNo',
             index: 'billNo',
+          },
+          {
+            name: 'licensePlate',
+            index: 'licensePlate',
+            hidden: true,
           },
           {
             name: 'billDate',
@@ -115,9 +119,9 @@ const ordinarymain = (function () {
               jQuery('#dataList').jqGrid('setRowData', ids[i], { stateName: btn });
             } else {
               var btn =
-                "<a id='view' href='javascript:void(0);'  onclick=\"doAppStatusFlow('个人普通报销','" +
+                "<a id='view' href='javascript:void(0);'  onclick=\"doAppStatusFlow('车辆费用报销','" +
                 billNo +
-                "','FEE01001');\">" +
+                "','FEE01003');\">" +
                 appStatus +
                 '</a>';
               jQuery('#dataList').jqGrid('setRowData', ids[i], { stateName: btn });
@@ -132,16 +136,14 @@ const ordinarymain = (function () {
         pager: '#listPager',
         mtype: 'post',
         viewrecords: false,
-        //						sortname : 'paramTypeName', // 默认的排序索引,可根据需求添加该项
         emptyMsg: '查询结果为空', // 如果设置了该选项，在表格为空数据时撑开表格并显示设置的信息
-        caption: '个人普通报销列表',
+        caption: '车辆费用报销列表',
       });
-
       /*
        * 表格大小调整
        */
       jQuery(window).on('resize.jqGrid', function () {
-        jQuery('#dataList').jqGrid('setGridWidth', jQuery('.col-xs-12').width());
+        jQuery('#dataList').jqGrid('setGridWidth', jQuery('.col-xs-12').width(), true);
       });
       jQuery(window).triggerHandler('resize.jqGrid');
     },
@@ -158,7 +160,7 @@ const ordinarymain = (function () {
       var url = '';
       //判断id是否为空
       if (clickType == 'edit') {
-        titleStr = '个人普通报销单编辑';
+        titleStr = '车辆费用报销单编辑';
         paramIdArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
         if (paramIdArr && paramIdArr.length > 1) {
           //选中多条
@@ -199,12 +201,12 @@ const ordinarymain = (function () {
 
         url =
           WEB_CTX_PATH +
-          '/ordinarymainAction.do?method=doAddOrEdit&actionType=' +
+          '/vehicleExpenseAction.do?method=doAddOrEdit&actionType=' +
           clickType +
           '&billUid=' +
           paramIdArr[0];
       } else if (clickType == 'detail') {
-        titleStr = '个人普通报销单详细';
+        titleStr = '车辆费用报销单详细';
         paramIdArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
         if (paramIdArr && paramIdArr.length > 1) {
           //选中多条
@@ -229,16 +231,15 @@ const ordinarymain = (function () {
         }
         url =
           WEB_CTX_PATH +
-          '/ordinarymainAction.do?method=doAddOrEdit&actionType=' +
+          '/vehicleExpenseAction.do?method=doAddOrEdit&actionType=' +
           clickType +
           '&billUid=' +
           paramIdArr[0];
       } else if (clickType == 'add') {
-        titleStr = '个人普通报销单新建';
-        url = WEB_CTX_PATH + '/ordinarymainAction.do?method=doAddOrEdit&actionType=' + clickType;
+        titleStr = '车辆费用报销单新建';
+        url = WEB_CTX_PATH + '/vehicleExpenseAction.do?method=doAddOrEdit&actionType=' + clickType;
       }
       //			jQuery().openDlg({
-      ////				parent: window.top,//此行调遮罩
       //				height: 800,//此行调高度
       //				width: 1100,
       //				url:url,
@@ -260,11 +261,10 @@ const ordinarymain = (function () {
         },
       });
     },
-
     //编辑或添加
     test: function (type) {
       //判断id是否为空
-      var titleStr = '个人普通报销单详细';
+      var titleStr = '车辆费用报销单详细';
       var paramIdArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
       if (paramIdArr && paramIdArr.length > 1) {
         //选中多条
@@ -289,7 +289,7 @@ const ordinarymain = (function () {
       }
       var url =
         WEB_CTX_PATH +
-        '/ordinarymainAction.do?method=detail&viewType=' +
+        '/vehicleExpenseAction.do?method=detail&viewType=' +
         type +
         '&billUid=' +
         $('#dataList').jqGrid('getRowData', paramIdArr[0]).billNo;
@@ -309,14 +309,12 @@ const ordinarymain = (function () {
         },
       });
     },
-
     //弹出代理新建页面
-    goOrdinaryMainEdit: function () {
-      //弹出新建个人普通报销画面
-      url = WEB_CTX_PATH + '/ordinarymainAction.do?method=goOrdinaryMainEdit';
+    goVehicleExpenseMainEdit: function () {
+      //弹出新建车辆费用报销画面
+      url = WEB_CTX_PATH + '/vehicleExpenseAction.do?method=goVehicleExpenseMainEdit';
 
       //			jQuery().openDlg({
-      ////				parent: window.top,//此行调遮罩
       //				height: 800,//此行调高度
       //				width: 1100,
       //				url:url,
@@ -340,7 +338,7 @@ const ordinarymain = (function () {
     },
 
     //删除码表数据
-    deleteOrdinaryMain: function () {
+    deleteTVehicleExpenseMain: function () {
       var billUids = '';
       var billUidArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
       if (!billUidArr || billUidArr.length == 0) {
@@ -394,7 +392,7 @@ const ordinarymain = (function () {
                 }
               }
               $.ajax({
-                url: WEB_CTX_PATH + '/ordinarymainAction.do?method=deleteOrdinaryMain',
+                url: WEB_CTX_PATH + '/vehicleExpenseAction.do?method=deleteTVehicleExpenseMain',
                 data: { billUids: billUids },
                 type: 'POST',
                 dataType: 'json',
@@ -412,7 +410,7 @@ const ordinarymain = (function () {
                         //重新加载数据
                         jQuery('#dataList')
                           .jqGrid('setGridParam', {
-                            url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+                            url: WEB_CTX_PATH + '/vehicleExpenseAction.do?method=doInit',
                             page: 1,
                           })
                           .trigger('reloadGrid');
@@ -468,7 +466,7 @@ const ordinarymain = (function () {
       // url
       var url = '';
       // 页头
-      var titleStr = '个人普通报销单打印';
+      var titleStr = '车辆费用报销单打印';
       paramIdArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
       // 判断id是否为空
       if (paramIdArr && paramIdArr.length > 1) {
@@ -504,7 +502,7 @@ const ordinarymain = (function () {
         });
         return;
       }
-      url = WEB_CTX_PATH + '/ordinarymainAction.do?method=print&paramId=' + paramIdArr[0];
+      url = WEB_CTX_PATH + '/vehicleExpenseAction.do?method=print&paramId=' + paramIdArr[0];
       //			jQuery().openDlg({
       //				// parent: window.top,//此行调遮罩
       //				height : 600,// 此行调高度
@@ -583,7 +581,7 @@ const ordinarymain = (function () {
                 }
               }
               $.ajax({
-                url: WEB_CTX_PATH + '/ordinarymainAction.do?method=start',
+                url: WEB_CTX_PATH + '/vehicleExpenseAction.do?method=start',
                 data: {
                   paramIds: paramIds,
                 },
@@ -602,7 +600,7 @@ const ordinarymain = (function () {
                         // 重新加载数据
                         jQuery('#dataList')
                           .jqGrid('setGridParam', {
-                            url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+                            url: WEB_CTX_PATH + '/vehicleExpenseAction.do?method=doInit',
                             page: 1,
                           })
                           .trigger('reloadGrid');
@@ -690,7 +688,7 @@ const ordinarymain = (function () {
                 }
               }
               $.ajax({
-                url: WEB_CTX_PATH + '/ordinarymainAction.do?method=callback',
+                url: WEB_CTX_PATH + '/vehicleExpenseAction.do?method=callback',
                 data: {
                   paramIds: paramIds,
                 },
@@ -709,7 +707,7 @@ const ordinarymain = (function () {
                         // 重新加载数据
                         jQuery('#dataList')
                           .jqGrid('setGridParam', {
-                            url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+                            url: WEB_CTX_PATH + '/vehicleExpenseAction.do?method=doInit',
                             page: 1,
                           })
                           .trigger('reloadGrid');
@@ -754,21 +752,14 @@ const ordinarymain = (function () {
       var state = jQuery('#state').val();
       var startTime = jQuery('#startTime').val();
       var endTime = jQuery('#endTime').val();
-      //			//公司id
-      //			var upOrgId = $('#upOrgId').val();
-      //			//部门id
-      //			var orgId = $('orgId').val();
-      //			//项目id
-      //			var projectUid = $('projectUid').val();
-
       var companyId = $('#upOrgId').val();
       var departmentId = $('#orgId').val();
       var projectId = $('#projectUid').val();
-
+      var licensePlate = $('#licensePlate').val();
       //重新加载数据
       jQuery('#dataList')
         .jqGrid('setGridParam', {
-          url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+          url: WEB_CTX_PATH + '/vehicleExpenseAction.do?method=doInit',
           page: 1,
           postData: {
             upOrgId: companyId,
@@ -778,6 +769,7 @@ const ordinarymain = (function () {
             state: state,
             startTime: startTime,
             endTime: endTime,
+            licensePlate: licensePlate,
           },
         })
         .trigger('reloadGrid');
@@ -787,13 +779,13 @@ const ordinarymain = (function () {
       $('#upOrgId').val('');
       $('#orgId').val('');
       $('#projectUid').empty().select2();
-      //			$("#state").empty().select2();
       $('#projectUid').val('');
       $('#starttime').val('');
       $('#endtime').val('');
       $('#billNo').val('');
       $('#state').val('');
-      ordinarymain.orgtree.init();
+      $('#licensePlate').val('');
+      vehicleExpense.vehicleExpenseList.orgtree.init();
       ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
@@ -803,11 +795,11 @@ const ordinarymain = (function () {
           }
         },
         function (state) {},
-        'ordinarymainForm',
+        'vehicleExpenseForm',
         true,
         ' '
       );
-      //
+      vehicleExpense.vehicleExpenseList.getLicensePlatesOptions();
     },
 
     //input框去空格
@@ -818,8 +810,27 @@ const ordinarymain = (function () {
   };
 })();
 
+vehicleExpense.vehicleExpenseList.getLicensePlatesOptions = function () {
+  $('#licensePlate').empty().select2();
+  $('#licensePlate').append('<option></option>');
+
+  // 加载车牌号信息
+  ajaxFormRequest(
+    WEB_CTX_PATH +
+      '/vehicleExpenseAction.do?method=getLicensePlatesOptions&upOrgId=' +
+      $('#upOrgId').val(),
+    function (returnData) {
+      if (initSelect2(returnData)) {
+      }
+    },
+    function (state) {},
+    'vehicleExpenseForm',
+    true,
+    ' '
+  );
+};
 //20170822 公司树形
-ordinarymain.companytree = (function () {
+vehicleExpense.vehicleExpenseList.companytree = (function () {
   var zTree;
   return {
     init: function () {
@@ -834,7 +845,7 @@ ordinarymain.companytree = (function () {
         beforeSend: function (xhr) {
           xhr.setRequestHeader('__REQUEST_TYPE', 'AJAX_REQUEST');
         },
-        success: ordinarymain.companytree.createTreeAll,
+        success: vehicleExpense.vehicleExpenseList.companytree.createTreeAll,
       });
     },
     bindEvent: function () {},
@@ -864,7 +875,7 @@ ordinarymain.companytree = (function () {
           dblClickExpand: false,
         },
         callback: {
-          onClick: ordinarymain.companytree.onClickCompany,
+          onClick: vehicleExpense.vehicleExpenseList.companytree.onClickCompany,
         },
       };
       jQuery.fn.zTree.init(jQuery('#companyTree'), setting, allNodes);
@@ -876,14 +887,16 @@ ordinarymain.companytree = (function () {
       jQuery('#upOrgId').val(node.id);
       jQuery('#upOrgName').val(node.name);
       // 隐藏menu
-      ordinarymain.companytree.hideMenu();
+      vehicleExpense.vehicleExpenseList.companytree.hideMenu();
       // 初始化 部门
       jQuery('#orgId').val('');
       jQuery('#orgName').val('');
-      ordinarymain.orgtree.init(node.id);
+      vehicleExpense.vehicleExpenseList.orgtree.init(node.id);
       // 初始化 项目  -- 最后做
       jQuery('#projectUid').empty().select2();
-      ordinarymain.companytree.changeProject();
+      vehicleExpense.vehicleExpenseList.companytree.changeProject();
+      // 加载车牌号信息
+      vehicleExpense.vehicleExpenseList.getLicensePlatesOptions();
     },
     changeProject: function () {
       //调用下拉列表  bankName'upOrgId'为select组件id、'bankName'(改变角色)
@@ -900,11 +913,11 @@ ordinarymain.companytree = (function () {
           top: orgOffset.top + orgName.outerHeight() + 'px',
         })
         .slideDown('fast');
-      jQuery('body').bind('mousedown', ordinarymain.companytree.onBodyDown);
+      jQuery('body').bind('mousedown', vehicleExpense.vehicleExpenseList.companytree.onBodyDown);
     },
     hideMenu: function () {
       jQuery('#companyContent').fadeOut('fast');
-      jQuery('body').unbind('mousedown', ordinarymain.companytree.onBodyDown);
+      jQuery('body').unbind('mousedown', vehicleExpense.vehicleExpenseList.companytree.onBodyDown);
     },
     onBodyDown: function (event) {
       if (
@@ -914,7 +927,7 @@ ordinarymain.companytree = (function () {
           jQuery(event.target).parents('#companyContent').length > 0
         )
       ) {
-        ordinarymain.companytree.hideMenu();
+        vehicleExpense.vehicleExpenseList.companytree.hideMenu();
       }
     },
     doError: function () {
@@ -924,7 +937,7 @@ ordinarymain.companytree = (function () {
   };
 })();
 //20170822 部门+项目
-ordinarymain.orgtree = (function () {
+vehicleExpense.vehicleExpenseList.orgtree = (function () {
   var zTree;
   return {
     init: function (upOrgId) {
@@ -939,7 +952,7 @@ ordinarymain.orgtree = (function () {
         beforeSend: function (xhr) {
           xhr.setRequestHeader('__REQUEST_TYPE', 'AJAX_REQUEST');
         },
-        success: ordinarymain.orgtree.createTreeAll,
+        success: vehicleExpense.vehicleExpenseList.orgtree.createTreeAll,
       });
     },
     bindEvent: function () {},
@@ -969,7 +982,7 @@ ordinarymain.orgtree = (function () {
           dblClickExpand: false,
         },
         callback: {
-          onClick: ordinarymain.orgtree.onClickOrg,
+          onClick: vehicleExpense.vehicleExpenseList.orgtree.onClickOrg,
         },
       };
       jQuery.fn.zTree.init(jQuery('#orgTree'), setting, allNodes);
@@ -983,41 +996,12 @@ ordinarymain.orgtree = (function () {
       }
       jQuery('#orgName').val(node.name);
       // 隐藏menu
-      ordinarymain.orgtree.hideMenu();
+      vehicleExpense.vehicleExpenseList.orgtree.hideMenu();
       // 初始化 项目  -- 最后做
-      ordinarymain.orgtree.changeProject();
+      vehicleExpense.vehicleExpenseList.orgtree.changeProject();
     },
     changeProject: function () {
       //调用下拉列表  bankName'upOrgId'为select组件id、'bankName'(改变角色)
-      //var jsonParam = new Object();
-      //jsonParam.upOrgId=$("#upOrgId").val();
-      //jsonParam.orgId=$("#orgId").val();
-      //			if($("#projectUid").val()!=null){
-      //				$("#projectUid").empty().select2();
-      //			}
-      //			ajaxFormRequest(
-      //				WEB_CTX_PATH
-      //						+ "/ordinarymainAction.do?method=getCompanyDepartmentProject"
-      //						+"&upOrgId="+$("#upOrgId").val()
-      //						+"&orgId="+$("#orgId").val(),
-      //				function(returnData) {
-      //					// 定义属性
-      //					var obj = new Object();
-      //					var obj1 = new Object();
-      //					obj1.projectUid=returnData;
-      //					// 这个属性 是控件Id
-      //					obj.result=obj1;
-      //
-      //					if (initSelect2(obj)) {
-      //					}
-      //				}, function(state) {
-      //				}, "ordinarymainForm", true, " ");
-
-      //调用下拉列表  bankName'upOrgId'为select组件id、'bankName'(改变角色)
-      //var jsonParam = new Object();
-      //jsonParam.upOrgId=$("#upOrgId").val();
-      //jsonParam.orgId=$("#orgId").val();
-
       if ($('#projectUid').val() != null) {
         $('#projectUid').empty().select2();
       }
@@ -1040,7 +1024,7 @@ ordinarymain.orgtree = (function () {
           }
         },
         function (state) {},
-        'ordinarymainForm',
+        'vehicleExpenseForm',
         true,
         ' '
       );
@@ -1054,11 +1038,11 @@ ordinarymain.orgtree = (function () {
           top: orgOffset.top + orgName.outerHeight() + 'px',
         })
         .slideDown('fast');
-      jQuery('body').bind('mousedown', ordinarymain.orgtree.onBodyDown);
+      jQuery('body').bind('mousedown', vehicleExpense.vehicleExpenseList.orgtree.onBodyDown);
     },
     hideMenu: function () {
       jQuery('#orgContent').fadeOut('fast');
-      jQuery('body').unbind('mousedown', ordinarymain.orgtree.onBodyDown);
+      jQuery('body').unbind('mousedown', vehicleExpense.vehicleExpenseList.orgtree.onBodyDown);
     },
     onBodyDown: function (event) {
       if (
@@ -1068,7 +1052,7 @@ ordinarymain.orgtree = (function () {
           jQuery(event.target).parents('#orgContent').length > 0
         )
       ) {
-        ordinarymain.orgtree.hideMenu();
+        vehicleExpense.vehicleExpenseList.orgtree.hideMenu();
       }
     },
     doError: function () {
@@ -1077,5 +1061,3 @@ ordinarymain.orgtree = (function () {
     doClose: function () {},
   };
 })();
-
-export default ordinarymain;

@@ -1,3 +1,5 @@
+var allNodes = []; // 公司部门属性结构
+
 const rmbtrip = (function () {
   return {
     init: function () {

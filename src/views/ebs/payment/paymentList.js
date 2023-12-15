@@ -1,16 +1,15 @@
 /*
  * 定义命名空间
  */
-var allNodes = []; // 公司部门属性结构
-
-const ordinarymain = (function () {
+jQuery.namespace('mainparam.mainParamList');
+mainparam.mainParamList = (function () {
   return {
     init: function () {
-      ordinarymain.gridInit();
-      jQuery('#delBtn').on('click', ordinarymain.deleteMainParam);
-      jQuery('#queryBtn').on('click', ordinarymain.doQuery);
-      jQuery('#resetBtn').on('click', ordinarymain.resetQuery);
-      //			ordinarymain.initSelect();
+      mainparam.mainParamList.gridInit();
+      jQuery('#delBtn').on('click', mainparam.mainParamList.deleteMainParam);
+      jQuery('#queryBtn').on('click', mainparam.mainParamList.doQuery);
+      jQuery('#resetBtn').on('click', mainparam.mainParamList.resetQuery);
+      //			mainparam.mainParamList.initSelect();
     },
     /*
      * 生成表格组件
@@ -19,19 +18,22 @@ const ordinarymain = (function () {
       jQuery('#dataList').jqGrid({
         // 绝大部分情况下JS中单引号与双引号并无区别
         // 以下部分的值采用单引号和双引号无区别
-        url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+        url: WEB_CTX_PATH + '/paymentAction.do?method=doInit',
         regional: 'cn',
         datatype: 'json',
         colNames: [
           'id',
           '单据号',
           '单据日期',
+          '部门名称',
+          '项目名称',
+          '关联合同',
+          '合同号',
+          '收款单位',
           '价税合计',
-          '收款人',
-          '申请人',
           '业务内容',
-          'state',
           '状态',
+          'state',
           'createDate',
         ],
         operatorKey: 'act',
@@ -51,12 +53,39 @@ const ordinarymain = (function () {
             name: 'billDate',
             index: 'billDate',
             formatter: 'date',
-            formatoptions: { srcformat: 'Y-m-d H:i:s', newformat: 'Y-m-d' },
+            formatoptions: { srcformat: 'Y-m-d', newformat: 'Y-m-d' },
             align: 'center',
           },
           {
-            name: 'amount',
-            index: 'amount',
+            name: 'orgName',
+            index: 'orgName',
+            align: 'center',
+            hidden: true,
+          },
+          {
+            name: 'projectName',
+            index: 'projectName',
+            align: 'center',
+            hidden: true,
+          },
+          {
+            name: 'haveContractName',
+            index: 'haveContractName',
+            align: 'center',
+          },
+          {
+            name: 'contractCd',
+            index: 'contractCd',
+            align: 'center',
+          },
+          {
+            name: 'providerName',
+            index: 'providerName',
+            align: 'center',
+          },
+          {
+            name: 'applicantAmount',
+            index: 'applicantAmount',
             formatter: 'number',
             formatoptions: {
               decimalSeparator: '.',
@@ -67,28 +96,19 @@ const ordinarymain = (function () {
             align: 'right',
           },
           {
-            name: 'applicateName',
-            index: 'applicateName',
-            align: 'center',
-          },
-          {
-            name: 'agentName',
-            index: 'agentName',
-            align: 'center',
-          },
-          {
             name: 'remark',
             index: 'remark',
-          },
-          {
-            name: 'state',
-            index: 'state',
-            hidden: true,
+            align: 'center',
           },
           {
             name: 'stateName',
             index: 'stateName',
             align: 'center',
+          },
+          {
+            name: 'state',
+            index: 'state',
+            hidden: true,
           },
           {
             name: 'createDate',
@@ -99,13 +119,14 @@ const ordinarymain = (function () {
         rowNum: 10, // 每页最大显示行数
         sortname: 'createDate',
         sortorder: 'desc',
+
         gridComplete: function () {
           var ids = jQuery('#dataList').jqGrid('getDataIDs');
           var userData = jQuery('#dataList').jqGrid('getGridParam', 'userData');
           for (var i = 0; i < ids.length; i++) {
             var appStatus = jQuery('#dataList').jqGrid('getCell', ids[i], 'stateName');
             /*alert(appStatus);*/
-            var billNo = jQuery('#dataList').jqGrid('getCell', ids[i], 'billNo');
+            var id = jQuery('#dataList').jqGrid('getCell', ids[i], 'billNo');
 
             if (appStatus == '') {
               var btn = '<span>待审批</span>';
@@ -115,26 +136,27 @@ const ordinarymain = (function () {
               jQuery('#dataList').jqGrid('setRowData', ids[i], { stateName: btn });
             } else {
               var btn =
-                "<a id='view' href='javascript:void(0);'  onclick=\"doAppStatusFlow('个人普通报销','" +
-                billNo +
-                "','FEE01001');\">" +
+                "<a id='view' href='javascript:void(0);'  onclick=\"doAppStatusFlow('支付报销单','" +
+                id +
+                "','FEE02001');\">" +
                 appStatus +
                 '</a>';
               jQuery('#dataList').jqGrid('setRowData', ids[i], { stateName: btn });
             }
           }
         },
+
         autowidth: true, // grid的宽度会根据父元素的宽度自动重新计算
         height: '100%',
         multiselect: true, // 多选（表格会多出一列选择框）
-        rownumbers: true, // 显示行号
+        //rownumbers : true, // 显示行号
         rowList: [10, 20, 30], // 其他可选每页最大显示行数
         pager: '#listPager',
         mtype: 'post',
         viewrecords: false,
         //						sortname : 'paramTypeName', // 默认的排序索引,可根据需求添加该项
         emptyMsg: '查询结果为空', // 如果设置了该选项，在表格为空数据时撑开表格并显示设置的信息
-        caption: '个人普通报销列表',
+        caption: '付款报销列表',
       });
 
       /*
@@ -146,7 +168,44 @@ const ordinarymain = (function () {
       jQuery(window).triggerHandler('resize.jqGrid');
     },
 
-    initSelect: function () {},
+    initSelect: function () {
+      //
+      //			//加载下拉框数据
+      //			ajaxFormRequest(
+      //					WEB_CTX_PATH
+      //							+ "/codeAction.do?method=getSelectOptions&element2CodeType="
+      //							+ encodeURI(encodeURI("{'state':'flowTypeForQuery'}")),
+      //					function(returnData) {
+      //						if (initSelect2(returnData)) {
+      //
+      //							// 操作类型
+      ////							var actionType = jQuery("#actionType").val();
+      //								$("#state").val(state).select2();
+      //
+      //						}
+      //					}, function(state) {
+      //
+      //					}, "paymentForm", true, " ");
+      //
+      //			ajaxFormRequest(
+      //					WEB_CTX_PATH
+      //							+ "/codeAction.do?method=getSelectOptions&element2CodeType="
+      //							+ encodeURI(encodeURI("{'state':'cityLevel'}")),
+      //					function(returnData) {
+      //						if (initSelect2(returnData)) {
+      //							// 操作类型
+      //								$("#state").val(state).select2();
+      //
+      //						}
+      //					}, function(state) {
+      //
+      //					}, "paymentForm", true, " ");
+      //
+    },
+
+    //		printMessage : function(){
+    //			window.print();
+    //		},
 
     //编辑或添加
     addOrEdit: function (clickType) {
@@ -158,7 +217,7 @@ const ordinarymain = (function () {
       var url = '';
       //判断id是否为空
       if (clickType == 'edit') {
-        titleStr = '个人普通报销单编辑';
+        titleStr = '付款报销单编辑';
         paramIdArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
         if (paramIdArr && paramIdArr.length > 1) {
           //选中多条
@@ -171,9 +230,6 @@ const ordinarymain = (function () {
           });
           return;
         } else if (paramIdArr.length == 0) {
-          var obj = $('#dataList').jqGrid('getRowData', paramIdArr[0]);
-          if (obj.state == '') {
-          }
           //未选中数据
           sweetAlert({
             title: '提示',
@@ -199,18 +255,18 @@ const ordinarymain = (function () {
 
         url =
           WEB_CTX_PATH +
-          '/ordinarymainAction.do?method=doAddOrEdit&actionType=' +
+          '/paymentAction.do?method=doAddOrEdit&actionType=' +
           clickType +
-          '&billUid=' +
+          '&paramId=' +
           paramIdArr[0];
       } else if (clickType == 'detail') {
-        titleStr = '个人普通报销单详细';
+        titleStr = '付款报销单详细';
         paramIdArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
         if (paramIdArr && paramIdArr.length > 1) {
           //选中多条
           sweetAlert({
             title: '提示',
-            text: '只能选择一条数据进行查看',
+            text: '只能选择一条数据查看详细',
             type: 'error',
             showConfirmButton: true,
             confirmButtonText: '确认',
@@ -220,7 +276,7 @@ const ordinarymain = (function () {
           //未选中数据
           sweetAlert({
             title: '提示',
-            text: '请选择一条数据进行查看',
+            text: '请选择一条数据查看详细',
             type: 'error',
             showConfirmButton: true,
             confirmButtonText: '确认',
@@ -229,13 +285,13 @@ const ordinarymain = (function () {
         }
         url =
           WEB_CTX_PATH +
-          '/ordinarymainAction.do?method=doAddOrEdit&actionType=' +
+          '/paymentAction.do?method=doAddOrEdit&actionType=' +
           clickType +
-          '&billUid=' +
+          '&paramId=' +
           paramIdArr[0];
       } else if (clickType == 'add') {
-        titleStr = '个人普通报销单新建';
-        url = WEB_CTX_PATH + '/ordinarymainAction.do?method=doAddOrEdit&actionType=' + clickType;
+        titleStr = '付款报销单新建';
+        url = WEB_CTX_PATH + '/paymentAction.do?method=doAddOrEdit&actionType=' + clickType;
       }
       //			jQuery().openDlg({
       ////				parent: window.top,//此行调遮罩
@@ -260,11 +316,10 @@ const ordinarymain = (function () {
         },
       });
     },
-
     //编辑或添加
     test: function (type) {
       //判断id是否为空
-      var titleStr = '个人普通报销单详细';
+      var titleStr = '付款报销单详细';
       var paramIdArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
       if (paramIdArr && paramIdArr.length > 1) {
         //选中多条
@@ -289,7 +344,7 @@ const ordinarymain = (function () {
       }
       var url =
         WEB_CTX_PATH +
-        '/ordinarymainAction.do?method=detail&viewType=' +
+        '/paymentAction.do?method=detail&viewType=' +
         type +
         '&billUid=' +
         $('#dataList').jqGrid('getRowData', paramIdArr[0]).billNo;
@@ -309,41 +364,12 @@ const ordinarymain = (function () {
         },
       });
     },
-
-    //弹出代理新建页面
-    goOrdinaryMainEdit: function () {
-      //弹出新建个人普通报销画面
-      url = WEB_CTX_PATH + '/ordinarymainAction.do?method=goOrdinaryMainEdit';
-
-      //			jQuery().openDlg({
-      ////				parent: window.top,//此行调遮罩
-      //				height: 800,//此行调高度
-      //				width: 1100,
-      //				url:url,
-      //				title: "新建代理报销"
-      //			});
-      layer.open({
-        type: 2,
-        title: '新建代理报销',
-        content: url,
-        fix: true,
-        area: ['100%', '100%'],
-        //	           /*注释部分功能：弹窗后立即最大化*/
-        success: function (layerObj) {
-          var currLayer = jQuery(layerObj);
-          currLayer
-            .css({ top: '0px', left: '0px', width: '100%', height: jQuery(window).height() })
-            .find('iframe')
-            .css('height', jQuery(window).height() - 50);
-        },
-      });
-    },
-
     //删除码表数据
-    deleteOrdinaryMain: function () {
-      var billUids = '';
-      var billUidArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
-      if (!billUidArr || billUidArr.length == 0) {
+    deleteMainParam: function () {
+      var paramIds = '';
+      var paramIdArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
+
+      if (!paramIdArr || paramIdArr.length == 0) {
         //未选中数据
         sweetAlert({
           title: '删除',
@@ -372,8 +398,8 @@ const ordinarymain = (function () {
               return;
             } else {
               //确认
-              for (var i = 0; i < billUidArr.length; i++) {
-                var obj = $('#dataList').jqGrid('getRowData', billUidArr[i]);
+              for (var i = 0; i < paramIdArr.length; i++) {
+                var obj = $('#dataList').jqGrid('getRowData', paramIdArr[i]);
                 if (obj.state == '2') {
                   sweetAlert({
                     title: '提示',
@@ -387,15 +413,15 @@ const ordinarymain = (function () {
 
                 //i==0时不拼接","
                 if (i == 0) {
-                  billUids = billUidArr[i];
+                  paramIds = paramIdArr[i];
                 } else {
                   //拼接","
-                  billUids = billUids + ',' + billUidArr[i];
+                  paramIds = paramIds + ',' + paramIdArr[i];
                 }
               }
               $.ajax({
-                url: WEB_CTX_PATH + '/ordinarymainAction.do?method=deleteOrdinaryMain',
-                data: { billUids: billUids },
+                url: WEB_CTX_PATH + '/paymentAction.do?method=deletePayment',
+                data: { paramIds: paramIds },
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
@@ -412,7 +438,7 @@ const ordinarymain = (function () {
                         //重新加载数据
                         jQuery('#dataList')
                           .jqGrid('setGridParam', {
-                            url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+                            url: WEB_CTX_PATH + '/paymentAction.do?method=doInit',
                             page: 1,
                           })
                           .trigger('reloadGrid');
@@ -444,23 +470,6 @@ const ordinarymain = (function () {
         );
       }
     },
-
-    //代理报销子画面
-    agencyPerson: function (showType) {
-      //页头
-      var titleStr = '';
-      //url
-      var url = '';
-      titleStr = '代理人身份认证';
-      url = WEB_CTX_PATH + '/ordinarymainAction.do?method=agencyPerson&showType=' + showType;
-      jQuery().openDlg({
-        height: 250, //此行调高度
-        width: 500,
-        url: url,
-        title: titleStr,
-      });
-    },
-
     // 打印
     print: function () {
       // 码表id
@@ -468,7 +477,7 @@ const ordinarymain = (function () {
       // url
       var url = '';
       // 页头
-      var titleStr = '个人普通报销单打印';
+      var titleStr = '付款报销单打印';
       paramIdArr = $('#dataList').jqGrid('getGridParam', 'selarrrow');
       // 判断id是否为空
       if (paramIdArr && paramIdArr.length > 1) {
@@ -504,7 +513,7 @@ const ordinarymain = (function () {
         });
         return;
       }
-      url = WEB_CTX_PATH + '/ordinarymainAction.do?method=print&paramId=' + paramIdArr[0];
+      url = WEB_CTX_PATH + '/paymentAction.do?method=print&paramId=' + paramIdArr[0];
       //			jQuery().openDlg({
       //				// parent: window.top,//此行调遮罩
       //				height : 600,// 此行调高度
@@ -528,6 +537,7 @@ const ordinarymain = (function () {
         },
       });
     },
+
     // 批量启动
     start: function () {
       var paramIds = '';
@@ -583,7 +593,7 @@ const ordinarymain = (function () {
                 }
               }
               $.ajax({
-                url: WEB_CTX_PATH + '/ordinarymainAction.do?method=start',
+                url: WEB_CTX_PATH + '/paymentAction.do?method=start',
                 data: {
                   paramIds: paramIds,
                 },
@@ -593,7 +603,7 @@ const ordinarymain = (function () {
                   if (data.success) {
                     sweetAlert(
                       {
-                        title: '启动成功！',
+                        title: '批量启动成功！',
                         type: 'success',
                         showConfirmButton: true,
                         confirmButtonText: '确认',
@@ -602,7 +612,7 @@ const ordinarymain = (function () {
                         // 重新加载数据
                         jQuery('#dataList')
                           .jqGrid('setGridParam', {
-                            url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+                            url: WEB_CTX_PATH + '/paymentAction.do?method=doInit',
                             page: 1,
                           })
                           .trigger('reloadGrid');
@@ -611,7 +621,7 @@ const ordinarymain = (function () {
                   } else {
                     // 失败
                     sweetAlert({
-                      title: '启动失败',
+                      title: '批量启动失败',
                       text: '' + data.msg,
                       type: 'error',
                       showConfirmButton: true,
@@ -690,13 +700,14 @@ const ordinarymain = (function () {
                 }
               }
               $.ajax({
-                url: WEB_CTX_PATH + '/ordinarymainAction.do?method=callback',
+                url: WEB_CTX_PATH + '/paymentAction.do?method=callback',
                 data: {
                   paramIds: paramIds,
                 },
                 type: 'POST',
                 dataType: 'json',
                 success: function (data) {
+                  // 删除成功
                   if (data.success) {
                     sweetAlert(
                       {
@@ -709,7 +720,7 @@ const ordinarymain = (function () {
                         // 重新加载数据
                         jQuery('#dataList')
                           .jqGrid('setGridParam', {
-                            url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+                            url: WEB_CTX_PATH + '/paymentAction.do?method=doInit',
                             page: 1,
                           })
                           .trigger('reloadGrid');
@@ -750,34 +761,27 @@ const ordinarymain = (function () {
     },
     //查询
     doQuery: function () {
-      var billNo = jQuery('#billNo').val();
-      var state = jQuery('#state').val();
-      var startTime = jQuery('#startTime').val();
-      var endTime = jQuery('#endTime').val();
-      //			//公司id
-      //			var upOrgId = $('#upOrgId').val();
-      //			//部门id
-      //			var orgId = $('orgId').val();
-      //			//项目id
-      //			var projectUid = $('projectUid').val();
-
       var companyId = $('#upOrgId').val();
       var departmentId = $('#orgId').val();
       var projectId = $('#projectUid').val();
+      var sdate = $('#starttime').val();
+      var edate = $('#endtime').val();
+      var billNo = $('#billNo').val();
+      var state = $('#state').val();
 
       //重新加载数据
       jQuery('#dataList')
         .jqGrid('setGridParam', {
-          url: WEB_CTX_PATH + '/ordinarymainAction.do?method=doInit',
+          url: WEB_CTX_PATH + '/paymentAction.do?method=doInit',
           page: 1,
           postData: {
             upOrgId: companyId,
             deptUid: departmentId,
             projectUid: projectId,
+            sdate: sdate,
+            edate: edate,
             billNo: billNo,
             state: state,
-            startTime: startTime,
-            endTime: endTime,
           },
         })
         .trigger('reloadGrid');
@@ -793,7 +797,7 @@ const ordinarymain = (function () {
       $('#endtime').val('');
       $('#billNo').val('');
       $('#state').val('');
-      ordinarymain.orgtree.init();
+      mainparam.mainParamList.orgtree.init();
       ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
@@ -803,10 +807,24 @@ const ordinarymain = (function () {
           }
         },
         function (state) {},
-        'ordinarymainForm',
+        'paymentForm',
         true,
         ' '
       );
+      //			var companyId = "";
+      //			var departmentId = "";
+      //			var projectId = "";
+      //			var sdate = "";
+      //			var edate = "";
+      //			var billNo = "";
+      //			var state = "";
+
+      //重新加载数据
+      //			jQuery("#dataList").jqGrid('setGridParam', {
+      //				url :WEB_CTX_PATH+"/paymentAction.do?method=doInit",
+      //				page : 1,
+      //				postData : {"upOrgId":companyId,"deptUid":departmentId,"projectUid":projectId,"sdate":sdate,"edate":edate,"billNo":billNo,"state":state}
+      //			}).trigger("reloadGrid");
       //
     },
 
@@ -818,8 +836,8 @@ const ordinarymain = (function () {
   };
 })();
 
-//20170822 公司树形
-ordinarymain.companytree = (function () {
+// 20170822 公司树形
+mainparam.mainParamList.companytree = (function () {
   var zTree;
   return {
     init: function () {
@@ -834,7 +852,7 @@ ordinarymain.companytree = (function () {
         beforeSend: function (xhr) {
           xhr.setRequestHeader('__REQUEST_TYPE', 'AJAX_REQUEST');
         },
-        success: ordinarymain.companytree.createTreeAll,
+        success: mainparam.mainParamList.companytree.createTreeAll,
       });
     },
     bindEvent: function () {},
@@ -864,7 +882,7 @@ ordinarymain.companytree = (function () {
           dblClickExpand: false,
         },
         callback: {
-          onClick: ordinarymain.companytree.onClickCompany,
+          onClick: mainparam.mainParamList.companytree.onClickCompany,
         },
       };
       jQuery.fn.zTree.init(jQuery('#companyTree'), setting, allNodes);
@@ -876,14 +894,14 @@ ordinarymain.companytree = (function () {
       jQuery('#upOrgId').val(node.id);
       jQuery('#upOrgName').val(node.name);
       // 隐藏menu
-      ordinarymain.companytree.hideMenu();
+      mainparam.mainParamList.companytree.hideMenu();
       // 初始化 部门
       jQuery('#orgId').val('');
       jQuery('#orgName').val('');
-      ordinarymain.orgtree.init(node.id);
+      mainparam.mainParamList.orgtree.init(node.id);
       // 初始化 项目  -- 最后做
       jQuery('#projectUid').empty().select2();
-      ordinarymain.companytree.changeProject();
+      mainparam.mainParamList.companytree.changeProject();
     },
     changeProject: function () {
       //调用下拉列表  bankName'upOrgId'为select组件id、'bankName'(改变角色)
@@ -900,11 +918,11 @@ ordinarymain.companytree = (function () {
           top: orgOffset.top + orgName.outerHeight() + 'px',
         })
         .slideDown('fast');
-      jQuery('body').bind('mousedown', ordinarymain.companytree.onBodyDown);
+      jQuery('body').bind('mousedown', mainparam.mainParamList.companytree.onBodyDown);
     },
     hideMenu: function () {
       jQuery('#companyContent').fadeOut('fast');
-      jQuery('body').unbind('mousedown', ordinarymain.companytree.onBodyDown);
+      jQuery('body').unbind('mousedown', mainparam.mainParamList.companytree.onBodyDown);
     },
     onBodyDown: function (event) {
       if (
@@ -914,7 +932,7 @@ ordinarymain.companytree = (function () {
           jQuery(event.target).parents('#companyContent').length > 0
         )
       ) {
-        ordinarymain.companytree.hideMenu();
+        mainparam.mainParamList.companytree.hideMenu();
       }
     },
     doError: function () {
@@ -923,8 +941,9 @@ ordinarymain.companytree = (function () {
     doClose: function () {},
   };
 })();
+
 //20170822 部门+项目
-ordinarymain.orgtree = (function () {
+mainparam.mainParamList.orgtree = (function () {
   var zTree;
   return {
     init: function (upOrgId) {
@@ -939,7 +958,7 @@ ordinarymain.orgtree = (function () {
         beforeSend: function (xhr) {
           xhr.setRequestHeader('__REQUEST_TYPE', 'AJAX_REQUEST');
         },
-        success: ordinarymain.orgtree.createTreeAll,
+        success: mainparam.mainParamList.orgtree.createTreeAll,
       });
     },
     bindEvent: function () {},
@@ -969,7 +988,7 @@ ordinarymain.orgtree = (function () {
           dblClickExpand: false,
         },
         callback: {
-          onClick: ordinarymain.orgtree.onClickOrg,
+          onClick: mainparam.mainParamList.orgtree.onClickOrg,
         },
       };
       jQuery.fn.zTree.init(jQuery('#orgTree'), setting, allNodes);
@@ -983,41 +1002,15 @@ ordinarymain.orgtree = (function () {
       }
       jQuery('#orgName').val(node.name);
       // 隐藏menu
-      ordinarymain.orgtree.hideMenu();
+      mainparam.mainParamList.orgtree.hideMenu();
       // 初始化 项目  -- 最后做
-      ordinarymain.orgtree.changeProject();
+      mainparam.mainParamList.orgtree.changeProject();
     },
     changeProject: function () {
       //调用下拉列表  bankName'upOrgId'为select组件id、'bankName'(改变角色)
       //var jsonParam = new Object();
       //jsonParam.upOrgId=$("#upOrgId").val();
       //jsonParam.orgId=$("#orgId").val();
-      //			if($("#projectUid").val()!=null){
-      //				$("#projectUid").empty().select2();
-      //			}
-      //			ajaxFormRequest(
-      //				WEB_CTX_PATH
-      //						+ "/ordinarymainAction.do?method=getCompanyDepartmentProject"
-      //						+"&upOrgId="+$("#upOrgId").val()
-      //						+"&orgId="+$("#orgId").val(),
-      //				function(returnData) {
-      //					// 定义属性
-      //					var obj = new Object();
-      //					var obj1 = new Object();
-      //					obj1.projectUid=returnData;
-      //					// 这个属性 是控件Id
-      //					obj.result=obj1;
-      //
-      //					if (initSelect2(obj)) {
-      //					}
-      //				}, function(state) {
-      //				}, "ordinarymainForm", true, " ");
-
-      //调用下拉列表  bankName'upOrgId'为select组件id、'bankName'(改变角色)
-      //var jsonParam = new Object();
-      //jsonParam.upOrgId=$("#upOrgId").val();
-      //jsonParam.orgId=$("#orgId").val();
-
       if ($('#projectUid').val() != null) {
         $('#projectUid').empty().select2();
       }
@@ -1040,7 +1033,7 @@ ordinarymain.orgtree = (function () {
           }
         },
         function (state) {},
-        'ordinarymainForm',
+        'paymentForm',
         true,
         ' '
       );
@@ -1054,11 +1047,11 @@ ordinarymain.orgtree = (function () {
           top: orgOffset.top + orgName.outerHeight() + 'px',
         })
         .slideDown('fast');
-      jQuery('body').bind('mousedown', ordinarymain.orgtree.onBodyDown);
+      jQuery('body').bind('mousedown', mainparam.mainParamList.orgtree.onBodyDown);
     },
     hideMenu: function () {
       jQuery('#orgContent').fadeOut('fast');
-      jQuery('body').unbind('mousedown', ordinarymain.orgtree.onBodyDown);
+      jQuery('body').unbind('mousedown', mainparam.mainParamList.orgtree.onBodyDown);
     },
     onBodyDown: function (event) {
       if (
@@ -1068,7 +1061,7 @@ ordinarymain.orgtree = (function () {
           jQuery(event.target).parents('#orgContent').length > 0
         )
       ) {
-        ordinarymain.orgtree.hideMenu();
+        mainparam.mainParamList.orgtree.hideMenu();
       }
     },
     doError: function () {
@@ -1077,5 +1070,3 @@ ordinarymain.orgtree = (function () {
     doClose: function () {},
   };
 })();
-
-export default ordinarymain;

@@ -33,6 +33,30 @@ const routes: Array<RouteRecordRaw> = [
         },
         component: () => import('@/views/ebs/rmbtrip/rmbtripList.vue'),
       },
+      {
+        path: 'rmbtripEdit',
+        name: 'rmbtripEdit',
+        meta: {
+          title: '个人差旅报销编辑(隐藏)',
+        },
+        component: () => import('@/views/ebs/rmbtrip/rmbtripEdit.vue'),
+      },
+      {
+        path: 'ordinaryMainList',
+        name: 'ordinaryMainList',
+        meta: {
+          title: '个人普通报销',
+        },
+        component: () => import('@/views/ebs/ordinarymain/ordinaryMainList.vue'),
+      },
+      {
+        path: 'vehicleExpenseList',
+        name: 'vehicleExpenseList',
+        meta: {
+          title: '车辆费用报销',
+        },
+        component: () => import('@/views/ebs/vehicleExpense/vehicleExpenseList.vue'),
+      },
     ],
   },
 ];

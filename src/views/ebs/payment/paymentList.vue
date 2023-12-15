@@ -30,29 +30,14 @@
         "
       ></ul>
     </div>
-    <div id="superDetailTree" style="display: none; position: absolute; z-index: 999">
-      <ul
-        id="orgTree2"
-        class="ztree"
-        style="
-          width: 280px;
-          height: auto;
-          margin-top: 1px;
-          border: 1px solid #617775;
-          background: #f0f6e4;
-          overflow-y: scroll;
-          overflow-x: auto;
-        "
-      ></ul>
-    </div>
     <div class="row">
       <div class="col-xs-12">
         <div class="ilead-search">
-          <form id="deptbillForm" name="deptbillForm" class="" method="post">
+          <form id="paymentForm" name="paymentForm" class="" method="post">
             <div class="panel-body">
               <div class="form-group col-xs-12">
                 <label class="control-label col-xs-1">公司/部门：</label>
-                <div class="col-xs-3">
+                <div class="col-xs-2">
                   <input
                     type="text"
                     class="form-control"
@@ -60,11 +45,10 @@
                     name="upOrgName"
                     readonly
                     placeholder="公司名称"
-                    onclick="cashierconfirm.cashierList.companytree.showOrgTree(); return false;"
+                    onfocus="mainparam.mainParamList.companytree.showOrgTree(); return false;"
                   />
                   <input type="hidden" id="upOrgId" name="upOrgId" />
                 </div>
-
                 <div class="col-xs-2">
                   <input
                     type="text"
@@ -73,16 +57,15 @@
                     name="orgName"
                     readonly
                     placeholder="部门名称"
-                    onclick="cashierconfirm.cashierList.orgtree.showOrgTree(); return false;"
+                    onclick="mainparam.mainParamList.orgtree.showOrgTree(); return false;"
                   />
                   <input type="hidden" id="orgId" name="orgId" />
                 </div>
-
-                <div class="col-xs-2" style="margin-left: -3%; display: none">
+                <div class="col-xs-2" style="margin-left: -40px; display: none">
                   <select class="form-control" id="projectUid" name="projectUid"> </select>
                 </div>
 
-                <label class="control-label col-xs-1">员工卡号：</label>
+                <label class="control-label col-xs-1">单据号：</label>
                 <div class="col-xs-2">
                   <input
                     type="text"
@@ -90,43 +73,31 @@
                     class="form-control"
                     id="billNo"
                     name="editPer"
-                    placeholder="员工卡号"
+                    placeholder="单据号"
                   />
                 </div>
               </div>
             </div>
-
             <div class="panel-body">
               <div class="form-group col-xs-12">
-                <label class="control-label col-xs-1">单据类型：</label>
+                <label class="control-label col-xs-1">单据状态：</label>
                 <div class="col-xs-2">
-                  <select id="type" type="text" class="form-control" name="state">
+                  <select id="state" type="text" class="form-control" name="state">
                     <option></option>
                   </select>
                 </div>
-
-                <label class="control-label col-xs-1">确认状态：</label>
                 <div class="col-xs-2">
-                  <select
-                    id="cashierConfirm"
-                    type="text"
-                    class="form-control"
-                    name="cashierConfirm"
-                  >
-                    <option></option>
-                  </select>
-                </div>
-
-                <label class="control-label col-xs-1">单据日期：</label>
-                <div class="col-xs-2">
-                  <input
-                    type="text"
-                    class="laydate-icon-default ilead-laydate-icon-default form-control"
-                    id="starttime"
-                    name="endtime"
-                    placeholder="起始"
-                    onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"
-                  />
+                  <label class="control-label col-xs-1">单据日期：</label>
+                  <div class="col-xs-2">
+                    <input
+                      type="text"
+                      class="laydate-icon-default ilead-laydate-icon-default form-control"
+                      id="starttime"
+                      name="endtime"
+                      placeholder="起始"
+                      onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"
+                    />
+                  </div>
                 </div>
                 <div class="col-xs-2">
                   <input
@@ -139,21 +110,19 @@
                   />
                 </div>
               </div>
-            </div>
-
-            <div class="panel-btn">
-              <button type="button" class="btn btn-default" id="queryBtn">
-                <span class="glyphicon glyphicon-search"></span> 查询
-              </button>
-              <button type="reset" class="btn btn-default" id="resetBtn">
-                <span class="glyphicon glyphicon-refresh"></span> 重置
-              </button>
+              <div class="panel-btn">
+                <button type="button" class="btn btn-default" id="queryBtn">
+                  <span class="glyphicon glyphicon-search"></span> 查询
+                </button>
+                <button type="reset" class="btn btn-default" id="resetBtn">
+                  <span class="glyphicon glyphicon-refresh"></span> 重置
+                </button>
+              </div>
             </div>
           </form>
         </div>
       </div>
     </div>
-
     <div class="row">
       <div class="col-xs-12 ilead-table">
         <div class="table-tool">
@@ -162,11 +131,31 @@
             class="btn"
             data-toggle="tooltip"
             data-placement="top"
-            title="详细"
-            onclick="cashierconfirm.cashierList.queryDetail('cashier')"
-            id="detailBtn"
+            title="新建"
+            onclick="mainparam.mainParamList.addOrEdit('add')"
+          >
+            <span class="icon iconfont icon-add"></span>新建
+          </button>
+          <button
+            type="button"
+            class="btn"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="编辑"
+            onclick="mainparam.mainParamList.addOrEdit('edit')"
           >
             <span class="icon iconfont icon-fankui"></span>编辑
+          </button>
+          <button
+            type="button"
+            id="delBtn"
+            class="btn"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="删除"
+            onclick="mainparam.mainParamList.deleteMainParam()"
+          >
+            <span class="iconfont icon-shanchu"></span>删除
           </button>
           <button
             type="button"
@@ -174,8 +163,7 @@
             data-toggle="tooltip"
             data-placement="top"
             title="详细"
-            onclick="cashierconfirm.cashierList.queryDetail('detail')"
-            id="detailBtn"
+            onclick="mainparam.mainParamList.addOrEdit('detail')"
           >
             <span class="icon iconfont icon-liulan"></span>详细
           </button>
@@ -184,21 +172,53 @@
             class="btn"
             data-toggle="tooltip"
             data-placement="top"
-            title="确认"
-            onclick="cashierconfirm.cashierList.doConfirm()"
-            id="comfirmBtn"
+            title="打印"
+            onclick="mainparam.mainParamList.print()"
           >
-            <span class="icon iconfont icon-bangongyongpin"></span>确认
+            <span class="icon iconfont icon-bangongyongpin"></span>打印
           </button>
           <button
             type="button"
             class="btn"
             data-toggle="tooltip"
             data-placement="top"
-            title="打印"
-            id="printBtn"
+            title="启动"
+            onclick="mainparam.mainParamList.start()"
           >
-            <span class="icon iconfont icon-bangongyongpin"></span>打印
+            <span class="icon iconfont icon-yunongtongcaozuochenggong"></span>启动
+          </button>
+          <button
+            style="display: none"
+            type="button"
+            class="btn"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="撤回"
+            onclick="mainparam.mainParamList.callback()"
+          >
+            <span class="icon iconfont icon-shuaxin"></span>撤回
+          </button>
+          <button
+            style="display: none"
+            type="button"
+            class="btn"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="撤回"
+            onclick="mainparam.mainParamList.test(1)"
+          >
+            <span class="icon iconfont icon-shuaxin"></span>测试用：不可修改的审批节点
+          </button>
+          <button
+            style="display: none"
+            type="button"
+            class="btn"
+            data-toggle="tooltip"
+            data-placement="top"
+            title="撤回"
+            onclick="mainparam.mainParamList.test(2)"
+          >
+            <span class="icon iconfont icon-shuaxin"></span>测试用：可修改的审批节点
           </button>
         </div>
         <table id="dataList" style="width: 100%"></table>
@@ -210,47 +230,31 @@
 
 <script setup>
   import { onMounted } from 'vue';
-  import './cashierList.js';
+  import './paymentList.js';
 
   onMounted(() => {
     /*
      * 初始化
      */
     jQuery(document).ready(function () {
-      cashierconfirm.cashierList.init();
+      mainparam.mainParamList.init();
       // 初始公司
-      cashierconfirm.cashierList.companytree.init();
+      mainparam.mainParamList.companytree.init();
       //初始化控件
       jQuery('#projectUid').select2({
         minimumResultsForSearch: -1,
         data: [],
       });
-      //单据状态下拉
       ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
-          encodeURI(encodeURI("{'cashierConfirm':'confirmationState'}")),
+          encodeURI(encodeURI("{'state':'listFlowType'}")),
         function (returnData) {
           if (initSelect2(returnData)) {
           }
         },
-        function (cashierConfirm) {},
-        'deptbillForm',
-        true,
-        ' '
-      );
-
-      //单据类型下拉
-      ajaxFormRequest(
-        WEB_CTX_PATH +
-          '/codeAction.do?method=getSelectOptions&element2CodeType=' +
-          encodeURI(encodeURI("{'type':'billType'}")),
-        function (returnData) {
-          if (initSelect2(returnData)) {
-          }
-        },
-        function (type) {},
-        'deptbillForm',
+        function (state) {},
+        'paymentForm',
         true,
         ' '
       );

@@ -398,7 +398,9 @@ body {
 
 /*锟斤拷钮锟斤拷式*/
 .btn-default{
-	 background-color: #3cb3f7;
+	/* 临时修改  */
+  background-color: #3cb3f7 !important;
+   
 }
 .btn-default:hover,.btn-default:focus{
 	 background-color: #3cadee;
