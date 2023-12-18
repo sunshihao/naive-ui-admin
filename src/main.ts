@@ -5,6 +5,9 @@ import App from './App.vue';
 import router, { setupRouter } from './router';
 import { setupStore } from '@/store';
 
+// ？？？
+import '@xjjrtz/layout';
+
 async function bootstrap() {
   const app = createApp(App);
 

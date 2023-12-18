@@ -47,6 +47,7 @@
     "vue-types": "^4.2.1"
   },
   "devDependencies": {
+    "@xjjrtz/layout": "workspace:*",
     "@commitlint/cli": "^17.7.0",
     "@commitlint/config-conventional": "^17.7.0",
     "@types/lodash": "^4.14.197",

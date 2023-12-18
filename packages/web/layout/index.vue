@@ -75,9 +75,7 @@
 
 <script lang="ts" setup>
   import { ref, unref, computed, onMounted } from 'vue';
-  // import { Logo } from './components/Logo';
-  import { XHXmenuProvider as Logo } from '@xjjrtz/layout';
-
+  import { Logo } from './components/Logo';
   import { TabsView } from './components/TagsView';
   import { MainView } from './components/Main';
   import { AsideMenu } from './components/Menu';
@@ -88,13 +86,7 @@
   import { useProjectSettingStore } from '@/store/modules/projectSetting';
 
   const { getDarkTheme } = useDesignSetting();
-  const {
-    navMode,
-    navTheme,
-    headerSetting,
-    menuSetting,
-    multiTabsSetting,
-  } = useProjectSetting();
+  const { navMode, navTheme, headerSetting, menuSetting, multiTabsSetting } = useProjectSetting();
 
   const settingStore = useProjectSettingStore();
 

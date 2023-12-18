@@ -10,6 +10,8 @@ const LayoutMap = new Map<string, () => Promise<typeof import('*.vue')>>();
 LayoutMap.set('LAYOUT', Layout);
 LayoutMap.set('IFRAME', Iframe);
 
+console.log('LayoutMap---', LayoutMap);
+
 /**
  * 格式化 后端 结构信息并递归生成层级路由表
  * @param routerMap

@@ -1,0 +1,21 @@
+{
+  "name": "@xjjrtz/layout",
+  "version": "1.0.0",
+  "description": "layout for xjjrtz",
+  "type": "module",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist"
+  },
+  "keywords": [
+    "vue3",
+    "layout"
+  ],
+  "author": "sssh",
+  "license": "ISC",
+  "dependencies": {
+    "vue": "3.3.4",
+    "@xjjrtz/utils": "workspace:*"
+  }
+}
