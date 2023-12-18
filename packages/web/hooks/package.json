@@ -1,0 +1,24 @@
+{
+  "name": "@xjjrtz/hooks",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "hooks for xjjrtz",
+  "author": "sssh",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist",
+    "test": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "peerDependencies": {
+    "vue": ">=3.3.4"
+  },
+  "dependencies": {
+    "@xjjrtz/types": "workspace:*",
+    "@xjjrtz/utils": "workspace:*",
+    "@vueuse/core": "^10.5.0",
+    "@vueuse/integrations": "^10.5.0"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@xjjrtz/request",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "http request for xjjrtz",
+  "author": "sssh",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist"
+  },
+  "keywords": [
+    "vue3",
+    "request",
+    "xjjrtz"
+  ],
+  "dependencies": {
+    "@xjjrtz/constants": "workspace:*",
+    "@xjjrtz/types": "workspace:*",
+    "@xjjrtz/utils": "workspace:*",
+    "axios": "^1.4.0",
+    "qs": "^6.11.2"
+  },
+  "devDependencies": {
+    "@types/qs": "^6.9.9"
+  }
+}

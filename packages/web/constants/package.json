@@ -1,0 +1,16 @@
+{
+  "name": "@xjjrtz/constants",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "constants for xjjrtz",
+  "author": "sssh",
+  "license": "MIT",
+  "main": "index.ts",
+  "module": "index.ts",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist"
+  },
+  "dependencies": {
+    "lodash.pick": "4.4.0"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@xjjrtz/types",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "types for xjjrtz",
+  "author": "sssh",
+  "main": "./index.ts",
+  "module": "./index.ts",
+  "types": "./index.ts",
+  "scripts": {
+    "clean": "pnpm rimraf node_modules && pnpm rimraf dist"
+  },
+  "dependencies": {
+    "@xjjrtz/constants": "workspace:*"
+  },
+  "devDependencies": {
+    "pinia": "2.1.7",
+    "vue": "^3.3.7",
+    "vue-router": "^4.2.5"
+  }
+}
