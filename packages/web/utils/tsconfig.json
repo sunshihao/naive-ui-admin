@@ -1,5 +1,5 @@
 {
-  "extends": "@celeris/tsconfig/tsconfig.base.json",
+  "extends": "@xjjrtz/tsconfig/tsconfig.base.json",
   "compilerOptions": {
     "target": "esnext",
     "baseUrl": ".",
