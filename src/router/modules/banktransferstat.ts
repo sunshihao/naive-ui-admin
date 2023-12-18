@@ -22,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     meta: {
       title: '综合查询',
+      sort: 14,
       icon: renderIcon(CheckCircleOutlined),
     },
     children: [
@@ -32,6 +33,22 @@ const routes: Array<RouteRecordRaw> = [
           title: '银行间转账查询',
         },
         component: () => import('@/views/ebs/banktransferstat/bankTransferStatList.vue'),
+      },
+      {
+        path: 'deptbillList',
+        name: 'deptbillList',
+        meta: {
+          title: '部门单据查询',
+        },
+        component: () => import('@/views/ebs/deptbill/deptbillList.vue'),
+      },
+      {
+        path: 'personbillList',
+        name: 'personbillList',
+        meta: {
+          title: '部门单据查询',
+        },
+        component: () => import('@/views/ebs/personbill/personbillList.vue'),
       },
     ],
   },

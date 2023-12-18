@@ -9,8 +9,9 @@ const routes: Array<RouteRecordRaw> = [
     name: 'about',
     component: Layout,
     meta: {
-      sort: 10,
+      sort: 1000,
       isRoot: true,
+      // hidden: true,
       activeMenu: 'about_index',
       icon: renderIcon(ProjectOutlined),
     },

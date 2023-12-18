@@ -23,6 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: '表单页面',
       icon: renderIcon(ProfileOutlined),
+      hidden: true,
       sort: 3,
     },
     children: [

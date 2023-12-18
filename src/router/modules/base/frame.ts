@@ -14,6 +14,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: '外部页面',
       sort: 8,
+      hidden: true,
       icon: renderIcon(DesktopOutline),
     },
     children: [

@@ -22,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     meta: {
       title: '出纳确认',
+      sort: 10,
       icon: renderIcon(CheckCircleOutlined),
     },
     children: [

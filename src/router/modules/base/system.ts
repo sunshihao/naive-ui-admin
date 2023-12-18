@@ -22,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     meta: {
       title: '系统设置',
+      hidden: true,
       icon: renderIcon(OptionsSharp),
       sort: 1,
     },

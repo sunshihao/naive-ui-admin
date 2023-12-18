@@ -22,6 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Layout,
     meta: {
       title: '结果页面',
+      hidden: true,
       icon: renderIcon(CheckCircleOutlined),
       sort: 4,
     },

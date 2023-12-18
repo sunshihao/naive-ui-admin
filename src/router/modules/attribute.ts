@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router';
 import { Layout } from '@/router/constant';
-import { SettingOutlined } from '@vicons/antd';
+import { CheckCircleOutlined } from '@vicons/antd';
 import { renderIcon } from '@/utils/index';
 
 /**
@@ -16,31 +16,31 @@ import { renderIcon } from '@/utils/index';
  * */
 const routes: Array<RouteRecordRaw> = [
   {
-    path: '/setting',
-    name: 'Setting',
-    redirect: '/setting/account',
+    path: '/attribute',
+    name: 'attribute',
+    redirect: '/attribute/attributeEdit',
     component: Layout,
     meta: {
-      title: '设置页面',
-      icon: renderIcon(SettingOutlined),
-      sort: 5,
+      title: '基础维护',
+      sort: 16,
+      icon: renderIcon(CheckCircleOutlined),
     },
     children: [
       {
-        path: 'account',
-        name: 'setting-account',
+        path: 'attributeEdit',
+        name: 'attributeEdit',
         meta: {
-          title: '个人设置',
+          title: '公司标准属性设置',
         },
-        component: () => import('@/views/setting/account/account.vue'),
+        component: () => import('@/views/ebs/attribute/attributeEdit.vue'),
       },
       {
-        path: 'system',
-        name: 'setting-system',
+        path: 'bankAccountList',
+        name: 'bankAccountList',
         meta: {
-          title: '系统设置',
+          title: '银行账号对应关系设置',
         },
-        component: () => import('@/views/setting/system/system.vue'),
+        component: () => import('@/views/ebs/bankaccount/bankAccountList.vue'),
       },
     ],
   },

@@ -11,6 +11,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       sort: 9,
       isRoot: true,
+      hidden: true,
       activeMenu: 'directive_index',
       icon: renderIcon(BorderOuterOutlined),
     },
