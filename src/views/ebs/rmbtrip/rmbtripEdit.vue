@@ -55,19 +55,14 @@
                     class="form-control"
                     readonly
                     placeholder=""
-                    value="${rmbtrip.agentUid} &nbsp;${rmbtrip.agentName}"
+                    value="rmbtrip.agentUid + rmbtrip.agentName"
                   />
-                  <input type="hidden" value="${rmbtrip.agentUid}" name="agentUid" />
-                  <input type="hidden" value="${rmbtrip.agentName}" name="agentName" />
+                  <input type="hidden" value="rmbtrip.agentUid" name="agentUid" />
+                  <input type="hidden" value="rmbtrip.agentName" name="agentName" />
                 </div>
                 <label class="control-label col-xs-1">单据日期</label>
                 <div class="col-xs-2">
-                  <input
-                    class="form-control"
-                    readonly
-                    placeholder=""
-                    value="${rmbtrip.startTime}"
-                  />
+                  <input class="form-control" readonly placeholder="" value="rmbtrip.startTime" />
                 </div>
                 <label class="control-label col-xs-1">单据编号</label>
                 <div class="col-xs-2">
@@ -78,7 +73,7 @@
                     id="billState"
                     value="加载中.."
                   />
-                  <input type="hidden" id="billNo" name="billNo" value="${rmbtrip.billNo}" />
+                  <input type="hidden" id="billNo" name="billNo" value="rmbtrip.billNo" />
                 </div>
                 <label class="control-label col-xs-1">是否高管</label>
                 <div class="col-xs-2">
@@ -87,7 +82,7 @@
                     id="executive"
                     name="executive"
                     style="margin: 10px 0 0 0"
-                    value="${rmbtrip.executive}"
+                    value="rmbtrip.executive"
                   />
                 </div>
               </div>
@@ -121,13 +116,13 @@
                   </div>
                   <input
                     type="hidden"
-                    value="${rmbtrip.applicantUid}"
+                    value="rmbtrip.applicantUid"
                     id="applicantUid"
                     name="applicantUid"
                   />
                   <input
                     type="hidden"
-                    value="${rmbtrip.applicantName}"
+                    value="rmbtrip.applicantName"
                     id="applicantName"
                     name="applicantName"
                   />
@@ -139,7 +134,7 @@
                     placeholder=""
                     id="bankName"
                     name="bankName"
-                    value="${rmbtrip.bankName}"
+                    value="rmbtrip.bankName"
                     maxlength="50"
                   />
                 </div>
@@ -150,7 +145,7 @@
                     placeholder=""
                     id="cardNo"
                     name="cardNo"
-                    value="${rmbtrip.cardNo}"
+                    value="rmbtrip.cardNo"
                     maxlength="50"
                     onkeyup="fee.Common.numberformat(this)"
                   />
@@ -167,7 +162,7 @@
                       type="text"
                       id="applicantBillCd"
                       name="applicantBillCd"
-                      value="${rmbtrip.applicantBillCd}"
+                      value="rmbtrip.applicantBillCd"
                       placeholder="出差申请单"
                       maxlength="20"
                       readonly
@@ -216,7 +211,7 @@
                     onclick="rmbtrip.rmbtripEdit.companytree.showOrgTree(); return false;"
                     readonly
                     placeholder="公司"
-                    value="${rmbtrip.upOrgName}"
+                    value="rmbtrip.upOrgName"
                   />
                   <input type="hidden" id="upOrgId" name="upOrgId" value="${rmbtrip.upOrgId}" />
                 </div>
@@ -532,7 +527,7 @@
             <div class="page-line"></div>
             <div class="form-group form-group-sm col-xs-12">
               <div class="form-group form-group-sm col-xs-2-2">
-                <label class="col-xs-9">附件<font color="red"> </font></label>
+                <label class="col-xs-9">附件<font color="red" /></label>
               </div>
               <div class="container-fluid">
                 <div class="col-xs-9-8 m-t-20">
@@ -554,12 +549,13 @@
 </template>
 
 <script setup>
-  import { onMounted, reactive } from 'vue';
+  import { onMounted, onBeforeMount, reactive } from 'vue';
+  import { getDetail } from './api';
   import './rmbtripEdit.js';
   import '../common/feeCommon';
 
   // // form表单数据
-  // const formData = reactive({
+  // const rmbtrip = reactive({
   //   agentUid: undefined,
   //   agentName: undefined,
   //   startTime: undefined, // 单据日期
@@ -580,11 +576,47 @@
   //   remark: undefined, // 业务内容
   // });
 
-  onMounted(() => {
+  const initPage = () => {
+    return getDetail({
+      actionType: 'detail',
+      paramId: '24508c0c950e44d8b446527f5d5afaf3',
+    });
+  };
+
+  // onBeforeMount(async () => {
+  //   const res = await initPage(); // 初始化
+
+  //   console.log('resresres', res);
+
+  //   Window.rmbtrip = {
+  //     ...Window.rmbtrip,
+  //     ...res.rmbtrip,
+  //   };
+
+  //   console.log('Window.rmbtrip - new', Window.rmbtrip);
+  // });
+
+  onMounted(async () => {
+    const res = await getDetail({
+      actionType: 'detail',
+      paramId: '24508c0c950e44d8b446527f5d5afaf3',
+    }); // 初始化
+
+    console.log('resresres', res);
+
+    Window.rmbtrip = {
+      ...Window.rmbtrip,
+      ...res.rmbtrip,
+    };
+
+    console.log('Window.rmbtrip - new', Window.rmbtrip);
+
     /*
      * 初始化
      */
-    jQuery(document).ready(function () {
+    await jQuery(document).ready(function () {
+      console.log('Window.rmbtrip - new - 22222', Window.rmbtrip);
+
       // 临时
       $('#amount').val(fee.Common.formatAmount($('#amount').val()));
       $('#exceptTaxRateAm').val(fee.Common.formatAmount($('#exceptTaxRateAm').val()));
@@ -623,6 +655,8 @@
         // 增加金额单据统计
         sumBillCount();
       });
+
+
     });
   });
 </script>

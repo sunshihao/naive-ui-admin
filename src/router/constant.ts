@@ -1,5 +1,5 @@
-import { menuProvider, XHXmenuProvider } from '@xjjrtz/layout';
-import { h } from 'vue';
+// import { menuProvider, XHXmenuProvider } from '@xjjrtz/layout';
+// import { h } from 'vue';
 
 export const RedirectName = 'Redirect';
 
