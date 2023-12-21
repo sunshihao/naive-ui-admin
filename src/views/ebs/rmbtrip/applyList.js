@@ -196,7 +196,12 @@ rmbtrip.applyList = (function () {
       parent.$('#orgName').val(obj.workTripOrgName);
 
       // TODO
-      parent.window.changeBillNo(oldCompanyId, oldDeptId);
+      // console.log('parent.window', parent.window);
+      console.log('parent.rmbtrip', parent.rmbtrip);
+
+      // top.window.changeBillNo(oldCompanyId, oldDeptId);
+
+      parent.rmbtrip.changeBillNo(oldCompanyId, oldDeptId);
 
       //显示查看出差申请单的按钮
       parent.$('#viewApply').show();

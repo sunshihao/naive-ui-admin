@@ -854,9 +854,9 @@ rmbtrip.rmbtripEdit = (function () {
         '&applicantUid=' +
         $('#applicantUid').val();
       jQuery().openDlg({
-        height: 700, // 此行调高度
+        height: 600, // 此行调高度
         width: 1000,
-        url: url,
+        url,
         title: '出差申请单选择',
       });
     },
@@ -883,7 +883,7 @@ rmbtrip.rmbtripEdit = (function () {
 // 城市间交通费
 rmbtrip.citytraffic = (function () {
   let i; // 行变量
-  let vehicleArr; // 交通工具数组
+  let vehicleArr = []; // 交通工具数组
   // console.log('rmbtrip.citytrafficData', rmbtrip.citytrafficData);
   let jsonArray = []; //回显数据
   return {
@@ -1321,11 +1321,13 @@ rmbtrip.cityinside = (function () {
       jsonArray[index] = value;
     },
     loadData: function () {
-      for (let k = 0; k < jsonArray.length; k++) {
-        rmbtrip.cityinside.addGradRow(jsonArray[k]);
-      }
-      // 初始化地区控件
-      $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+      setTimeout(() => {
+        for (let k = 0; k < jsonArray.length; k++) {
+          rmbtrip.cityinside.addGradRow(jsonArray[k]);
+        }
+        // 初始化地区控件
+        $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+      }, 100);
     },
     init: function (data) {
       // 未初始化设置1
@@ -1752,11 +1754,14 @@ rmbtrip.hotel = (function () {
     },
     loadData: function () {
       jQuery('#hotel').jqGrid('clearGridData');
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.hotel.addGradRow(jsonArray[k]);
-      }
-      //加载城市控件
-      $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+
+      setTimeout(() => {
+        for (k = 0; k < jsonArray.length; k++) {
+          rmbtrip.hotel.addGradRow(jsonArray[k]);
+        }
+        //加载城市控件
+        $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+      }, 100);
     },
     init: function (data) {
       if (data) {
@@ -2896,9 +2901,11 @@ rmbtrip.subsidy = (function () {
       jsonArray[index] = value;
     },
     loadData: function () {
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.subsidy.addGradRow(jsonArray[k]);
-      }
+      setTimeout(() => {
+        for (k = 0; k < jsonArray.length; k++) {
+          rmbtrip.subsidy.addGradRow(jsonArray[k]);
+        }
+      }, 100);
       //加载城市控件
       //			$('[data-toggle="city-picker"]').citypicker({companyId: $("#upOrgId").val()});
     },
@@ -3930,9 +3937,12 @@ rmbtrip.other = (function () {
     },
     loadData: function () {
       jQuery('#other').jqGrid('clearGridData');
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.other.addGradRow(jsonArray[k]);
-      }
+
+      setTimeout(() => {
+        for (k = 0; k < jsonArray.length; k++) {
+          rmbtrip.other.addGradRow(jsonArray[k]);
+        }
+      }, 100);
     },
     init: function () {
       // 未初始化设置1
@@ -4524,6 +4534,10 @@ function changeBillNo(oldCompanyId, oldDeptId) {
   }
 }
 
+function changeBillNoNew() {
+  console.log('方法被调用');
+}
+
 //公司树
 rmbtrip.rmbtripEdit.companytree = (function () {
   var zTree;
@@ -4781,48 +4795,6 @@ rmbtrip.rmbtripEdit.orgtree = (function () {
   };
 })();
 
-/*
- * 初始化
- */
-// jQuery(document).ready(function () {
-//   $('#amount').val(fee.Common.formatAmount($('#amount').val()));
-//   $('#exceptTaxRateAm').val(fee.Common.formatAmount($('#exceptTaxRateAm').val()));
-//   $('#taxRateAm').val(fee.Common.formatAmount($('#taxRateAm').val()));
-//   $('#planCheckAmount').val(fee.Common.formatAmount($('#planCheckAmount').val()));
-
-//   // 清空业务内容回车换行
-//   jQuery('#remark').val(
-//     jQuery('#remark')
-//       .val()
-//       .replace(/[\r\n\t]/g, '')
-//   );
-//   // 公司部门树
-//   rmbtrip.rmbtripEdit.companytree.init();
-//   if ($('#actionType').val() == 'edit') {
-//     rmbtrip.rmbtripEdit.orgtree.init();
-//   }
-//   // 表单初始化
-//   rmbtrip.rmbtripEdit.init();
-//   // 城市间交通费Tab1
-//   rmbtrip.citytraffic.init();
-//   // 城内交通费Tab2
-//   rmbtrip.cityinside.init();
-//   // 住宿费Tab3
-//   rmbtrip.hotel.init();
-//   // 出差补助Tab4
-//   rmbtrip.subsidy.init();
-//   // 其它Tab45
-//   rmbtrip.other.init();
-//   // 初始化日期控件
-//   $.initDataPlugin();
-//   // 统计单据数量
-//   //sumBillCount();
-
-//   $('.tabs').keyup(function (e) {
-//     // 增加金额单据统计
-//     sumBillCount();
-//   });
-// });
 jQuery.validator.addMethod(
   'checkTextAreaRequired',
   function (value, element) {

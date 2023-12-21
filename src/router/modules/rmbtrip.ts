@@ -43,6 +43,14 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import('@/views/ebs/rmbtrip/rmbtripEdit.vue'),
       },
       {
+        path: 'rmbtripDetail',
+        name: 'rmbtripDetail',
+        meta: {
+          title: '个人差旅报销详情(隐藏)',
+        },
+        component: () => import('@/views/ebs/rmbtrip/rmbtripDetail.vue'),
+      },
+      {
         path: 'ordinaryMainList',
         name: 'ordinaryMainList',
         meta: {
