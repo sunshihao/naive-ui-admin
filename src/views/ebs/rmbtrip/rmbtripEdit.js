@@ -848,23 +848,22 @@ rmbtrip.rmbtripEdit = (function () {
 
     // 出差申请单选择，弹出pop
     chooseApply: function () {
-      url =
-        WEB_CTX_PATH +
-        '/ebc/rmbtrip/rmbtrip/applyList.jsp?projectUid=' +
+      const url =
+        '/applyList?projectUid=' +
         $('#projectUid').val() +
         '&applicantUid=' +
         $('#applicantUid').val();
       jQuery().openDlg({
-        // parent: window.top,//此行调遮罩
-        height: 700, // 此行调高度
+        height: 600, // 此行调高度
         width: 1000,
-        url: url,
+        url,
         title: '出差申请单选择',
       });
     },
     // 选择收款人，弹出pop
     chooseStaff: function () {
-      url = WEB_CTX_PATH + '/ebc/rmbtrip/rmbtrip/staffList.jsp';
+      // TODO
+      const url = '/staffList';
       jQuery().openDlg({
         height: 700, // 此行调高度
         width: 1000,
@@ -883,31 +882,40 @@ rmbtrip.rmbtripEdit = (function () {
 
 // 城市间交通费
 rmbtrip.citytraffic = (function () {
-  var i; // 行变量
-  var vehicleArr; // 交通工具数组
-  var jsonArray = new Array(); //回显数据
+  let i; // 行变量
+  let vehicleArr = []; // 交通工具数组
+  // console.log('rmbtrip.citytrafficData', rmbtrip.citytrafficData);
+  let jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
+      console.log('initDatainitDatainitDatainitData');
       jsonArray[index] = value;
     },
     loadData: function () {
+      console.log('loadDataloadDataloadDataloadData');
       jQuery('#citytraffic').jqGrid('clearGridData');
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.citytraffic.addGradRow(jsonArray[k]);
-      }
-      // 初始化地区控件
-      $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+      setTimeout(() => {
+        for (let k = 0; k < jsonArray.length; k++) {
+          rmbtrip.citytraffic.addGradRow(jsonArray[k]);
+        }
+        // 初始化地区控件
+        $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+      }, 100);
     },
-    init: function () {
+    init: async function (data) {
+      if (data) {
+        jsonArray = data;
+      }
       // 未初始化设置1
       i = $('#citytraffic').find('tr').length;
       // 加载支付方式下拉列表
-      ajaxFormRequest(
+      await ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
           encodeURI(encodeURI("{'vehicle':'trafficTool'}")),
         function (returnData) {
           vehicleArr = returnData.result.vehicle;
+          console.log('--------------------returnData--', returnData);
           // 初始化回显的下拉框
           rmbtrip.citytraffic.selected();
         },
@@ -1003,7 +1011,7 @@ rmbtrip.citytraffic = (function () {
             formatter: function (value, grid, rows, state) {
               var option = '';
               // 填充交通工具
-              for (j = 0; j < vehicleArr.length; j++) {
+              for (let j = 0; j < vehicleArr.length; j++) {
                 if (value != vehicleArr[j].code) {
                   option +=
                     "<option value='" +
@@ -1307,21 +1315,26 @@ rmbtrip.citytraffic = (function () {
 rmbtrip.cityinside = (function () {
   var i; // 行变量
   var vehicleArr; // 交通工具数组
-  var jsonArray = new Array(); //回显数据
+  var jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
     },
     loadData: function () {
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.cityinside.addGradRow(jsonArray[k]);
-      }
-      // 初始化地区控件
-      $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+      setTimeout(() => {
+        for (let k = 0; k < jsonArray.length; k++) {
+          rmbtrip.cityinside.addGradRow(jsonArray[k]);
+        }
+        // 初始化地区控件
+        $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+      }, 100);
     },
-    init: function () {
+    init: function (data) {
       // 未初始化设置1
       i = $('#cityinside').find('tr').length;
+      if (data) {
+        jsonArray = data;
+      }
       // 加载支付方式下拉列表
       ajaxFormRequest(
         WEB_CTX_PATH +
@@ -1421,7 +1434,7 @@ rmbtrip.cityinside = (function () {
             formatter: function (value, grid, rows, state) {
               var option = '';
               // 填充交通工具
-              for (j = 0; j < vehicleArr.length; j++) {
+              for (let j = 0; j < vehicleArr.length; j++) {
                 if (value != vehicleArr[j].code) {
                   option +=
                     "<option value='" +
@@ -1733,7 +1746,7 @@ rmbtrip.hotel = (function () {
   var i; // 行变量
   var vehicleArr; // 交通工具数组
   var taxRateArr; // 税率数组
-  var jsonArray = new Array(); //回显数据
+  var jsonArray = []; //回显数据
   var tab3_flag = 0; //对 金额 限定
   return {
     initData: function (index, value) {
@@ -1741,13 +1754,19 @@ rmbtrip.hotel = (function () {
     },
     loadData: function () {
       jQuery('#hotel').jqGrid('clearGridData');
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.hotel.addGradRow(jsonArray[k]);
-      }
-      //加载城市控件
-      $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+
+      setTimeout(() => {
+        for (k = 0; k < jsonArray.length; k++) {
+          rmbtrip.hotel.addGradRow(jsonArray[k]);
+        }
+        //加载城市控件
+        $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
+      }, 100);
     },
-    init: function () {
+    init: function (data) {
+      if (data) {
+        jsonArray = data;
+      }
       // 初始化日期控件
       rmbtrip.hotel.initDate();
       //			ldaccompany();
@@ -1841,7 +1860,7 @@ rmbtrip.hotel = (function () {
             formatter: function (value, grid, rows, state) {
               var option = '';
               // 填充交通工具
-              for (j = 0; j < vehicleArr.length; j++) {
+              for (let j = 0; j < vehicleArr.length; j++) {
                 if (value != vehicleArr[j].code) {
                   option +=
                     "<option value='" +
@@ -2876,15 +2895,17 @@ rmbtrip.subsidy = (function () {
   var i; // 行变量
   var vehicleArr; // 交通工具数组
   var subsidyTypeArr; // 补助数组
-  var jsonArray = new Array(); //回显数据
+  var jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
     },
     loadData: function () {
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.subsidy.addGradRow(jsonArray[k]);
-      }
+      setTimeout(() => {
+        for (k = 0; k < jsonArray.length; k++) {
+          rmbtrip.subsidy.addGradRow(jsonArray[k]);
+        }
+      }, 100);
       //加载城市控件
       //			$('[data-toggle="city-picker"]').citypicker({companyId: $("#upOrgId").val()});
     },
@@ -3909,16 +3930,19 @@ rmbtrip.subsidy = (function () {
 rmbtrip.other = (function () {
   var i; // 行变量
   var vehicleArr; // 交通工具数组
-  var jsonArray = new Array(); //回显数据
+  var jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
     },
     loadData: function () {
       jQuery('#other').jqGrid('clearGridData');
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.other.addGradRow(jsonArray[k]);
-      }
+
+      setTimeout(() => {
+        for (k = 0; k < jsonArray.length; k++) {
+          rmbtrip.other.addGradRow(jsonArray[k]);
+        }
+      }, 100);
     },
     init: function () {
       // 未初始化设置1
@@ -4508,6 +4532,10 @@ function changeBillNo(oldCompanyId, oldDeptId) {
     // 公司不变-部门改变时。明细不清空，但是计划内外等值要重设
     rmbtrip.rmbtripEdit.planAmount(true);
   }
+}
+
+function changeBillNoNew() {
+  console.log('方法被调用');
 }
 
 //公司树
