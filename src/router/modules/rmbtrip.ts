@@ -60,6 +60,24 @@ const routes: Array<RouteRecordRaw> = [
       },
     ],
   },
+  {
+    path: '/staffList',
+    name: 'staffList',
+    meta: {
+      title: '收款人选择',
+      hidden: true,
+    },
+    component: () => import('@/views/ebs/rmbtrip/staffList.vue'),
+  },
+  {
+    path: '/applyList',
+    name: 'applyList',
+    meta: {
+      title: '出差申请单选择',
+      hidden: true,
+    },
+    component: () => import('@/views/ebs/rmbtrip/applyList.vue'),
+  },
 ];
 
 export default routes;
