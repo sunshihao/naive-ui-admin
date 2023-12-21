@@ -541,7 +541,7 @@ rmbtrip.citytraffic = (function () {
               // 取消
               return;
             } else {
-              for (var i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++) {
                 $(id).jqGrid('delRowData', selectedRowIds[0]);
               }
               // 增加金额单据统计
@@ -667,16 +667,18 @@ rmbtrip.citytraffic = (function () {
 // 市内交通费
 rmbtrip.cityinside = (function () {
   var i; // 行变量
-  var vehicleArr; // 交通工具数组
+  var vehicleArr = []; // 交通工具数组
   var jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
     },
     loadData: function () {
-      for (let k = 0; k < jsonArray.length; k++) {
-        rmbtrip.cityinside.addGradRow(jsonArray[k]);
-      }
+      setTimeout(() => {
+        for (let k = 0; k < jsonArray.length; k++) {
+          rmbtrip.cityinside.addGradRow(jsonArray[k]);
+        }
+      }, 100);
     },
     init: async function () {
       // 未初始化设置1
@@ -944,7 +946,7 @@ rmbtrip.cityinside = (function () {
               // 取消
               return;
             } else {
-              for (var i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++) {
                 $(id).jqGrid('delRowData', selectedRowIds[0]);
               }
               // 增加金额单据统计
@@ -1057,9 +1059,9 @@ rmbtrip.cityinside = (function () {
       var cityStartTimes = $('#citytraffic .form_datetime');
       // 结束日期
       var cityEndTimes = $('#citytraffic .form_time');
-      for (i = 0; i < startTimes.length; i++) {
+      for (let i = 0; i < startTimes.length; i++) {
         var isHave = false;
-        for (j = 0; j < cityStartTimes.length; j++) {
+        for (let j = 0; j < cityStartTimes.length; j++) {
           // 判断是否属于某一个时间段
           if (
             startTimes[i].value >= cityStartTimes[j].value &&
@@ -1089,27 +1091,32 @@ rmbtrip.cityinside = (function () {
 
 // 住宿费
 rmbtrip.hotel = (function () {
-  var i; // 行变量
-  var vehicleArr; // 交通工具数组
-  var taxRateArr; // 税率数组
-  var jsonArray = []; //回显数据
+  let i; // 行变量
+  let vehicleArr = []; // 交通工具数组
+  let taxRateArr = []; // 税率数组
+  let jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
     },
+    initData2: function (data) {
+      if (data) jsonArray = data;
+    },
     loadData: function () {
       jQuery('#hotel').jqGrid('clearGridData');
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.hotel.addGradRow(jsonArray[k]);
-      }
+      setTimeout(() => {
+        for (let k = 0; k < jsonArray.length; k++) {
+          rmbtrip.hotel.addGradRow(jsonArray[k]);
+        }
+      });
     },
-    init: function () {
+    init: async function () {
       // 初始化日期控件
-      rmbtrip.hotel.initDate();
+      // rmbtrip.hotel.initDate();
       // 未初始化设置1
       i = $('#hotel').find('tr').length;
       // 加载支付方式下拉列表
-      ajaxFormRequest(
+      await ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
           encodeURI(encodeURI("{'vehicle':'tripType'}")),
@@ -1124,7 +1131,7 @@ rmbtrip.hotel = (function () {
         ' '
       );
       // 加载税率式下拉列表
-      ajaxFormRequest(
+      await ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
           encodeURI(encodeURI("{'taxRate':'taxRate'}")),
@@ -1139,7 +1146,7 @@ rmbtrip.hotel = (function () {
         ' '
       );
       // 初始化表格
-      jQuery('#hotel').jqGrid({
+      await jQuery('#hotel').jqGrid({
         url: null,
         regional: 'cn',
         datatype: 'json',
@@ -1312,7 +1319,7 @@ rmbtrip.hotel = (function () {
             index: 'tab3_taxRate',
             formatter: function (value, grid, rows, state) {
               var option = "<option value=''></option>";
-              for (j = 0; j < taxRateArr.length; j++) {
+              for (let j = 0; j < taxRateArr.length; j++) {
                 if (value != taxRateArr[j].code) {
                   option +=
                     "<option value='" +
@@ -1502,7 +1509,7 @@ rmbtrip.hotel = (function () {
               // 取消
               return;
             } else {
-              for (var i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++) {
                 $(id).jqGrid('delRowData', selectedRowIds[0]);
               }
               // 增加金额单据统计
@@ -1548,8 +1555,8 @@ rmbtrip.hotel = (function () {
       var startTimes = $('.hotel_datetime');
       // 结束日期
       var endTimes = $('.hotel_time');
-      for (i = 0; i < startTimes.length; i++) {
-        for (j = 0; j < startTimes.length && i != j; j++) {
+      for (let i = 0; i < startTimes.length; i++) {
+        for (let j = 0; j < startTimes.length && i != j; j++) {
           // 判断是否属于某一个时间段
           if (
             (startTimes[i].value >= startTimes[j].value &&
@@ -1574,9 +1581,9 @@ rmbtrip.hotel = (function () {
       var cityStartTimes = $('#citytraffic .form_datetime');
       // 结束日期
       var cityEndTimes = $('#citytraffic .form_time');
-      for (i = 0; i < startTimes.length; i++) {
+      for (let i = 0; i < startTimes.length; i++) {
         var isHave = false;
-        for (j = 0; j < cityStartTimes.length; j++) {
+        for (let j = 0; j < cityStartTimes.length; j++) {
           // 判断是否属于某一个时间段
           if (
             startTimes[i].value >= cityStartTimes[j].value &&
@@ -1870,15 +1877,17 @@ rmbtrip.subsidy = (function () {
       jsonArray[index] = value;
     },
     loadData: function () {
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.subsidy.addGradRow(jsonArray[k]);
-      }
+      setTimeout(() => {
+        for (let k = 0; k < jsonArray.length; k++) {
+          rmbtrip.subsidy.addGradRow(jsonArray[k]);
+        }
+      }, 100);
     },
     init: function () {
       // 未初始化设置1
       i = $('#subsidy').find('tr').length;
       // 初始化时间控件
-      rmbtrip.subsidy.initDate();
+      // rmbtrip.subsidy.initDate();
 
       // 初始化表格
       jQuery('#subsidy').jqGrid({
@@ -2135,7 +2144,7 @@ rmbtrip.subsidy = (function () {
               // 取消
               return;
             } else {
-              for (var i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++) {
                 $(id).jqGrid('delRowData', selectedRowIds[0]);
               }
               // 增加金额单据统计
@@ -2250,8 +2259,8 @@ rmbtrip.subsidy = (function () {
       var startTimes = $('.subsidy_datetime');
       // 结束日期
       var endTimes = $('.subsidy_time');
-      for (i = 0; i < startTimes.length; i++) {
-        for (j = 0; j < startTimes.length && i != j; j++) {
+      for (let i = 0; i < startTimes.length; i++) {
+        for (let j = 0; j < startTimes.length && i != j; j++) {
           // 判断是否属于某一个时间段
           if (
             (startTimes[i].value >= startTimes[j].value &&
@@ -2276,9 +2285,9 @@ rmbtrip.subsidy = (function () {
       var cityStartTimes = $('#citytraffic .form_datetime');
       // 结束日期
       var cityEndTimes = $('#citytraffic .form_time');
-      for (i = 0; i < startTimes.length; i++) {
+      for (let i = 0; i < startTimes.length; i++) {
         var isHave = false;
-        for (j = 0; j < cityStartTimes.length; j++) {
+        for (let j = 0; j < cityStartTimes.length; j++) {
           // 判断是否属于某一个时间段
           if (
             startTimes[i].value >= cityStartTimes[j].value &&
@@ -2434,9 +2443,11 @@ rmbtrip.other = (function () {
     },
     loadData: function () {
       jQuery('#other').jqGrid('clearGridData');
-      for (k = 0; k < jsonArray.length; k++) {
-        rmbtrip.other.addGradRow(jsonArray[k]);
-      }
+      setTimeout(() => {
+        for (let k = 0; k < jsonArray.length; k++) {
+          rmbtrip.other.addGradRow(jsonArray[k]);
+        }
+      }, 100);
     },
     init: function () {
       // 未初始化设置1
@@ -2878,8 +2889,9 @@ String.prototype.startWith = function (str) {
 
 //验证回显数字格式是否正确
 function formatAmount(str) {
-  if (str.startWith('.')) {
-    str = '0' + str;
-  }
-  return fee.Common.formatAmount(str);
+  // if (str && str.startWith('.')) {
+  //   str = '0' + str;
+  //   return fee.Common.formatAmount(str);
+  // }
+  return str;
 }

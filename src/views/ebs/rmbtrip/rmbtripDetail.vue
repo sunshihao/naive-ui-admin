@@ -511,20 +511,7 @@
 
       // 城市间交通费Tab1
       let citytrafficData = res.citytraffic.map((detail, index) => {
-        console.log('indexindexindexindex', index);
-        // --
-        rmbtrip.citytraffic.initData(index, {
-          // ...detail,
-          tab1_startTime: detail.startTimeString,
-          tab1_endTime: detail.endTimeString,
-          tab1_startAddressName: { name: detail.startAddressName, code: detail.startAddressId },
-          tab1_endAddressName: { name: detail.endAddressName, code: detail.endAddressId },
-          tab1_vehicle: detail.vehicle,
-          tab1_amount: detail.amount2,
-        });
-
-        return {
-          // ...detail,
+        const json = {
           tab1_startTime: detail.startTimeString,
           tab1_endTime: detail.endTimeString,
           tab1_startAddressName: { name: detail.startAddressName, code: detail.startAddressId },
@@ -532,18 +519,67 @@
           tab1_vehicle: detail.vehicle,
           tab1_amount: detail.amount2,
         };
+        rmbtrip.citytraffic.initData(index, json);
+        return json;
       });
-
-      console.log('citytrafficData', citytrafficData);
 
       rmbtrip.citytraffic.init(); // 初始化
 
-      // rmbtrip.citytraffic.init();
       // 城内交通费Tab2
+
+      // 城市间交通费Tab1
+      res.cityinside.map((detail, index) => {
+        const json = {
+          tab2_startTime: detail.startTimeString,
+          tab2_endTime: detail.endTimeString,
+          tab2_startAddressName: { name: detail.startAddressName, code: detail.startAddressId },
+          tab2_endAddressName: { name: detail.endAddressName, code: detail.endAddressId },
+          tab2_vehicle: detail.vehicle,
+          tab2_amount: detail.amount2,
+        };
+        rmbtrip.cityinside.initData(index, json);
+        return json;
+      });
+
       rmbtrip.cityinside.init();
       // 住宿费Tab3
+      let htDaata = res.hotel.map((detail, index) => {
+        const json = {
+          tab3_startTime: detail.startTime, // startTime
+          tab3_endTime: detail.endTime, // endTime
+          tab3_traveType: detail.traveType,
+          tab3_city: detail.city,
+          tab3_personCount: detail.personCount,
+          tab3_dayNumber: detail.dayNumber,
+          tab3_amount: detail.amount, // amount
+          tab3_actualDayNumber: detail.actualDayNumber,
+          tab3_standardValue: detail.standardValue,
+          tab3_exceptTaxRateAm: detail.exceptTaxRateAm,
+          tab3_taxRate: detail.taxRate,
+          tab3_taxRateAm: detail.taxRateAm,
+        };
+        // rmbtrip.hotel.initData(index, json);
+        return json;
+      });
+
+      rmbtrip.hotel.initData2(htDaata);
+
       rmbtrip.hotel.init();
       // 出差补助Tab4
+      res.subsidy.map((detail, index) => {
+        const json = {
+          tab4_startTime: detail.startTimeString,
+          tab4_endTime: detail.endTimeString,
+          tab4_city: detail.city,
+          tab4_dayNumber: detail.dayNumber,
+          tab4_amount: detail.amount2,
+          tab4_standardValue: detail.standardValue,
+          tab4_subsidyType: detail.subsidyType,
+        };
+        rmbtrip.subsidy.initData(index, json);
+        return json;
+      });
+
       rmbtrip.subsidy.init();
       // 其它Tab45
       rmbtrip.other.init();

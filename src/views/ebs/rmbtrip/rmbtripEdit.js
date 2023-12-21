@@ -877,6 +877,7 @@ rmbtrip.rmbtripEdit = (function () {
         doAppStatusFlow('差旅申请单详情', applicantBillCd, 'HR02001');
       }
     },
+    changeBillNo: changeBillNo,
   };
 })();
 
@@ -4534,10 +4535,6 @@ function changeBillNo(oldCompanyId, oldDeptId) {
   }
 }
 
-function changeBillNoNew() {
-  console.log('方法被调用');
-}
-
 //公司树
 rmbtrip.rmbtripEdit.companytree = (function () {
   var zTree;
@@ -4827,3 +4824,28 @@ jQuery.validator.addMethod(
   },
   '出差申请单必须输入'
 );
+
+// 工程性提交
+var FROM_WORK_FLOW_URL = 'http://172.16.1.53:8080';
+var doAppStatusFlow = function (title, becomeId, busiFunctionId) {
+  layer.open({
+    type: 2,
+    title: title,
+    content:
+      FROM_WORK_FLOW_URL +
+      '/wf/InterApproveAction.do?method=doforwardApproveView&busiCode=' +
+      becomeId +
+      '&busiFunctionId=' +
+      busiFunctionId,
+    fix: true,
+    area: ['100%', '100%'],
+    //     /*注释部分功能：弹窗后立即最大化*/
+    success: function (layerObj) {
+      var currLayer = jQuery(layerObj);
+      currLayer
+        .css({ top: '0px', left: '0px', width: '100%', height: jQuery(window).height() })
+        .find('iframe')
+        .css('height', jQuery(window).height() - 50);
+    },
+  });
+};
