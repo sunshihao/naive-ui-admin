@@ -1,3 +1,4 @@
+import { doAppStatusFlow } from '@/utils/tools';
 /*
  * 定义命名空间
  */
@@ -1175,7 +1176,7 @@ rmbtrip.citytraffic = (function () {
               // 取消
               return;
             } else {
-              for (var i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++) {
                 $(id).jqGrid('delRowData', selectedRowIds[0]);
               }
               // 增加金额单据统计
@@ -1189,7 +1190,7 @@ rmbtrip.citytraffic = (function () {
       // 加载下拉列表和选中项
       $('.citytraffic-select').each(function () {
         var selected = $(this).attr('check');
-        for (j = 0; j < vehicleArr.length; j++) {
+        for (let j = 0; j < vehicleArr.length; j++) {
           if (selected != vehicleArr[j].code) {
             $(this).append(
               "<option value='" + vehicleArr[j].code + "'>" + vehicleArr[j].name + '</option>'
@@ -1596,7 +1597,7 @@ rmbtrip.cityinside = (function () {
               // 取消
               return;
             } else {
-              for (var i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++) {
                 $(id).jqGrid('delRowData', selectedRowIds[0]);
               }
               // 增加金额单据统计
@@ -1610,7 +1611,7 @@ rmbtrip.cityinside = (function () {
       // 加载下拉列表和选中项
       $('.cityinside-select').each(function () {
         var selected = $(this).attr('check');
-        for (j = 0; j < vehicleArr.length; j++) {
+        for (let j = 0; j < vehicleArr.length; j++) {
           if (selected != vehicleArr[j].code) {
             $(this).append(
               "<option value='" + vehicleArr[j].code + "'>" + vehicleArr[j].name + '</option>'
@@ -1744,11 +1745,11 @@ rmbtrip.cityinside = (function () {
 
 // 住宿费
 rmbtrip.hotel = (function () {
-  var i; // 行变量
-  var vehicleArr; // 交通工具数组
-  var taxRateArr; // 税率数组
-  var jsonArray = []; //回显数据
-  var tab3_flag = 0; //对 金额 限定
+  let i; // 行变量
+  let vehicleArr; // 交通工具数组
+  let taxRateArr; // 税率数组
+  let jsonArray = []; //回显数据
+  let tab3_flag = 0; //对 金额 限定
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
@@ -1757,24 +1758,24 @@ rmbtrip.hotel = (function () {
       jQuery('#hotel').jqGrid('clearGridData');
 
       setTimeout(() => {
-        for (k = 0; k < jsonArray.length; k++) {
+        for (let k = 0; k < jsonArray.length; k++) {
           rmbtrip.hotel.addGradRow(jsonArray[k]);
         }
         //加载城市控件
         $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
       }, 100);
     },
-    init: function (data) {
+    init: async function (data) {
       if (data) {
         jsonArray = data;
       }
       // 初始化日期控件
-      rmbtrip.hotel.initDate();
+      // rmbtrip.hotel.initDate();
       //			ldaccompany();
       // 未初始化设置1
       i = $('#hotel').find('tr').length;
       // 加载出差类别下拉列表
-      ajaxFormRequest(
+      await ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
           encodeURI(encodeURI("{'vehicle':'tripType'}")),
@@ -1979,7 +1980,7 @@ rmbtrip.hotel = (function () {
             index: 'tab3_taxRate',
             formatter: function (value, grid, rows, state) {
               var option = "<option value=''></option>";
-              for (j = 0; j < taxRateArr.length; j++) {
+              for (let j = 0; j < taxRateArr.length; j++) {
                 if (value != taxRateArr[j].code) {
                   option +=
                     "<option value='" +
@@ -2212,7 +2213,7 @@ rmbtrip.hotel = (function () {
               // 取消
               return;
             } else {
-              for (var i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++) {
                 $(id).jqGrid('delRowData', selectedRowIds[0]);
               }
               // 增加金额单据统计
@@ -2347,7 +2348,7 @@ rmbtrip.hotel = (function () {
       var endTimes = $('.hotel_time');
 
       // 住宿信息的开始日和结束日不能是同一天
-      for (i = 0; i < startTimes.length; i++) {
+      for (let i = 0; i < startTimes.length; i++) {
         if (startTimes[i].value == endTimes[i].value) {
           sweetAlert({
             title: '录入提示',
@@ -2363,8 +2364,8 @@ rmbtrip.hotel = (function () {
       }
 
       // 验证重复区划
-      for (i = 0; i < startTimes.length; i++) {
-        for (j = 0; j < startTimes.length && i != j; j++) {
+      for (let i = 0; i < startTimes.length; i++) {
+        for (let j = 0; j < startTimes.length && i != j; j++) {
           // 判断是否属于某一个时间段
           if (
             (startTimes[i].value >= startTimes[j].value &&
@@ -2440,7 +2441,7 @@ rmbtrip.hotel = (function () {
       // 加载下拉列表和选中项
       $('.hotel-select').each(function () {
         var selected = $(this).attr('check');
-        for (j = 0; j < vehicleArr.length; j++) {
+        for (let j = 0; j < vehicleArr.length; j++) {
           if (selected != vehicleArr[j].code) {
             $(this).append(
               "<option value='" + vehicleArr[j].code + "'>" + vehicleArr[j].name + '</option>'
@@ -2903,20 +2904,20 @@ rmbtrip.subsidy = (function () {
     },
     loadData: function () {
       setTimeout(() => {
-        for (k = 0; k < jsonArray.length; k++) {
+        for (let k = 0; k < jsonArray.length; k++) {
           rmbtrip.subsidy.addGradRow(jsonArray[k]);
         }
       }, 100);
       //加载城市控件
       //			$('[data-toggle="city-picker"]').citypicker({companyId: $("#upOrgId").val()});
     },
-    init: function () {
+    init: async function () {
       // 未初始化设置1
       i = $('#subsidy').find('tr').length;
       // 初始化时间控件
-      rmbtrip.subsidy.initDatea();
+      // rmbtrip.subsidy.initDatea();
       // 加载税率式下拉列表
-      ajaxFormRequest(
+      await ajaxFormRequest(
         WEB_CTX_PATH +
           '/tripMainAction.do?method=getSelectStandardType&element2CodeType=' +
           encodeURI(encodeURI("{'standardType':'standardType'}")),
@@ -2932,7 +2933,7 @@ rmbtrip.subsidy = (function () {
       );
 
       // 初始化表格
-      jQuery('#subsidy').jqGrid({
+      await jQuery('#subsidy').jqGrid({
         url: null,
         regional: 'cn',
         datatype: 'json',
@@ -2981,7 +2982,7 @@ rmbtrip.subsidy = (function () {
             index: 'tab4_subsidyType',
             formatter: function (value, grid, rows, state) {
               var option = '';
-              for (j = 0; j < subsidyTypeArr.length; j++) {
+              for (let j = 0; j < subsidyTypeArr.length; j++) {
                 if (value != subsidyTypeArr[j].code) {
                   option +=
                     "<option value='" +
@@ -3228,7 +3229,7 @@ rmbtrip.subsidy = (function () {
               // 取消
               return;
             } else {
-              for (var i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++) {
                 $(id).jqGrid('delRowData', selectedRowIds[0]);
               }
               // 增加金额单据统计
@@ -3242,7 +3243,7 @@ rmbtrip.subsidy = (function () {
       // 加载下拉列表和选中项
       $('.subsidy-select').each(function () {
         var selected = $(this).attr('check');
-        for (j = 0; j < vehicleArr.length; j++) {
+        for (let j = 0; j < vehicleArr.length; j++) {
           if (selected != vehicleArr[j].code) {
             $(this).append(
               "<option value='" + vehicleArr[j].code + "'>" + vehicleArr[j].name + '</option>'
@@ -3564,14 +3565,14 @@ rmbtrip.subsidy = (function () {
       var startTimes = $('.subsidy_datetime');
       // 结束日期
       var endTimes = $('.subsidy_time');
-      for (i = 0; i < startTimes.length; i++) {
+      for (let i = 0; i < startTimes.length; i++) {
         if (startTimes[i].value == '') {
           continue;
         }
         var stand1 = $(
           $(startTimes[i]).parent().parent().parent().children()[4].children[0].children[0]
         ).val();
-        for (j = 0; j < startTimes.length && i != j; j++) {
+        for (let j = 0; j < startTimes.length && i != j; j++) {
           if (startTimes[j].value == '') {
             continue;
           }
@@ -3940,7 +3941,7 @@ rmbtrip.other = (function () {
       jQuery('#other').jqGrid('clearGridData');
 
       setTimeout(() => {
-        for (k = 0; k < jsonArray.length; k++) {
+        for (let k = 0; k < jsonArray.length; k++) {
           rmbtrip.other.addGradRow(jsonArray[k]);
         }
       }, 100);
@@ -4105,7 +4106,7 @@ rmbtrip.other = (function () {
               // 取消
               return;
             } else {
-              for (var i = 0; i < len; i++) {
+              for (let i = 0; i < len; i++) {
                 $(id).jqGrid('delRowData', selectedRowIds[0]);
               }
               // 增加金额单据统计
@@ -4263,7 +4264,7 @@ Date.prototype.format = function (format) {
   if (/(y+)/i.test(format)) {
     format = format.replace(RegExp.$1, (this.getFullYear() + '').substr(4 - RegExp.$1.length));
   }
-  for (var k in date) {
+  for (let k in date) {
     if (new RegExp('(' + k + ')').test(format)) {
       format = format.replace(
         RegExp.$1,
@@ -4824,28 +4825,3 @@ jQuery.validator.addMethod(
   },
   '出差申请单必须输入'
 );
-
-// 工程性提交
-var FROM_WORK_FLOW_URL = 'http://172.16.1.53:8080';
-var doAppStatusFlow = function (title, becomeId, busiFunctionId) {
-  layer.open({
-    type: 2,
-    title: title,
-    content:
-      FROM_WORK_FLOW_URL +
-      '/wf/InterApproveAction.do?method=doforwardApproveView&busiCode=' +
-      becomeId +
-      '&busiFunctionId=' +
-      busiFunctionId,
-    fix: true,
-    area: ['100%', '100%'],
-    //     /*注释部分功能：弹窗后立即最大化*/
-    success: function (layerObj) {
-      var currLayer = jQuery(layerObj);
-      currLayer
-        .css({ top: '0px', left: '0px', width: '100%', height: jQuery(window).height() })
-        .find('iframe')
-        .css('height', jQuery(window).height() - 50);
-    },
-  });
-};

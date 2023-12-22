@@ -341,7 +341,7 @@
                 <div class="col-xs-3" id="project_div" style="display: none">
                   <select class="form-control" name="projectUid" id="projectUid">
                     <option value="">-请选择-</option>
-                    <c:forEach
+                    <!-- <c:forEach
                       var="project"
                       items="${rmbtrip.comProject}"
                       begin="0"
@@ -358,7 +358,18 @@
                           <option value="${project.key}">${project.value}</option>
                         </c:otherwise>
                       </c:choose>
-                    </c:forEach>
+                    </c:forEach> -->
+                    <!-- for start -->
+                    <div v-for="(project, index) of rmbtripPage.comProject" :key="index">
+                      <option
+                        v-if="rmbtripPage.projectUid == project.key"
+                        :value="project.key"
+                        selected="selected"
+                        >{{ project.value }}</option
+                      >
+                      <option v-else :value="project.key">{{ project.value }}</option>
+                    </div>
+                    <!-- for end -->
                   </select>
                 </div>
                 <label class="control-label col-xs-1">费用科目<font color="red">*</font></label>

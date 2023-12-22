@@ -1,3 +1,5 @@
+import { doAppStatusFlow } from '@/utils/tools';
+
 /*
  * 定义命名空间
  */

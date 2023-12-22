@@ -1,4 +1,4 @@
-import pick from "lodash/pick";
+import pick from 'lodash.pick';
 
 /**
  * Utility function to determine the raw type of a value.
@@ -13,12 +13,17 @@ const toRawType = (val: unknown) => Object.prototype.toString.call(val).slice(8,
  * @param val - The value to check. 要检查的值。
  * @returns true if the value is a PropertyKey, false otherwise. 如果值是 PropertyKey，则返回 true，否则返回 false。
  */
-const isPropertyKey = (val: unknown): val is PropertyKey => ["String", "Number", "Symbol"].includes(toRawType(val));
+const isPropertyKey = (val: unknown): val is PropertyKey =>
+  ['String', 'Number', 'Symbol'].includes(toRawType(val));
 /**
  * Type alias to extract valid keys from an object.
  * 从对象中提取有效键的类型别名。
  */
-type ValidKeys<T, K extends keyof T = keyof T> = K extends K ? T[K] extends PropertyKey ? K : never : never;
+type ValidKeys<T, K extends keyof T = keyof T> = K extends K
+  ? T[K] extends PropertyKey
+    ? K
+    : never
+  : never;
 /**
  * Overload 1:
  * Extracts the values of a specific key from an array of objects.
@@ -37,7 +42,11 @@ export function defineConstants<T extends object, K extends keyof T>(items: T[],
  * @param values - The values to extract from each object. 从每个对象中提取的值。
  * @returns An object containing the extracted keys and their corresponding values. 包含提取的键和相应值的对象。
  */
-export function defineConstants<T extends object, K extends ValidKeys<T>, V extends keyof T>(items: T[], key: K, values: V): Record<T[K] extends PropertyKey ? T[K] : never, T[V]>;
+export function defineConstants<T extends object, K extends ValidKeys<T>, V extends keyof T>(
+  items: T[],
+  key: K,
+  values: V
+): Record<T[K] extends PropertyKey ? T[K] : never, T[V]>;
 /**
  * Overload 3:
  * Extracts multiple values of a specific key from an array of objects and maps them to a new object.
@@ -47,7 +56,11 @@ export function defineConstants<T extends object, K extends ValidKeys<T>, V exte
  * @param values - The values to extract from each object. 从每个对象中提取的值。
  * @returns An object containing the extracted keys and their corresponding values. 包含提取的键和相应值的对象。
  */
-export function defineConstants<T extends object, K extends ValidKeys<T>, V extends keyof T>(items: T[], key: K, values: V[]): Record<T[K] extends PropertyKey ? T[K] : never, Pick<T, V>>;
+export function defineConstants<T extends object, K extends ValidKeys<T>, V extends keyof T>(
+  items: T[],
+  key: K,
+  values: V[]
+): Record<T[K] extends PropertyKey ? T[K] : never, Pick<T, V>>;
 
 /**
  * A utility function to define constants based on an array of objects.
@@ -57,9 +70,13 @@ export function defineConstants<T extends object, K extends ValidKeys<T>, V exte
  * @param values - The values to extract from each object. 从每个对象中提取的值。
  * @returns An array or object containing the extracted values. 包含提取值的数组或对象。
  */
-export function defineConstants<T extends object, K extends keyof T, V extends keyof T>(items: T[], key: K, values?: V | V[]) {
-  if (typeof values === "undefined") {
-    return items.map(item => item[key]);
+export function defineConstants<T extends object, K extends keyof T, V extends keyof T>(
+  items: T[],
+  key: K,
+  values?: V | V[]
+) {
+  if (typeof values === 'undefined') {
+    return items.map((item) => item[key]);
   }
 
   return items.reduce((map, item) => {
