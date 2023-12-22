@@ -1252,28 +1252,6 @@ rmbtrip.citytraffic = (function () {
       return result;
     },
     validateDetails: function () {
-      //			// 验证重复区划
-      //			// 开始日期
-      //			var startTimes=$("#citytraffic .form_datetime");
-      //			// 结束日期
-      //			var endTimes=$("#citytraffic .form_time");
-      //			for(i=0;i<startTimes.length;i++){
-      //				for(j=0;j<startTimes.length&&i!=j;j++){
-      //					// 判断是否属于某一个时间段
-      //					if(startTimes[i].value>=startTimes[j].value&&startTimes[i].value<=endTimes[j].value||endTimes[i].value>=startTimes[j].value&&endTimes[i].value<=endTimes[j].value){
-      //						sweetAlert({
-      //							title: "录入提示",
-      //							text:"城市间交通费时间段重叠",
-      //							type: 'error',
-      //							showConfirmButton: true,
-      //							confirmButtonText:"确认",
-      //						});
-      //						return false;
-      //					}else{
-      //						continue;
-      //					}
-      //				}
-      //			}
       return true;
     },
     validateNumber: function (e) {
@@ -1331,14 +1309,14 @@ rmbtrip.cityinside = (function () {
         $('[data-toggle="city-picker"]').citypicker({ companyId: $('#upOrgId').val() });
       }, 100);
     },
-    init: function (data) {
+    init: async function (data) {
       // 未初始化设置1
       i = $('#cityinside').find('tr').length;
       if (data) {
         jsonArray = data;
       }
       // 加载支付方式下拉列表
-      ajaxFormRequest(
+      await ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +
           encodeURI(encodeURI("{'vehicle':'cityTrafficTool'}")),
@@ -1354,7 +1332,7 @@ rmbtrip.cityinside = (function () {
       );
 
       // 初始化表格
-      jQuery('#cityinside').jqGrid({
+      await jQuery('#cityinside').jqGrid({
         url: null,
         regional: 'cn',
         datatype: 'json',
@@ -1368,13 +1346,12 @@ rmbtrip.cityinside = (function () {
             formatter: function (value, grid, rows, state) {
               return (
                 "<center><input type='text' style='text-align:center;color: #333;width:100%;height:30px;border: 1px solid #ccc;border-radius: 4px;color: #555;background-color: #eee;' class='form_datetime' name='tab2_startTime' readonly placeholder='出发时间' value='" +
-                (value != undefined ? value : '') +
+                (value || '') +
                 "'/></center>"
               );
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab2_endTime',
@@ -1382,13 +1359,12 @@ rmbtrip.cityinside = (function () {
             formatter: function (value, grid, rows, state) {
               return (
                 "<center><input type='text' style='text-align:center;color: #333;width:100%;height:30px;border: 1px solid #ccc;border-radius: 4px;color: #555;background-color: #eee;' class='form_time' name='tab2_endTime' readonly placeholder='到达时间' value='" +
-                (value != undefined ? value : '') +
+                (value || '') +
                 "'/></center>"
               );
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab2_startAddressName',
@@ -1408,7 +1384,6 @@ rmbtrip.cityinside = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab2_endAddressName',
@@ -1428,7 +1403,6 @@ rmbtrip.cityinside = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab2_vehicle',
@@ -1453,7 +1427,6 @@ rmbtrip.cityinside = (function () {
                     '</option>';
                 }
               }
-
               return (
                 "<center><select type='text' class='form-control citytraffic-select' id='tab2_vehicle_" +
                 grid.rowId +
@@ -1464,7 +1437,6 @@ rmbtrip.cityinside = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab2_amount',
@@ -1478,7 +1450,6 @@ rmbtrip.cityinside = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
         ],
         autowidth: true,
@@ -1496,7 +1467,6 @@ rmbtrip.cityinside = (function () {
         loadError: function (e, e1, e2) {
           jQuery('#cityinside').footerData('set', {});
           $($('.footrow').find('[aria-describedby="cityinside_tab2_vehicle"]')[0]).html('合计');
-
           jQuery('#cityinside').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width(), true);
           //回显数据
           rmbtrip.cityinside.loadData();
@@ -1697,47 +1667,6 @@ rmbtrip.cityinside = (function () {
       sumBillCount();
     },
     validateDetails: function () {
-      //			// 城市间交通费没填时，不校验时间段
-      //			if($("#citytraffic").find("tr").length<=1){
-      //				return true;
-      //			}
-      //			// 验证重复区划
-      //			// 开始日期
-      //			var startTimes=$("#cityinside .form_datetime");
-      //			// 结束日期
-      //			var endTimes=$("#cityinside .form_time");
-      //			// 验证是否在出差申请单中
-      //			// 开始日期
-      //			var cityStartTimes=$("#citytraffic .form_datetime");
-      //			// 结束日期
-      //			var cityEndTimes=$("#citytraffic .form_time");
-      //			//验证时间是否在城市间
-      //			var startTimeState;
-      //			var endTimeState;
-      //			for(i=0;i<startTimes.length;i++){
-      //				startTimeState=false;
-      //				endTimeState=false;
-      //				for(j=0;j<cityStartTimes.length;j++){
-      //					// 判断是否属于某一个时间段
-      //					if(startTimes[i].value>=cityStartTimes[j].value){
-      //						startTimeState=true;
-      //					}
-      //					if(endTimes[i].value<=cityEndTimes[j].value){
-      //						endTimeState=true;
-      //					}
-      //				}
-      //				//判断最小开始和最大开始日期
-      //				if(!startTimeState || !endTimeState){
-      //					sweetAlert({
-      //						title: "录入提示",
-      //						text:"市内交通费时间不在城市间交通费时间之内",
-      //						type: 'error',
-      //						showConfirmButton: true,
-      //						confirmButtonText:"确认",
-      //					});
-      //					return false;
-      //				}
-      //			}
       return true;
     },
   };
@@ -2385,43 +2314,6 @@ rmbtrip.hotel = (function () {
           }
         }
       }
-
-      //			// 城市间交通费没填时，不校验时间段
-      //			if($("#citytraffic").find("tr").length<=1){
-      //				return true;
-      //			}
-      //			// 开始日期
-      //			var cityStartTimes=$("#citytraffic .form_datetime");
-      //			// 结束日期
-      //			var cityEndTimes=$("#citytraffic .form_time");
-      //			//验证时间是否在城市间
-      //			var startTimeState;
-      //			var endTimeState;
-      //			for(i=0;i<startTimes.length;i++){
-      //				startTimeState=false;
-      //				endTimeState=false;
-      //				for(j=0;j<cityStartTimes.length;j++){
-      //					// 判断是否属于某一个时间段
-      //					if(startTimes[i].value>=cityStartTimes[j].value.substr(0,10)){
-      //						startTimeState=true;
-      //					}
-      //					//住宿结束时间加1天根据内网规则(1天=86400000毫秒)
-      //					if(rmbtrip.hotel.changeDate(endTimes[i].value)<=rmbtrip.hotel.changeDate(cityEndTimes[j].value.substr(0,10))+86400000){
-      //						endTimeState=true;
-      //					}
-      //				}
-      //				//判断最小开始和最大开始日期
-      //				if(!startTimeState || !endTimeState){
-      //					sweetAlert({
-      //						title: "录入提示",
-      //						text:"住宿费时间不在城市间交通费时间之内",
-      //						type: 'error',
-      //						showConfirmButton: true,
-      //						confirmButtonText:"确认",
-      //					});
-      //					return false;
-      //				}
-      //			}
 
       return true;
     },
@@ -3601,46 +3493,6 @@ rmbtrip.subsidy = (function () {
           }
         }
       }
-
-      //			// 城市间交通费没填时，不校验时间段
-      //			if($("#citytraffic").find("tr").length<=1){
-      //				return true;
-      //			}
-      //			// 开始日期
-      //			var cityStartTimes=$("#citytraffic .form_datetime");
-      //			// 结束日期
-      //			var cityEndTimes=$("#citytraffic .form_time");
-      //			//验证时间是否在城市间
-      //			var startTimeState;
-      //			var endTimeState;
-      //			for(i=0;i<startTimes.length;i++){
-      //				startTimeState=false;
-      //				endTimeState=false;
-      //				if(startTimes[i].value==""){
-      //					continue;
-      //				}
-      //				for(j=0;j<cityStartTimes.length;j++){
-      //
-      //					// 判断是否属于某一个时间段
-      //					if(startTimes[i].value>=cityStartTimes[j].value){
-      //						startTimeState=true;
-      //					}
-      //					if(endTimes[i].value<=cityEndTimes[j].value){
-      //						endTimeState=true;
-      //					}
-      //				}
-      //				//判断最小开始和最大开始日期
-      //				if(!startTimeState || !endTimeState){
-      //					sweetAlert({
-      //						title: "录入提示",
-      //						text:"出差补助时间不在城市间交通费时间之内",
-      //						type: 'error',
-      //						showConfirmButton: true,
-      //						confirmButtonText:"确认",
-      //					});
-      //					return false;
-      //				}
-      //			}
       return true;
     },
     initDatea: function (e) {
@@ -4182,73 +4034,81 @@ rmbtrip.other = (function () {
   };
 })();
 
-$.initDataPlugin = function () {
-  $('.form_datetime')
-    .datetimepicker({
-      language: 'zh-CN',
-      format: 'yyyy-mm-dd',
-      autoclose: true,
-      todayBtn: true,
-      startView: 2,
-      minView: 2,
-      viewSelect: 2,
-      autoclose: true,
-    })
-    .on('hide', function (ev) {
-      $(this).siblings(':first').datetimepicker('setStartTime', $(this).val());
-      var td = $(this).parent().parent().parent().children()[3];
-      var endt = td.children[0].children[0];
-      endt = endt.value.replace(':', '');
-      if (endt == '') {
-        return;
-      }
-      // 设置天数
-      if ($(this).val() != '' && $(this).val() > endt) {
-        // 未选中数据
-        sweetAlert({
-          title: '录入提示',
-          text: '开始时间必须要早于结束时间',
-          type: 'error',
-          showConfirmButton: true,
-          confirmButtonText: '确认',
-        });
-        $(this).val('');
-        return false;
-      }
-    });
-  $('.form_time')
-    .datetimepicker({
-      language: 'zh-CN',
-      format: 'yyyy-mm-dd',
-      autoclose: true,
-      todayBtn: true,
-      startView: 2,
-      minView: 2,
-      viewSelect: 2,
-      autoclose: true,
-    })
-    .on('hide', function (ev) {
-      var endt = $(this).val().replace(':', '');
-      var td = $(this).parent().parent().parent().children()[2];
-      var stat = td.children[0].children[0];
-      stat = stat.value.replace(':', '');
-      if (endt != '' && stat > endt) {
-        // 未选中数据
-        sweetAlert({
-          title: '录入提示',
-          text: '结束时间必须要晚于起始时间',
-          type: 'error',
-          showConfirmButton: true,
-          confirmButtonText: '确认',
-        });
-        $(this).val('');
-        return false;
-      }
-    });
+// 插件
+$.initDataPlugin = async function () {
+  if ($('.form_datetime')) {
+    $('.form_datetime')
+      .datetimepicker({
+        language: 'zh-CN',
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayBtn: true,
+        startView: 2,
+        minView: 2,
+        viewSelect: 2,
+        autoclose: true,
+      })
+      .on('hide', function (ev) {
+        $(this).siblings(':first').datetimepicker('setStartTime', $(this).val());
+        var td = $(this).parent().parent().parent().children()[3];
+        var endt = td.children[0].children[0];
+        endt = endt.value.replace(':', '');
+        if (endt == '') {
+          return;
+        }
+        // 设置天数
+        if ($(this).val() != '' && $(this).val() > endt) {
+          // 未选中数据
+          sweetAlert({
+            title: '录入提示',
+            text: '开始时间必须要早于结束时间',
+            type: 'error',
+            showConfirmButton: true,
+            confirmButtonText: '确认',
+          });
+          $(this).val('');
+          return false;
+        }
+      });
+  }
 
-  $('.del_line').click(function () {
-    $(this).parent().parent().remove();
-  });
+  if ($('.form_time')) {
+    $('.form_time')
+      .datetimepicker({
+        language: 'zh-CN',
+        format: 'yyyy-mm-dd',
+        autoclose: true,
+        todayBtn: true,
+        startView: 2,
+        minView: 2,
+        viewSelect: 2,
+        autoclose: true,
+      })
+      .on('hide', function (ev) {
+        var endt = $(this).val().replace(':', '');
+        var td = $(this).parent().parent().parent().children()[2];
+        var stat = td.children[0].children[0];
+        stat = stat.value.replace(':', '');
+        if (endt != '' && stat > endt) {
+          // 未选中数据
+          sweetAlert({
+            title: '录入提示',
+            text: '结束时间必须要晚于起始时间',
+            type: 'error',
+            showConfirmButton: true,
+            confirmButtonText: '确认',
+          });
+          $(this).val('');
+          return false;
+        }
+      });
+  }
+
+  if ($('.del_line')) {
+    $('.del_line').click(function () {
+      $(this).parent().parent().remove();
+    });
+  }
 };
 
 Date.prototype.format = function (format) {
@@ -4477,7 +4337,6 @@ String.prototype.startWith = function (str) {
   if (str == null || str == '' || this.length == 0 || str.length > this.length) return false;
   if (this.substr(0, str.length) == str) return true;
   else return false;
-  return true;
 };
 
 //验证回显数字格式是否正确
@@ -4488,35 +4347,18 @@ function formatAmount(str) {
 
   return fee.Common.formatAmount(str);
 }
-function changeBillNo(oldCompanyId, oldDeptId) {
-  //平行化四家、资管和刀郎没有陪同出差
-  //	if ($('#upOrgId').val() == JT_companyId
-  //			|| $('#upOrgId').val() == KD_companyId
-  //			|| $('#upOrgId').val() == KK_companyId
-  //			|| $('#upOrgId').val() == KC_companyId
-  //			|| $('#upOrgId').val() == ZG_companyId
-  //			|| $('#upOrgId').val() == DL_companyId
-  //			|| $('#upOrgId').val() == WY_companyId) {
-  //		rmbtrip.rmbtripEdit.hideAccompany();
-  //	} else {
-  //		//不是高管 时才显示
-  //		if($("#executive").val()!="1"){
-  //			rmbtrip.rmbtripEdit.showAccompany();
-  //		}
-  //	}
 
+function changeBillNo(oldCompanyId, oldDeptId) {
   $('#planCheckAmount').val('');
   $('#planCheckAmountState').val('');
   $('#planCheckAmountState').attr('style', 'background-color:#eee');
   $('#monthlyPlan').val('');
   //构筑部门树
   rmbtrip.rmbtripEdit.orgtree.init();
-
   //公司id
-  var upOrgId = $('#upOrgId').val();
+  let upOrgId = $('#upOrgId').val();
   //部门id
-  var deptUid = $('#deptUid').val();
-
+  let deptUid = $('#deptUid').val();
   //判断指定公司的资金计划是否已经同步
   fee.Common.checkSyncPlan(upOrgId);
 
@@ -4524,7 +4366,6 @@ function changeBillNo(oldCompanyId, oldDeptId) {
     // 公司改变时，所有内容全清空
     // 清空计划内外
     $('#amount').val('');
-
     // 清空明细（JQGrid）
     jQuery('#citytraffic').jqGrid('clearGridData');
     jQuery('#cityinside').jqGrid('clearGridData');

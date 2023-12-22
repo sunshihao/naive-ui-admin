@@ -91,7 +91,7 @@
                 </div>
               </div>
               <div class="form-group col-xs-12">
-                <label class="control-label col-xs-1">收款人<font color="red">*</font></label>
+                <label class="control-label col-xs-1">收款人<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <div class="input-group" style="padding: 0px 0px">
                     <input
@@ -131,7 +131,7 @@
                     name="applicantName"
                   />
                 </div>
-                <label class="control-label col-xs-1">开户银行<font color="red">*</font></label>
+                <label class="control-label col-xs-1">开户银行<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <input
                     class="form-control"
@@ -142,7 +142,7 @@
                     maxlength="50"
                   />
                 </div>
-                <label class="control-label col-xs-1">银行卡号<font color="red">*</font></label>
+                <label class="control-label col-xs-1">银行卡号<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <input
                     class="form-control"
@@ -157,7 +157,7 @@
               </div>
               <div class="form-group col-xs-12">
                 <label class="control-label col-xs-1"
-                  >出差申请单<font color="red" id="trip_request_sign">*</font></label
+                  >出差申请单<span color="red" id="trip_request_sign">*</span></label
                 >
                 <div class="col-xs-2">
                   <div id="applicatDiv" class="input-group" style="padding: 0px 0px">
@@ -206,7 +206,7 @@
                     </span>
                   </div>
                 </div>
-                <label class="control-label col-xs-1">公司/部门<font color="red">*</font></label>
+                <label class="control-label col-xs-1">公司/部门<span color="red">*</span></label>
                 <div class="col-xs-3">
                   <input
                     class="form-control"
@@ -238,7 +238,7 @@
                 </div>
               </div>
               <div class="form-group col-xs-12">
-                <label class="control-label col-xs-1">费用类型<font color="red">*</font></label>
+                <label class="control-label col-xs-1">费用类型<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <select class="form-control" name="expenseType" id="expenseType">
                     <option value="">-请选择-</option>
@@ -283,13 +283,13 @@
                 </div>
               </div>
               <div class="form-group col-xs-12">
-                <label class="control-label col-xs-1">支付方式<font color="red">*</font></label>
+                <label class="control-label col-xs-1">支付方式<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <select class="form-control" name="payType" id="payType">
                     <option value="">-请选择-</option>
                   </select>
                 </div>
-                <label class="control-label col-xs-1">票据数量<font color="red">*</font></label>
+                <label class="control-label col-xs-1">票据数量<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <input
                     class="form-control"
@@ -372,7 +372,7 @@
                     <!-- for end -->
                   </select>
                 </div>
-                <label class="control-label col-xs-1">费用科目<font color="red">*</font></label>
+                <label class="control-label col-xs-1">费用科目<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <select
                     class="form-control"
@@ -383,7 +383,7 @@
                     <option value="6602">差旅费</option>
                   </select>
                 </div>
-                <label class="control-label col-xs-1">费用明细<font color="red">*</font></label>
+                <label class="control-label col-xs-1">费用明细<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <select
                     class="form-control"
@@ -394,7 +394,7 @@
                     <option value="660205">差旅费</option>
                   </select>
                 </div>
-                <label class="control-label col-xs-1">金额<font color="red">*</font></label>
+                <label class="control-label col-xs-1">金额<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <div class="input-group" style="padding: 0px 0px">
                     <input
@@ -410,7 +410,7 @@
                     <label class="input-group-addon">元</label>
                   </div>
                 </div>
-                <label class="control-label col-xs-1">税额<font color="red">*</font></label>
+                <label class="control-label col-xs-1">税额<span color="red">*</span></label>
                 <div class="col-xs-2">
                   <div class="input-group" style="padding: 0px 0px">
                     <input
@@ -428,7 +428,7 @@
                 </div>
               </div>
               <div class="form-group col-xs-12">
-                <label class="control-label col-xs-1">业务内容<font color="red">*</font></label>
+                <label class="control-label col-xs-1">业务内容<span color="red">*</span></label>
                 <div class="col-xs-11">
                   <textarea
                     rows="4"
@@ -546,7 +546,7 @@
             <div class="page-line"></div>
             <div class="form-group form-group-sm col-xs-12">
               <div class="form-group form-group-sm col-xs-2-2">
-                <label class="col-xs-9">附件<font color="red" /></label>
+                <label class="col-xs-9">附件</label>
               </div>
               <div class="container-fluid">
                 <div class="col-xs-9-8 m-t-20">

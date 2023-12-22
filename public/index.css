@@ -42,3 +42,6 @@
 /* zTree */
 @import url("/fee/resource/zTree/css/metroStyle/rightmenu.css");
 @import url("/fee/resource/zTree/css/metroStyle/metroStyle.css");
+
+/* datetimepicker */
+@import url("/fee/framework/ui4/widget/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css");
