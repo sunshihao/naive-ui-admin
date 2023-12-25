@@ -98,6 +98,9 @@ export function createRouterGuards(router: Router) {
         keepAliveComponents.splice(index, 1);
       }
     }
+
+    console.log('keepAliveComponents keepalive', keepAliveComponents);
+
     asyncRouteStore.setKeepAliveComponents(keepAliveComponents);
     const Loading = window['$loading'] || null;
     Loading && Loading.finish();

@@ -5,7 +5,6 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <input type="hidden" :value="actionType" id="actionType" />
-
             <form
               name="rmbtripForm"
               id="rmbtripForm"
@@ -20,7 +19,6 @@
                 id="applicantUid"
                 name="applicantUid"
               />
-
               <div class="form-group col-xs-12">
                 <label class="control-label col-xs-1">申请人</label>
                 <div class="col-xs-2">
@@ -467,25 +465,25 @@
 
   // form表单数据
   let rmbtripPage = ref({});
-
   let pageData = ref({});
-
   let actionType = ref('detail');
 
   onMounted(async () => {
+    // jQuery('#citytraffic').jqGrid('clearGridData');
+
+    // jQuery('#listPager1').remove();
+
     const res = await getDetail({
       actionType: 'detail',
       paramId: '24508c0c950e44d8b446527f5d5afaf3',
     }); // 初始化
-
-    console.log('res------------', res);
 
     rmbtripPage.value = res.rmbtrip;
     actionType.value = res.actionType;
     pageData.value = res;
 
     /*
-     * 初始化
+     * 模拟JSP初始化操作
      */
     jQuery(document).ready(function () {
       $('#amount').val(fee.Common.formatAmount($('#amount').val()));

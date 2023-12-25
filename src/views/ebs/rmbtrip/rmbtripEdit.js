@@ -1293,9 +1293,9 @@ rmbtrip.citytraffic = (function () {
 
 // 市内交通费
 rmbtrip.cityinside = (function () {
-  var i; // 行变量
-  var vehicleArr; // 交通工具数组
-  var jsonArray = []; //回显数据
+  let i; // 行变量
+  let vehicleArr; // 交通工具数组
+  let jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
@@ -2786,10 +2786,10 @@ rmbtrip.hotel = (function () {
 
 // 出差补助
 rmbtrip.subsidy = (function () {
-  var i; // 行变量
-  var vehicleArr; // 交通工具数组
-  var subsidyTypeArr; // 补助数组
-  var jsonArray = []; //回显数据
+  let i; // 行变量
+  let vehicleArr; // 交通工具数组
+  let subsidyTypeArr; // 补助数组
+  let jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
@@ -3782,9 +3782,9 @@ rmbtrip.subsidy = (function () {
 
 // 其它
 rmbtrip.other = (function () {
-  var i; // 行变量
-  var vehicleArr; // 交通工具数组
-  var jsonArray = []; //回显数据
+  let i; // 行变量
+  let vehicleArr; // 交通工具数组
+  let jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;

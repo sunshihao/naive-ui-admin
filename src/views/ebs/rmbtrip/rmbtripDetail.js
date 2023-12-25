@@ -11,7 +11,7 @@ jQuery.namespace('rmbtrip.rmbtripDetail');
 //var ZG_companyId = "10003";//资管
 //var DL_companyId = "10007";//刀郎
 //var WY_companyId = "10012";//物業
-var citytrafficCnt = 0;
+let citytrafficCnt = 0;
 
 rmbtrip.rmbtripDetail = (function () {
   return {
@@ -59,17 +59,6 @@ rmbtrip.rmbtripDetail = (function () {
       } else {
         $('#usePlanFlag').attr('checked', false);
       }
-      //			//平行化四家、资管和刀郎没有陪同出差
-      //			if ($('#upOrgId').val() == JT_companyId
-      //					|| $('#upOrgId').val() == KD_companyId
-      //					|| $('#upOrgId').val() == KK_companyId
-      //					|| $('#upOrgId').val() == KC_companyId
-      //					|| $('#upOrgId').val() == ZG_companyId
-      //					|| $('#upOrgId').val() == DL_companyId
-      //					|| $('#upOrgId').val() == WY_companyId) {
-      //				$("#accompany").hide();
-      //				$("#accompany_label").hide();
-      //			}
 
       rmbtrip.rmbtripDetail.gridInit();
       jQuery('#saveButton').on('click', rmbtrip.rmbtripDetail.saveOrUpdate);
@@ -257,16 +246,14 @@ rmbtrip.rmbtripDetail = (function () {
 
 // 城市间交通费
 rmbtrip.citytraffic = (function () {
-  let i = 1; // 行变量
+  let i = 0; // 行变量
   let vehicleArr = []; // 交通工具数组
   let jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
-      console.log('initDatainitDatainitDatainitDatainitData');
       jsonArray[index] = value;
     },
     loadData: function () {
-      console.log('loadDataloadDataloadDataloadDataloadData', jsonArray);
       jQuery('#citytraffic').jqGrid('clearGridData');
       setTimeout(() => {
         for (let k = 0; k < jsonArray.length; k++) {
@@ -275,7 +262,11 @@ rmbtrip.citytraffic = (function () {
       }, 100);
     },
     init: async function () {
-      console.log('initinitinitinitinitinitinit');
+      // 初始化表格
+      jQuery('#citytraffic').innerHTML = '111';
+      jQuery('#listPager1').innerHTML = '222';
+      jQuery('#citytraffic').jqGrid('clearGridData');
+      jQuery('#gview_citytraffic').innerHTML = '222';
       // 未初始化设置1
       i = $('#citytraffic').find('tr').length;
       // 加载支付方式下拉列表
@@ -629,9 +620,9 @@ rmbtrip.citytraffic = (function () {
 
 // 市内交通费
 rmbtrip.cityinside = (function () {
-  var i; // 行变量
-  var vehicleArr = []; // 交通工具数组
-  var jsonArray = []; //回显数据
+  let i; // 行变量
+  let vehicleArr = []; // 交通工具数组
+  let jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
@@ -1081,7 +1072,7 @@ rmbtrip.hotel = (function () {
         function (returnData) {
           taxRateArr = returnData.result.taxRate;
           // 初始化回显的下拉框
-          //						rmbtrip.citytraffic.selected();
+          // rmbtrip.citytraffic.selected();
         },
         function (state) {},
         'rmbtripForm',
@@ -1816,9 +1807,9 @@ rmbtrip.hotel = (function () {
 
 // 出差补助
 rmbtrip.subsidy = (function () {
-  var i; // 行变量
-  var vehicleArr; // 交通工具数组
-  var jsonArray = []; //回显数据
+  let i; // 行变量
+  let vehicleArr; // 交通工具数组
+  let jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
@@ -2383,9 +2374,9 @@ rmbtrip.subsidy = (function () {
 
 // 其它
 rmbtrip.other = (function () {
-  var i; // 行变量
-  var vehicleArr; // 交通工具数组
-  var jsonArray = []; //回显数据
+  let i; // 行变量
+  let vehicleArr; // 交通工具数组
+  let jsonArray = []; //回显数据
   return {
     initData: function (index, value) {
       jsonArray[index] = value;
