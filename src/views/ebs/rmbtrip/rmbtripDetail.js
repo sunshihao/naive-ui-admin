@@ -1948,7 +1948,7 @@ rmbtrip.subsidy = (function () {
         height: '100%',
         rownumbers: true, // 显示行号
         multiselect: false, // 多选（表格会多出一列选择框）
-        mtype: 'post',
+        // mtype: 'post',
         viewrecords: false,
         pagination: false,
         expandAll: false,

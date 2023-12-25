@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+
+	<action-mappings>
+		<!--共通下拉框Action start -->
+		<action path="/commonSelectAction"
+			type="com.dhc.common.commonselect.batch.web.CommonSelectAction" scope="request"
+			parameter="method">
+		</action>
+		<action path="/hrParamAction"
+			type="com.dhc.common.param.web.HrParamAction" scope="request"
+			parameter="method">
+		</action>
+		<action path="/contractTreeAction"
+			type="com.dhc.common.contracttree.batch.web.ContractTreeAction" scope="request"
+			parameter="method">
+		</action> 
+		<!--共通下拉框Action end -->
+		
+				
+		<!--移动端获取附件Action start -->
+		<action path="/attachmentAction"
+			type="com.dhc.common.AttachmentAction" scope="request"
+			parameter="method">
+		</action> 
+		<!--移动端获取附件Action end -->
+	</action-mappings>
+
+</struts-config>
