@@ -1,4 +1,5 @@
 import { http } from '@/utils/http/axios';
+// import { request } from '@xjjrtz/request';
 
 const requestPath = 'Knife4j';
 
@@ -9,4 +10,8 @@ export function getDetail(params) {
     method: 'get',
     params,
   });
+  // return request.get({
+  //   url: `${requestPath}/portal/codeAction/detail`,
+  //   params,
+  // });
 }

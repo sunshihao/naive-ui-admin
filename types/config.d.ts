@@ -71,4 +71,6 @@ export interface GlobEnvConfig {
   VITE_GLOB_IMG_URL?: string;
   //生产环境开启mock
   VITE_GLOB_PROD_MOCK: boolean;
+  // 三方环境设置示例
+  VITE_GLOB_WEB_URL_1: string;
 }

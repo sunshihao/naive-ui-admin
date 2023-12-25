@@ -1,11 +1,13 @@
-var allNodes = []; // 公司部门属性结构
-
-const rmbtrip = (function () {
+/*
+ * 定义命名空间
+ */
+jQuery.namespace('rmbtrip.rmbtripList');
+rmbtrip.rmbtripList = (function () {
   return {
     init: function () {
-      rmbtrip.gridInit();
-      jQuery('#resetBtn').on('click', rmbtrip.reset);
-      jQuery('#queryBtn').on('click', rmbtrip.doQuery);
+      rmbtrip.rmbtripList.gridInit();
+      jQuery('#resetBtn').on('click', rmbtrip.rmbtripList.reset);
+      jQuery('#queryBtn').on('click', rmbtrip.rmbtripList.doQuery);
     },
     /*
      * 生成表格组件
@@ -779,5 +781,3 @@ const rmbtrip = (function () {
     },
   };
 })();
-
-export default rmbtrip;

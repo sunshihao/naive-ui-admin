@@ -4,8 +4,7 @@
       <div class="col-xs-12" style="margin-top: 15px">
         <div class="panel panel-default">
           <div class="panel-body">
-            <input type="hidden" value="${actionType}" id="actionType" />
-
+            <input type="hidden" :value="actionType" id="actionType" />
             <form
               name="rmbtripForm"
               id="rmbtripForm"
@@ -13,14 +12,13 @@
               method="post"
               class="window-page"
             >
-              <input type="hidden" value="${rmbtrip.billUid}" id="billUid" name="billUid" />
+              <input type="hidden" :value="rmbtripPage.billUid" id="billUid" name="billUid" />
               <input
                 type="hidden"
-                value="${rmbtrip.applicantUid}"
+                :value="rmbtripPage.applicantUid"
                 id="applicantUid"
                 name="applicantUid"
               />
-
               <div class="form-group col-xs-12">
                 <label class="control-label col-xs-1">申请人</label>
                 <div class="col-xs-2">
@@ -28,7 +26,9 @@
                     class="form-control"
                     readonly
                     placeholder=""
-                    :value="`${rmbtripPage.agentUid} ${rmbtripPage.agentName}`"
+                    :value="
+                      rmbtripPage.agentUid ? `${rmbtripPage.agentUid} ${rmbtripPage.agentName}` : ''
+                    "
                   />
                 </div>
                 <label class="control-label col-xs-1">单据日期</label>
@@ -37,17 +37,12 @@
                     class="form-control"
                     readonly
                     placeholder=""
-                    :value="`${rmbtripPage.startTime}`"
+                    :value="rmbtripPage.startTime"
                   />
                 </div>
                 <label class="control-label col-xs-1">单据编号</label>
                 <div class="col-xs-2">
-                  <input
-                    class="form-control"
-                    readonly
-                    placeholder=""
-                    :value="`${rmbtripPage.billNo}`"
-                  />
+                  <input class="form-control" readonly placeholder="" :value="rmbtripPage.billNo" />
                 </div>
                 <label class="control-label col-xs-1">是否高管</label>
                 <div class="col-xs-2">
@@ -57,7 +52,7 @@
                     name="executive"
                     disabled="disabled"
                     style="margin: 10px 0 0 0"
-                    :value="`${rmbtripPage.executive}`"
+                    :value="rmbtripPage.executive"
                   />
                 </div>
               </div>
@@ -68,7 +63,11 @@
                     class="form-control"
                     readonly
                     placeholder=""
-                    :value="`${rmbtripPage.applicantUid} ${rmbtripPage.applicantName}`"
+                    :value="
+                      rmbtripPage.applicantUid
+                        ? `${rmbtripPage.applicantUid} ${rmbtripPage.applicantName}`
+                        : ''
+                    "
                   />
                 </div>
                 <label class="control-label col-xs-1">开户银行</label>
@@ -79,7 +78,7 @@
                     placeholder=""
                     id="bankName"
                     name="bankName"
-                    :value="`${rmbtripPage.bankName}`"
+                    :value="rmbtripPage.bankName"
                     maxlength="50"
                   />
                 </div>
@@ -91,7 +90,7 @@
                     placeholder=""
                     id="cardNo"
                     name="cardNo"
-                    :value="`${rmbtripPage.cardNo}`"
+                    :value="rmbtripPage.cardNo"
                     maxlength="50"
                   />
                 </div>
@@ -105,7 +104,7 @@
                       type="text"
                       id="applicantBillCd"
                       name="applicantBillCd"
-                      :value="`${rmbtripPage.applicantBillCd}`"
+                      :value="rmbtripPage.applicantBillCd"
                       placeholder="出差申请单"
                       maxlength="20"
                       readonly
@@ -137,14 +136,9 @@
                     name="companyName"
                     readonly
                     placeholder="公司"
-                    :value="`${rmbtripPage.upOrgName}`"
+                    :value="rmbtripPage.upOrgName"
                   />
-                  <input
-                    type="hidden"
-                    id="upOrgId"
-                    name="upOrgId"
-                    :value="`${rmbtripPage.upOrgId}`"
-                  />
+                  <input type="hidden" id="upOrgId" name="upOrgId" :value="rmbtripPage.upOrgId" />
                 </div>
                 <div class="col-xs-2">
                   <input
@@ -153,18 +147,15 @@
                     name="orgName"
                     readonly
                     placeholder=""
-                    :value="`${rmbtripPage.deptName}`"
+                    :value="rmbtripPage.deptName"
                   />
-                  <input
-                    type="hidden"
-                    id="deptUid"
-                    name="deptUid"
-                    :value="`${rmbtripPage.deptUid}`"
-                  />
+                  <input type="hidden" id="deptUid" name="deptUid" :value="rmbtripPage.deptUid" />
                 </div>
               </div>
               <div class="form-group col-xs-12">
-                <label class="control-label col-xs-1">费用类型<font color="red">*</font></label>
+                <label class="control-label col-xs-1"
+                  >费用类型<span style="color: red">*</span></label
+                >
                 <div class="col-xs-2">
                   <select
                     class="form-control"
@@ -184,7 +175,7 @@
                       id="planCheckAmount"
                       readonly="readonly"
                       name="planCheckAmount"
-                      :value="`${rmbtripPage.planCheckAmount}`"
+                      :value="rmbtripPage.planCheckAmount"
                       placeholder=""
                     />
                     <label class="input-group-addon">元</label>
@@ -199,7 +190,7 @@
                     id="planCheckAmountState"
                     readonly="readonly"
                     name="planCheckAmountState"
-                    :value="`${rmbtripPage.planCheckAmountState}`"
+                    :value="rmbtripPage.planCheckAmountState"
                   />
                 </div>
                 <div class="col-xs-1">
@@ -208,7 +199,7 @@
                     id="usePlanFlag"
                     name="usePlanFlag"
                     style="margin: 10px 0 0 0"
-                    :value="`${rmbtripPage.usePlanFlag}`"
+                    :value="rmbtripPage.usePlanFlag"
                   />
                 </div>
               </div>
@@ -226,7 +217,7 @@
                     id="receiptNumber"
                     readonly
                     name="receiptNumber"
-                    :value="`${rmbtripPage.receiptNumber}`"
+                    :value="rmbtripPage.receiptNumber"
                     placeholder="票据数量"
                     maxlength="15"
                   />
@@ -239,7 +230,7 @@
                       type="text"
                       id="amount"
                       name="amount"
-                      :value="`${rmbtripPage.amount}`"
+                      :value="rmbtripPage.amount"
                       placeholder="未录入"
                       maxlength="15"
                       readonly
@@ -260,7 +251,7 @@
                     disabled="disabled"
                     name="accompany"
                     style="display: none; margin: 10px 0 0 0"
-                    :value="`${rmbtripPage.accompany}`"
+                    :value="rmbtripPage.accompany"
                   />
                 </div>
               </div>
@@ -272,7 +263,7 @@
                     class="form-control"
                     readonly
                     placeholder=""
-                    :value="`${rmbtripPage.projectName}`"
+                    :value="rmbtripPage.projectName"
                   />
                 </div>
                 <label class="control-label col-xs-1">金额</label>
@@ -283,7 +274,7 @@
                       type="text"
                       id="exceptTaxRateAm"
                       name="exceptTaxRateAm"
-                      :value="`${rmbtripPage.exceptTaxRateAm}`"
+                      :value="rmbtripPage.exceptTaxRateAm"
                       placeholder="未录入"
                       maxlength="15"
                       readonly
@@ -298,7 +289,7 @@
                       type="text"
                       id="taxRateAm"
                       name="taxRateAm"
-                      :value="`${rmbtripPage.taxRateAm}`"
+                      :value="rmbtripPage.taxRateAm"
                       placeholder="未录入"
                       maxlength="15"
                       readonly
@@ -363,7 +354,7 @@
                     >补助</a
                   ></li
                 >
-                <li v-if="pageData?.other && pageData.other.length > 0" style="display: none"
+                <!-- <li v-if="pageData?.other && pageData.other.length > 0" style="display: none"
                   ><a
                     href="#resume-dataList5"
                     data-toggle="tab"
@@ -371,9 +362,9 @@
                     aria-controls="profile"
                     >其它</a
                   ></li
-                >
+                > -->
               </ul>
-              <div class="tab-content" id="manage-detail-grid-tabs" style="padding-top: 10px">
+              <div class="tab-content" id="manage-detail-grid-tabs">
                 <div id="resume-dataList1" class="tab-pane fade in active">
                   <div class="row">
                     <div class="col-xs-12 ilead-table">
@@ -406,21 +397,21 @@
                     </div>
                   </div>
                 </div>
-                <div id="resume-dataList5" class="tab-pane fade">
+                <!-- <div id="resume-dataList5" class="tab-pane fade">
                   <div class="row">
                     <div class="col-xs-12 ilead-table">
                       <table id="other"></table>
                       <div id="listPager5"></div>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
               <!-- Tab页结束 -->
 
               <!-- 上传附件的ID-->
               <input
                 type="hidden"
-                value="${rmbtrip.attachmentId}"
+                :value="rmbtripPage.attachmentId"
                 id="attachmentId"
                 name="attachmentId"
               />
@@ -474,25 +465,26 @@
 
   // form表单数据
   let rmbtripPage = ref({});
-
   let pageData = ref({});
-
   let actionType = ref('detail');
 
   onMounted(async () => {
+    // jQuery('#citytraffic').jqGrid('clearGridData');
+    // jQuery('#citytraffic').jqGrid('reloadGrid');
+
+    // jQuery('#listPager1').remove();
+
     const res = await getDetail({
       actionType: 'detail',
       paramId: '24508c0c950e44d8b446527f5d5afaf3',
     }); // 初始化
-
-    console.log('res------------', res);
 
     rmbtripPage.value = res.rmbtrip;
     actionType.value = res.actionType;
     pageData.value = res;
 
     /*
-     * 初始化
+     * 模拟JSP初始化操作
      */
     jQuery(document).ready(function () {
       $('#amount').val(fee.Common.formatAmount($('#amount').val()));
@@ -510,21 +502,10 @@
       rmbtrip.rmbtripDetail.init();
 
       // 城市间交通费Tab1
-      let citytrafficData = res.citytraffic.map((detail, index) => {
-        console.log('indexindexindexindex', index);
-        // --
-        rmbtrip.citytraffic.initData(index, {
-          // ...detail,
-          tab1_startTime: detail.startTimeString,
-          tab1_endTime: detail.endTimeString,
-          tab1_startAddressName: { name: detail.startAddressName, code: detail.startAddressId },
-          tab1_endAddressName: { name: detail.endAddressName, code: detail.endAddressId },
-          tab1_vehicle: detail.vehicle,
-          tab1_amount: detail.amount2,
-        });
+      rmbtrip.citytraffic.init(); // 初始化
 
-        return {
-          // ...detail,
+      let citytrafficData = res.citytraffic.map((detail, index) => {
+        const json = {
           tab1_startTime: detail.startTimeString,
           tab1_endTime: detail.endTimeString,
           tab1_startAddressName: { name: detail.startAddressName, code: detail.startAddressId },
@@ -532,23 +513,67 @@
           tab1_vehicle: detail.vehicle,
           tab1_amount: detail.amount2,
         };
+        rmbtrip.citytraffic.initData(index, json);
+        return json;
       });
 
-      console.log('citytrafficData', citytrafficData);
-
-      rmbtrip.citytraffic.init(); // 初始化
-
-      // rmbtrip.citytraffic.init();
       // 城内交通费Tab2
       rmbtrip.cityinside.init();
+
+      res.cityinside.map((detail, index) => {
+        const json = {
+          tab2_startTime: detail.startTimeString,
+          tab2_endTime: detail.endTimeString,
+          tab2_startAddressName: { name: detail.startAddressName, code: detail.startAddressId },
+          tab2_endAddressName: { name: detail.endAddressName, code: detail.endAddressId },
+          tab2_vehicle: detail.vehicle,
+          tab2_amount: detail.amount2,
+        };
+        rmbtrip.cityinside.initData(index, json);
+        return json;
+      });
+
       // 住宿费Tab3
       rmbtrip.hotel.init();
+
+      let htDaata = res.hotel.map((detail, index) => {
+        const json = {
+          tab3_startTime: detail.startTime, // startTime
+          tab3_endTime: detail.endTime, // endTime
+          tab3_traveType: detail.traveType,
+          tab3_city: detail.city,
+          tab3_personCount: detail.personCount,
+          tab3_dayNumber: detail.dayNumber,
+          tab3_amount: detail.amount, // amount
+          tab3_actualDayNumber: detail.actualDayNumber,
+          tab3_standardValue: detail.standardValue,
+          tab3_exceptTaxRateAm: detail.exceptTaxRateAm,
+          tab3_taxRate: detail.taxRate,
+          tab3_taxRateAm: detail.taxRateAm,
+        };
+        rmbtrip.hotel.initData(index, json);
+        return json;
+      });
+
       // 出差补助Tab4
       rmbtrip.subsidy.init();
+      res.subsidy.map((detail, index) => {
+        const json = {
+          tab4_startTime: detail.startTimeString,
+          tab4_endTime: detail.endTimeString,
+          tab4_city: detail.city,
+          tab4_dayNumber: detail.dayNumber,
+          tab4_amount: detail.amount2,
+          tab4_standardValue: detail.standardValue,
+          tab4_subsidyType: detail.subsidyType,
+        };
+        rmbtrip.subsidy.initData(index, json);
+        return json;
+      });
       // 其它Tab45
-      rmbtrip.other.init();
+      // rmbtrip.other.init();
       // 统计单据数量
-      sumBillCount();
+      rmbtrip.rmbtripDetail.sumBillCount();
     });
   });
 </script>

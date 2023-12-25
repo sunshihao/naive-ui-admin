@@ -36,7 +36,8 @@
                       id="startTime"
                       name="startTime"
                       placeholder="起始"
-                      onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"
+                      onclick="laydate({istime:
+                    true, format: 'YYYY-MM-DD'})"
                     />
                   </div>
                   <div class="col-xs-5">
@@ -46,7 +47,8 @@
                       id="endTime"
                       name="endTime"
                       placeholder="结束"
-                      onclick="laydate({istime: true, format: 'YYYY-MM-DD'})"
+                      onclick="laydate({istime: true,
+                    format: 'YYYY-MM-DD'})"
                     />
                   </div>
                 </div>
@@ -97,6 +99,11 @@
     <div class="row">
       <div class="col-xs-12 ilead-table">
         <div class="table-tool">
+          <!-- 					<button type="button" class="btn" data-toggle="tooltip"
+        data-placement="top" style="right: 515px" title="代理报销"
+        onclick="rmbtrip.rmbtripList.agencyPerson('trips')">
+        <span class="icon iconfont icon-baoxiao"></span>代理报销
+      </button> -->
           <button
             type="button"
             class="btn"
@@ -104,7 +111,7 @@
             data-placement="top"
             style="right: 455px"
             title="新建"
-            @click="rmbtrip.addOrEdit('add')"
+            onclick="rmbtrip.rmbtripList.addOrEdit('add')"
           >
             <span class="icon iconfont icon-add"></span>新建
           </button>
@@ -115,7 +122,7 @@
             data-placement="top"
             style="right: 395px"
             title="编辑"
-            @click="rmbtrip.addOrEdit('edit')"
+            onclick="rmbtrip.rmbtripList.addOrEdit('edit')"
           >
             <span class="icon iconfont icon-fankui"></span>编辑
           </button>
@@ -126,7 +133,7 @@
             data-placement="top"
             style="right: 335px"
             title="删除"
-            @click="rmbtrip.deleteIds()"
+            onclick="rmbtrip.rmbtripList.deleteIds()"
           >
             <span class="iconfont icon-shanchu"></span>删除
           </button>
@@ -137,7 +144,7 @@
             data-placement="top"
             style="right: 275px"
             title="详细"
-            @click="rmbtrip.detail()"
+            onclick="rmbtrip.rmbtripList.detail()"
           >
             <span class="icon iconfont icon-liulan"></span>详细
           </button>
@@ -148,7 +155,7 @@
             data-placement="top"
             style="right: 215px"
             title="打印"
-            @click="rmbtrip.print()"
+            onclick="rmbtrip.rmbtripList.print()"
           >
             <span class="icon iconfont icon-bangongyongpin"></span>打印
           </button>
@@ -159,39 +166,39 @@
             data-placement="top"
             style="right: 155px"
             title="启动"
-            @click="rmbtrip.start()"
+            onclick="rmbtrip.rmbtripList.start()"
           >
             <span class="icon iconfont icon-yunongtongcaozuochenggong"></span>启动
           </button>
           <button
-            style="display: none; right: 95px"
+            style="display: none right: 95px"
             type="button"
             class="btn"
             data-toggle="tooltip"
             data-placement="top"
             title="撤回"
-            @click="rmbtrip.callback()"
+            onclick="rmbtrip.rmbtripList.callback()"
           >
             <span class="icon iconfont icon-shuaxin"></span>撤回
           </button>
 
           <button
-            style="display: none; right: 95px"
+            style="display: none right: 95px"
             type="button"
             class="btn"
             data-toggle="tooltip"
             data-placement="top"
-            @click="rmbtrip.test(1)"
+            onclick="rmbtrip.rmbtripList.test(1)"
           >
             <span class="icon iconfont icon-shuaxin"></span>测试用：不可修改的审批节点
           </button>
           <button
-            style="display: none; right: 95px"
+            style="display: none right: 95px"
             type="button"
             class="btn"
             data-toggle="tooltip"
             data-placement="top"
-            @click="rmbtrip.test(2)"
+            onclick="rmbtrip.rmbtripList.test(2)"
           >
             <span class="icon iconfont icon-shuaxin"></span>测试用：可修改的审批节点
           </button>
@@ -205,7 +212,7 @@
 
 <script setup>
   import { onMounted } from 'vue';
-  import rmbtrip from './rmbtripList.js';
+  import './rmbtripList.js';
 
   onMounted(() => {
     /*
@@ -217,7 +224,7 @@
         minimumResultsForSearch: -1,
         data: [],
       });
-      rmbtrip.init();
+      rmbtrip.rmbtripList.init();
       ajaxFormRequest(
         WEB_CTX_PATH +
           '/codeAction.do?method=getSelectOptions&element2CodeType=' +

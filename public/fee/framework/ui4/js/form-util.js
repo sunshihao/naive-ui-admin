@@ -220,6 +220,7 @@ $.fn.initFileContainer = function(config){
 	if(typeof(l_config.operType)=="undefined" || l_config.operType==null)
 		l_config.operType="view";
 	
+  // 初始化
 	var load_url = WEB_CTX_PATH + "/jqFileUploadAction.do?method=initFilePage";
 	load_url = load_url + "&operType=" + l_config.operType;
 

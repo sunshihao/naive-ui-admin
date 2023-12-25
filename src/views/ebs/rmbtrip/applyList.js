@@ -201,7 +201,7 @@ rmbtrip.applyList = (function () {
 
       // top.window.changeBillNo(oldCompanyId, oldDeptId);
 
-      parent.rmbtrip.changeBillNo(oldCompanyId, oldDeptId);
+      parent.rmbtrip.rmbtripEdit.changeBillNo(oldCompanyId, oldDeptId);
 
       //显示查看出差申请单的按钮
       parent.$('#viewApply').show();
