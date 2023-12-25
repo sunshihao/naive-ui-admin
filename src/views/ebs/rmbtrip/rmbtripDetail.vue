@@ -368,7 +368,7 @@
                 <div id="resume-dataList1" class="tab-pane fade in active">
                   <div class="row">
                     <div class="col-xs-12 ilead-table">
-                      <table id="citytraffic"></table>
+                      <table id="citytrafficNew"></table>
                       <div id="listPager1"></div>
                     </div>
                   </div>
@@ -376,7 +376,7 @@
                 <div id="resume-dataList2" class="tab-pane fade">
                   <div class="row">
                     <div class="col-xs-12 ilead-table">
-                      <table id="cityinside"></table>
+                      <table id="cityinsideNew"></table>
                       <div id="listPager2"></div>
                     </div>
                   </div>
@@ -384,19 +384,29 @@
                 <div id="resume-dataList3" class="tab-pane fade">
                   <div class="row">
                     <div class="col-xs-12 ilead-table">
-                      <table id="hotel"></table>
+                      <table id="hotelNew"></table>
                       <div id="listPager3"></div>
                     </div>
                   </div>
                 </div>
-                <div id="resume-dataList4" class="tab-pane fade">
+                <!-- <div id="resume-dataList4" class="tab-pane fade">
                   <div class="row">
                     <div class="col-xs-12 ilead-table">
                       <table id="subsidy"></table>
                       <div id="listPager4"></div>
                     </div>
                   </div>
+                </div> -->
+
+                <div id="resume-dataList4" class="tab-pane fade">
+                  <div class="row">
+                    <div class="col-xs-12 ilead-table">
+                      <table id="subsidyNew"></table>
+                      <div id="listPager4"></div>
+                    </div>
+                  </div>
                 </div>
+
                 <!-- <div id="resume-dataList5" class="tab-pane fade">
                   <div class="row">
                     <div class="col-xs-12 ilead-table">
@@ -469,11 +479,6 @@
   let actionType = ref('detail');
 
   onMounted(async () => {
-    // jQuery('#citytraffic').jqGrid('clearGridData');
-    // jQuery('#citytraffic').jqGrid('reloadGrid');
-
-    // jQuery('#listPager1').remove();
-
     const res = await getDetail({
       actionType: 'detail',
       paramId: '24508c0c950e44d8b446527f5d5afaf3',
@@ -506,6 +511,7 @@
 
       let citytrafficData = res.citytraffic.map((detail, index) => {
         const json = {
+          ...detail,
           tab1_startTime: detail.startTimeString,
           tab1_endTime: detail.endTimeString,
           tab1_startAddressName: { name: detail.startAddressName, code: detail.startAddressId },
@@ -522,6 +528,7 @@
 
       res.cityinside.map((detail, index) => {
         const json = {
+          ...detail,
           tab2_startTime: detail.startTimeString,
           tab2_endTime: detail.endTimeString,
           tab2_startAddressName: { name: detail.startAddressName, code: detail.startAddressId },
@@ -538,6 +545,7 @@
 
       let htDaata = res.hotel.map((detail, index) => {
         const json = {
+          ...detail,
           tab3_startTime: detail.startTime, // startTime
           tab3_endTime: detail.endTime, // endTime
           tab3_traveType: detail.traveType,
@@ -559,6 +567,7 @@
       rmbtrip.subsidy.init();
       res.subsidy.map((detail, index) => {
         const json = {
+          ...detail,
           tab4_startTime: detail.startTimeString,
           tab4_endTime: detail.endTimeString,
           tab4_city: detail.city,

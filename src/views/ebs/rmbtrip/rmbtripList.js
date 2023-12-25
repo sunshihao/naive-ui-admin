@@ -1,6 +1,8 @@
 /*
  * 定义命名空间
  */
+var allNodes = []; // 公司部门属性结构
+
 jQuery.namespace('rmbtrip.rmbtripList');
 rmbtrip.rmbtripList = (function () {
   return {

@@ -109,16 +109,16 @@ rmbtrip.rmbtripDetail = (function () {
 
       //自适应 // ???
       $('#citytraffic_a').bind('click', function () {
-        jQuery('#citytraffic').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
+        jQuery('#citytrafficNew').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
       });
       $('#cityinside_a').bind('click', function () {
-        jQuery('#cityinside').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
+        jQuery('#cityinsideNew').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
       });
       $('#hotel_a').bind('click', function () {
-        jQuery('#hotel').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
+        jQuery('#hotelNew').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
       });
       $('#subsidy_a').bind('click', function () {
-        jQuery('#subsidy').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
+        jQuery('#subsidyNew').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
       });
       $('#other_a').bind('click', function () {
         jQuery('#other').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
@@ -254,7 +254,7 @@ rmbtrip.citytraffic = (function () {
       jsonArray[index] = value;
     },
     loadData: function () {
-      jQuery('#citytraffic').jqGrid('clearGridData');
+      jQuery('#citytrafficNew').jqGrid('clearGridData');
       setTimeout(() => {
         for (let k = 0; k < jsonArray.length; k++) {
           rmbtrip.citytraffic.addGradRow(jsonArray[k]);
@@ -263,15 +263,15 @@ rmbtrip.citytraffic = (function () {
     },
     init: async function () {
       // 初始化表格
-      jQuery('#citytraffic').innerHTML = '111';
-      jQuery('#listPager1').innerHTML = '222';
-      jQuery('#citytraffic').jqGrid('clearGridData');
-      // jQuery('#citytraffic').jqGrid('reloadGrid');
-      console.log('111', jQuery('#citytraffic').jqGrid());
+      // jQuery('#citytrafficNew').innerHTML = '111';
+      // jQuery('#listPager1').innerHTML = '222';
+      // jQuery('#citytrafficNew').jqGrid('clearGridData');
+      // jQuery('#citytrafficNew').jqGrid('reloadGrid');
+      // console.log('111', jQuery('#citytrafficNew').jqGrid());
 
       jQuery('#gview_citytraffic').innerHTML = '222';
       // 未初始化设置1
-      i = $('#citytraffic').find('tr').length;
+      i = $('#citytrafficNew').find('tr').length;
       // 加载支付方式下拉列表
       await ajaxFormRequest(
         WEB_CTX_PATH +
@@ -288,7 +288,7 @@ rmbtrip.citytraffic = (function () {
         ' '
       );
       // 初始化表格
-      await jQuery('#citytraffic').jqGrid({
+      await jQuery('#citytrafficNew').jqGrid({
         url: null,
         regional: 'cn',
         datatype: 'json',
@@ -429,21 +429,21 @@ rmbtrip.citytraffic = (function () {
         shrinkToFit: true,
         loadComplete: function (e) {},
         loadError: function (e, e1, e2) {
-          jQuery('#citytraffic').footerData('set', {});
+          jQuery('#citytrafficNew').footerData('set', {});
           $($('.footrow').find('[aria-describedby="citytraffic_tab1_vehicle"]')[0]).html('合计');
-          jQuery('#citytraffic').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width(), true);
+          jQuery('#citytrafficNew').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width(), true);
           //回显数据
           rmbtrip.citytraffic.loadData();
         },
         caption: '',
         footerrow: true,
         gridComplete: function () {
-          jQuery('#citytraffic').footerData('set', {});
+          jQuery('#citytrafficNew').footerData('set', {});
           $($('.footrow').find('[aria-describedby="citytraffic_tab1_vehicle"]')[0]).html('合计');
         },
       });
       // 隐藏其它控件
-      jQuery('#citytraffic').jqGrid('navGrid', '#listPager1', {
+      jQuery('#citytrafficNew').jqGrid('navGrid', '#listPager1', {
         edit: false,
         add: false,
         del: false,
@@ -456,7 +456,7 @@ rmbtrip.citytraffic = (function () {
       $('#refresh_citytraffic').hide();
 
       jQuery(window).on('resize.jqGrid', function () {
-        jQuery('#citytraffic').jqGrid('setGridWidth', $('.nav.nav-tabs').width());
+        jQuery('#citytrafficNew').jqGrid('setGridWidth', $('.nav.nav-tabs').width());
       });
       jQuery(window).triggerHandler('resize.jqGrid');
     },
@@ -497,7 +497,7 @@ rmbtrip.citytraffic = (function () {
         });
     },
     addGradRow: function (json) {
-      jQuery('#citytraffic').jqGrid('addRowData', i, json || {});
+      jQuery('#citytrafficNew').jqGrid('addRowData', i, json || {});
       // 初始化日期控件
       $.initDataPlugin(); // 1222
       // 增加金额单据统计
@@ -561,7 +561,7 @@ rmbtrip.citytraffic = (function () {
     validateNull: function () {
       var result = true;
       // 校验必填项
-      $('#citytraffic')
+      $('#citytrafficNew')
         .find('input')
         .each(function () {
           if ($(this).attr('type') != 'button') {
@@ -586,7 +586,7 @@ rmbtrip.citytraffic = (function () {
           }
         });
       // 判断城市间交通费
-      if ($('#citytraffic').find('tr').length <= 1) {
+      if ($('#citytrafficNew').find('tr').length <= 1) {
         sweetAlert({
           title: '录入提示',
           text: '城市间交通费不能为空',
@@ -639,7 +639,7 @@ rmbtrip.cityinside = (function () {
     },
     init: async function () {
       // 未初始化设置1
-      i = $('#cityinside').find('tr').length;
+      i = $('#cityinsideNew').find('tr').length;
       // 加载支付方式下拉列表
       await ajaxFormRequest(
         WEB_CTX_PATH +
@@ -657,7 +657,7 @@ rmbtrip.cityinside = (function () {
       );
 
       // 初始化表格
-      await jQuery('#cityinside').jqGrid({
+      await jQuery('#cityinsideNew').jqGrid({
         url: null,
         regional: 'cn',
         datatype: 'json',
@@ -805,22 +805,22 @@ rmbtrip.cityinside = (function () {
         shrinkToFit: true,
         loadComplete: function (e) {},
         loadError: function (e, e1, e2) {
-          jQuery('#cityinside').footerData('set', {});
+          jQuery('#cityinsideNew').footerData('set', {});
           $($('.footrow').find('[aria-describedby="cityinside_tab2_vehicle"]')[0]).html('合计');
 
-          jQuery('#cityinside').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width(), true);
+          jQuery('#cityinsideNew').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width(), true);
           //回显数据
           rmbtrip.cityinside.loadData();
         },
         caption: '',
         footerrow: true,
         gridComplete: function () {
-          jQuery('#cityinside').footerData('set', {});
+          jQuery('#cityinsideNew').footerData('set', {});
           $($('.footrow').find('[aria-describedby="cityinside_tab2_vehicle"]')[0]).html('合计');
         },
       });
       // 隐藏其它控件
-      jQuery('#cityinside').jqGrid('navGrid', '#listPager2', {
+      jQuery('#cityinsideNew').jqGrid('navGrid', '#listPager2', {
         edit: false,
         add: false,
         del: false,
@@ -832,7 +832,7 @@ rmbtrip.cityinside = (function () {
       $('#listPager2_center').hide();
       $('#refresh_cityinside').hide();
       jQuery(window).on('resize.jqGrid', function () {
-        jQuery('#cityinside').jqGrid('setGridWidth', $('.nav.nav-tabs').width());
+        jQuery('#cityinsideNew').jqGrid('setGridWidth', $('.nav.nav-tabs').width());
       });
       jQuery(window).triggerHandler('resize.jqGrid');
     },
@@ -873,7 +873,7 @@ rmbtrip.cityinside = (function () {
         });
     },
     addGradRow: function (json) {
-      jQuery('#cityinside').jqGrid('addRowData', i, json != undefined ? json : {});
+      jQuery('#cityinsideNew').jqGrid('addRowData', i, json != undefined ? json : {});
       // 初始化日期控件
       $.initDataPlugin();
       // 增加金额单据统计
@@ -937,7 +937,7 @@ rmbtrip.cityinside = (function () {
     validateNull: function () {
       var result = true;
       // 校验必填项
-      $('#cityinside')
+      $('#cityinsideNew')
         .find('input')
         .each(function () {
           if ($(this).attr('type') != 'button') {
@@ -990,14 +990,14 @@ rmbtrip.cityinside = (function () {
     validateDetails: function () {
       // 验证重复区划
       // 开始日期
-      var startTimes = $('#cityinside .form_datetime');
+      var startTimes = $('#cityinsideNew .form_datetime');
       // 结束日期
-      var endTimes = $('#cityinside .form_time');
+      var endTimes = $('#cityinsideNew .form_time');
       // 验证是否在出差申请单中
       // 开始日期
-      var cityStartTimes = $('#citytraffic .form_datetime');
+      var cityStartTimes = $('#citytrafficNew .form_datetime');
       // 结束日期
-      var cityEndTimes = $('#citytraffic .form_time');
+      var cityEndTimes = $('#citytrafficNew .form_time');
       for (let i = 0; i < startTimes.length; i++) {
         var isHave = false;
         for (let j = 0; j < cityStartTimes.length; j++) {
@@ -1042,7 +1042,7 @@ rmbtrip.hotel = (function () {
       if (data) jsonArray = data;
     },
     loadData: function () {
-      jQuery('#hotel').jqGrid('clearGridData');
+      jQuery('#hotelNew').jqGrid('clearGridData');
       setTimeout(() => {
         for (let k = 0; k < jsonArray.length; k++) {
           rmbtrip.hotel.addGradRow(jsonArray[k]);
@@ -1051,7 +1051,7 @@ rmbtrip.hotel = (function () {
     },
     init: async function () {
       // 未初始化设置1
-      i = $('#hotel').find('tr').length;
+      i = $('#hotelNew').find('tr').length;
       // 加载支付方式下拉列表
       await ajaxFormRequest(
         WEB_CTX_PATH +
@@ -1083,7 +1083,7 @@ rmbtrip.hotel = (function () {
         ' '
       );
       // 初始化表格
-      await jQuery('#hotel').jqGrid({
+      await jQuery('#hotelNew').jqGrid({
         url: null,
         regional: 'cn',
         datatype: 'json',
@@ -1346,10 +1346,10 @@ rmbtrip.hotel = (function () {
         shrinkToFit: true,
         loadComplete: function (e) {},
         loadError: function (e, e1, e2) {
-          jQuery('#hotel').footerData('set', {});
+          jQuery('#hotelNew').footerData('set', {});
           $($('.footrow').find('[aria-describedby="hotel_tab3_dayNumber"]')[0]).html('合计');
 
-          jQuery('#hotel').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width(), true);
+          jQuery('#hotelNew').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width(), true);
           //回显数据
           rmbtrip.hotel.loadData();
           ldaccompany();
@@ -1357,7 +1357,7 @@ rmbtrip.hotel = (function () {
         caption: '',
         footerrow: true,
         gridComplete: function () {
-          jQuery('#hotel').footerData('set', {});
+          jQuery('#hotelNew').footerData('set', {});
           $($('.footrow').find('[aria-describedby="hotel_tab3_dayNumber"]')[0]).html('合计');
         },
       });
@@ -1366,7 +1366,7 @@ rmbtrip.hotel = (function () {
       rmbtrip.hotel.initDate();
 
       // 隐藏其它控件
-      jQuery('#hotel').jqGrid('navGrid', '#listPager3', {
+      jQuery('#hotelNew').jqGrid('navGrid', '#listPager3', {
         edit: false,
         add: false,
         del: false,
@@ -1379,7 +1379,7 @@ rmbtrip.hotel = (function () {
       $('#refresh_hotel').hide();
 
       jQuery(window).on('resize.jqGrid', function () {
-        jQuery('#hotel').jqGrid('setGridWidth', $('.nav.nav-tabs').width());
+        jQuery('#hotelNew').jqGrid('setGridWidth', $('.nav.nav-tabs').width());
       });
       jQuery(window).triggerHandler('resize.jqGrid');
     },
@@ -1420,7 +1420,7 @@ rmbtrip.hotel = (function () {
         });
     },
     addGradRow: function (json) {
-      jQuery('#hotel').jqGrid('addRowData', i, json != undefined ? json : {});
+      jQuery('#hotelNew').jqGrid('addRowData', i, json != undefined ? json : {});
       // 初始化日期控件
       rmbtrip.hotel.initDate();
       // 增加金额单据统计
@@ -1519,9 +1519,9 @@ rmbtrip.hotel = (function () {
       }
       // 验证是否在出差申请单中
       // 开始日期
-      var cityStartTimes = $('#citytraffic .form_datetime');
+      var cityStartTimes = $('#citytrafficNew .form_datetime');
       // 结束日期
-      var cityEndTimes = $('#citytraffic .form_time');
+      var cityEndTimes = $('#citytrafficNew .form_time');
       for (let i = 0; i < startTimes.length; i++) {
         var isHave = false;
         for (let j = 0; j < cityStartTimes.length; j++) {
@@ -1551,7 +1551,7 @@ rmbtrip.hotel = (function () {
       return true;
     },
     delRow: function (_id) {
-      $('#hotel .hotel_tr_' + _id).remove();
+      $('#hotelNew .hotel_tr_' + _id).remove();
       // 增加金额单据统计
       sumBillCount();
     },
@@ -1579,7 +1579,7 @@ rmbtrip.hotel = (function () {
     validateNull: function () {
       var result = true;
       // 校验必填项
-      $('#hotel')
+      $('#hotelNew')
         .find('input')
         .each(function () {
           if ($(this).attr('type') != 'button') {
@@ -1818,6 +1818,7 @@ rmbtrip.subsidy = (function () {
       jsonArray[index] = value;
     },
     loadData: function () {
+      jQuery('#subsidyNew').jqGrid('clearGridData');
       setTimeout(() => {
         for (let k = 0; k < jsonArray.length; k++) {
           rmbtrip.subsidy.addGradRow(jsonArray[k]);
@@ -1826,10 +1827,10 @@ rmbtrip.subsidy = (function () {
     },
     init: function () {
       // 未初始化设置1
-      i = $('#subsidy').find('tr').length;
+      i = $('#subsidyNew').find('tr').length;
 
       // 初始化表格
-      jQuery('#subsidy').jqGrid({
+      jQuery('#subsidyNew').jqGrid({
         url: null,
         regional: 'cn',
         datatype: 'json',
@@ -1849,7 +1850,6 @@ rmbtrip.subsidy = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab4_endTime',
@@ -1863,7 +1863,6 @@ rmbtrip.subsidy = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab4_subsidyType',
@@ -1877,7 +1876,6 @@ rmbtrip.subsidy = (function () {
             },
             align: 'center',
             sortable: false,
-            //								resizable: false
           },
           {
             name: 'tab4_city',
@@ -1899,7 +1897,6 @@ rmbtrip.subsidy = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab4_dayNumber',
@@ -1915,7 +1912,6 @@ rmbtrip.subsidy = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab4_amount',
@@ -1931,7 +1927,6 @@ rmbtrip.subsidy = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
           {
             name: 'tab4_standardValue',
@@ -1947,7 +1942,6 @@ rmbtrip.subsidy = (function () {
             },
             align: 'center',
             sortable: false,
-            //							resizable: false
           },
         ],
         autowidth: true,
@@ -1963,15 +1957,15 @@ rmbtrip.subsidy = (function () {
         shrinkToFit: true,
         loadComplete: function (e) {},
         loadError: function (e, e1, e2) {
-          jQuery('#subsidy').footerData('set', {});
+          jQuery('#subsidyNew').footerData('set', {});
           $($('.footrow').find('[aria-describedby="subsidy_tab4_dayNumber"]')[0]).html('合计');
 
-          jQuery('#subsidy').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width(), true);
+          jQuery('#subsidyNew').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width(), true);
           //回显数据
           rmbtrip.subsidy.loadData();
 
           //如果是实报实销，则直接显示 实报实销
-          $('#subsidy')
+          $('#subsidyNew')
             .find("input[name='tab4_standardValue']")
             .each(function () {
               var standardId = $(this).attr('id');
@@ -1994,7 +1988,7 @@ rmbtrip.subsidy = (function () {
         caption: '',
         footerrow: true,
         gridComplete: function () {
-          jQuery('#subsidy').footerData('set', {});
+          jQuery('#subsidyNew').footerData('set', {});
           $($('.footrow').find('[aria-describedby="subsidy_tab4_dayNumber"]')[0]).html('合计');
         },
       });
@@ -2003,7 +1997,7 @@ rmbtrip.subsidy = (function () {
       rmbtrip.subsidy.initDate();
 
       // 隐藏其它控件
-      jQuery('#subsidy').jqGrid('navGrid', '#listPager4', {
+      jQuery('#subsidyNew').jqGrid('navGrid', '#listPager4', {
         edit: false,
         add: false,
         del: false,
@@ -2016,7 +2010,7 @@ rmbtrip.subsidy = (function () {
       $('#refresh_subsidy').hide();
 
       jQuery(window).on('resize.jqGrid', function () {
-        jQuery('#subsidy').jqGrid('setGridWidth', $('.nav.nav-tabs').width());
+        jQuery('#subsidyNew').jqGrid('setGridWidth', $('.nav.nav-tabs').width());
       });
       jQuery(window).triggerHandler('resize.jqGrid');
     },
@@ -2057,7 +2051,7 @@ rmbtrip.subsidy = (function () {
         });
     },
     addGradRow: function (json) {
-      jQuery('#subsidy').jqGrid('addRowData', i, json != undefined ? json : {});
+      jQuery('#subsidyNew').jqGrid('addRowData', i, json || {});
       // 初始化日期控件
       rmbtrip.subsidy.initDate();
       // 增加金额单据统计
@@ -2121,7 +2115,7 @@ rmbtrip.subsidy = (function () {
     validateNull: function () {
       var result = true;
       // 校验必填项
-      $('#subsidy')
+      $('#subsidyNew')
         .find('input')
         .each(function () {
           if ($(this).attr('type') != 'button') {
@@ -2225,9 +2219,9 @@ rmbtrip.subsidy = (function () {
       }
       // 验证是否在出差申请单中
       // 开始日期
-      var cityStartTimes = $('#citytraffic .form_datetime');
+      var cityStartTimes = $('#citytrafficNew .form_datetime');
       // 结束日期
-      var cityEndTimes = $('#citytraffic .form_time');
+      var cityEndTimes = $('#citytrafficNew .form_time');
       for (let i = 0; i < startTimes.length; i++) {
         var isHave = false;
         for (let j = 0; j < cityStartTimes.length; j++) {
@@ -2741,7 +2735,7 @@ function ldaccompany() {
   } else {
     $('#accompany').val('0');
   }
-  $('#hotel')
+  $('#hotelNew')
     .find("input[name='tab3_standardValue']")
     .each(function () {
       var standardId = $(this).attr('id');
@@ -2765,7 +2759,7 @@ function ldaccompany() {
 function sumBillCount() {
   // TAB1金额
   var citytrafficAmounts = 0;
-  $('#citytraffic')
+  $('#citytrafficNew')
     .find("input[name='tab1_amount']")
     .each(function () {
       var oldNum = fee.Common.clearFormatAmount($(this).val());
@@ -2773,7 +2767,7 @@ function sumBillCount() {
     });
   // TAB2金额
   var cityinsideAmounts = 0;
-  $('#cityinside')
+  $('#cityinsideNew')
     .find("input[name='tab2_amount']")
     .each(function () {
       var oldNum = fee.Common.clearFormatAmount($(this).val());
@@ -2781,7 +2775,7 @@ function sumBillCount() {
     });
   // TAB3金额
   var hotelAmounts = 0;
-  $('#hotel')
+  $('#hotelNew')
     .find("input[name='tab3_amount']")
     .each(function () {
       var oldNum = fee.Common.clearFormatAmount($(this).val());
@@ -2789,7 +2783,7 @@ function sumBillCount() {
     });
   // TAB4金额
   var subsidyAmounts = 0;
-  $('#subsidy')
+  $('#subsidyNew')
     .find("input[name='tab4_amount']")
     .each(function () {
       var oldNum = fee.Common.clearFormatAmount($(this).val());
