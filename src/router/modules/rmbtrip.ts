@@ -23,6 +23,7 @@ const routes: Array<RouteRecordRaw> = [
     meta: {
       title: '报销业务',
       sort: 1,
+      keepAlive: false,
       icon: renderIcon(CheckCircleOutlined),
     },
     children: [
@@ -47,6 +48,7 @@ const routes: Array<RouteRecordRaw> = [
         name: 'rmbtripDetail',
         meta: {
           title: '个人差旅报销详情(隐藏)',
+          keepAlive: false,
         },
         component: () => import('@/views/ebs/rmbtrip/rmbtripDetail.vue'),
       },

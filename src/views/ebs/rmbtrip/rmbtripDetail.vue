@@ -364,7 +364,7 @@
                   ></li
                 > -->
               </ul>
-              <div class="tab-content" id="manage-detail-grid-tabs" style="padding-top: 10px">
+              <div class="tab-content" id="manage-detail-grid-tabs">
                 <div id="resume-dataList1" class="tab-pane fade in active">
                   <div class="row">
                     <div class="col-xs-12 ilead-table">
@@ -397,14 +397,14 @@
                     </div>
                   </div>
                 </div>
-                <div id="resume-dataList5" class="tab-pane fade">
+                <!-- <div id="resume-dataList5" class="tab-pane fade">
                   <div class="row">
                     <div class="col-xs-12 ilead-table">
                       <table id="other"></table>
                       <div id="listPager5"></div>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </div>
               <!-- Tab页结束 -->
 
@@ -470,6 +470,7 @@
 
   onMounted(async () => {
     // jQuery('#citytraffic').jqGrid('clearGridData');
+    // jQuery('#citytraffic').jqGrid('reloadGrid');
 
     // jQuery('#listPager1').remove();
 

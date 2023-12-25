@@ -107,7 +107,7 @@ rmbtrip.rmbtripDetail = (function () {
         maxFileSize: 600000000,
       });
 
-      //自适应
+      //自适应 // ???
       $('#citytraffic_a').bind('click', function () {
         jQuery('#citytraffic').jqGrid('setGridWidth', jQuery('.nav.nav-tabs').width());
       });
@@ -266,6 +266,9 @@ rmbtrip.citytraffic = (function () {
       jQuery('#citytraffic').innerHTML = '111';
       jQuery('#listPager1').innerHTML = '222';
       jQuery('#citytraffic').jqGrid('clearGridData');
+      // jQuery('#citytraffic').jqGrid('reloadGrid');
+      console.log('111', jQuery('#citytraffic').jqGrid());
+
       jQuery('#gview_citytraffic').innerHTML = '222';
       // 未初始化设置1
       i = $('#citytraffic').find('tr').length;
